@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/  # If there are parts you don’t want to be crawled
+Allow: /
+Sitemap: https://wizbox.tools/sitemap.xml
