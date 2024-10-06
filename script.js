@@ -1,3 +1,6 @@
+// Define the base URL as a parameter
+const BASE_URL = 'https://app.wizbox.tools';
+
 // Function to handle keypress for accessibility (space or enter key)
 function handleKeyPress(event, tabId) {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -153,7 +156,7 @@ async function checkCDN() {
     showSpinner('cdnSpinner');  // Show spinner while request is made
 
     try {
-        const response = await fetch(`http://localhost:8000/cdn/${domain}`);
+        const response = await fetch(`${BASE_URL}/cdn/${domain}`);
         const result = await response.json();
         hideSpinner('cdnSpinner');  // Hide spinner once response is received
 
@@ -212,7 +215,7 @@ async function checkSSL() {
     showSpinner('sslSpinner');
 
     try {
-        const response = await fetch(`http://localhost:8000/ssl/${domain}`);
+        const response = await fetch(`${BASE_URL}/ssl/${domain}`);
         const result = await response.json();
         hideSpinner('sslSpinner');
 
@@ -256,7 +259,7 @@ async function performDNSLookup() {
     showSpinner('dnsSpinner');
 
     try {
-        const response = await fetch(`http://localhost:8000/dns/${domain}?record_type=${recordType}`);
+        const response = await fetch(`${BASE_URL}/dns/${domain}?record_type=${recordType}`);
         const result = await response.json();
         hideSpinner('dnsSpinner');
 
@@ -305,7 +308,7 @@ async function checkBlacklist() {
     resultDiv.innerHTML = "";
     showSpinner('blacklistSpinner');
     try {
-        const response = await fetch(`http://localhost:8000/blacklist/${domain}`);
+        const response = await fetch(`${BASE_URL}/blacklist/${domain}`);
         const result = await response.json();
         hideSpinner('blacklistSpinner');
         if (result.error) {
@@ -326,7 +329,7 @@ async function checkDMARC() {
     resultDiv.innerHTML = "";
     showSpinner('dmarcSpinner');
     try {
-        const response = await fetch(`http://localhost:8000/dmarc/${domain}`);
+        const response = await fetch(`${BASE_URL}/dmarc/${domain}`);
         const result = await response.json();
         hideSpinner('dmarcSpinner');
         if (result.error) {
@@ -350,7 +353,7 @@ async function performWHOISLookup() {
     spinner.style.display = 'block';  // Show spinner
 
     try {
-        const response = await fetch(`http://localhost:8000/whois/${domain}`);
+        const response = await fetch(`${BASE_URL}/whois/${domain}`);
         const result = await response.json();
 
         spinner.style.display = 'none';  // Hide spinner
@@ -431,7 +434,7 @@ async function performPing() {
     showSpinner('pingSpinner');
 
     try {
-        const response = await fetch(`http://localhost:8000/ping/${host}`);
+        const response = await fetch(`${BASE_URL}/ping/${host}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -456,7 +459,7 @@ async function performTraceroute() {
     resultDiv.innerHTML = "";
     showSpinner('tracerouteSpinner');
     try {
-        const response = await fetch(`http://localhost:8000/traceroute/${host}`);
+        const response = await fetch(`${BASE_URL}/traceroute/${host}`);
         const result = await response.json();
         hideSpinner('tracerouteSpinner');
         resultDiv.innerHTML = `<pre>${result.result}</pre>`;
@@ -474,7 +477,7 @@ async function checkMXRecords() {
     showSpinner('mxSpinner');
 
     try {
-        const response = await fetch(`http://localhost:8000/mx/${domain}`);
+        const response = await fetch(`${BASE_URL}/mx/${domain}`);
         const result = await response.json();
         hideSpinner('mxSpinner');
 
@@ -540,7 +543,7 @@ async function checkSecurityHeaders() {
     };
 
     try {
-        const response = await fetch(`http://localhost:8000/security-headers/${domain}`);
+        const response = await fetch(`${BASE_URL}/security-headers/${domain}`);
         const result = await response.json();
         hideSpinner('securityHeadersSpinner');
 
@@ -679,4 +682,3 @@ function handleKeyPress(event, tabId) {
         switchTab(tabId);
     }
 }
-
