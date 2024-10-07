@@ -13,7 +13,7 @@ function trackUsage(eventCategory, eventAction, eventLabel = '') {
         'event_label': eventLabel,
     });
 }
-// Example function to switch tabs (Adjust this based on your needs)
+// Function to switch tabs and update the URL hash
 function switchTab(tabId) {
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -22,13 +22,35 @@ function switchTab(tabId) {
     tabs.forEach(tab => tab.classList.remove('active'));
     tabContents.forEach(content => content.classList.remove('active'));
 
-    // Add active class to selected tab and its content
-    document.querySelector(`#${tabId}`).classList.add('active');
-    document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+    // Add active class to the selected tab and its content
+    const activeTabContent = document.getElementById(tabId);
+    const activeTabButton = Array.from(tabs).find(tab => tab.getAttribute('onclick').includes(tabId));
 
-    // Track the usage of the tab
-    trackUsage('Tab', 'click', tabId);
+    if (activeTabContent && activeTabButton) {
+        activeTabContent.classList.add('active');
+        activeTabButton.classList.add('active');
+    }
+
+    // Update the URL hash
+    if (window.location.hash !== `#${tabId}`) {
+        window.history.pushState(null, null, `#${tabId}`);
+    }
 }
+
+// Function to load the appropriate tab based on the URL hash when the page loads
+function loadTabFromHash() {
+    const hash = window.location.hash.substring(1); // Get the hash value without the '#'
+    if (hash) {
+        switchTab(hash);
+    } else {
+        // Default to the first tab if no hash is present
+        switchTab('what-is-my-ip');
+    }
+}
+
+// Event listener to handle page load and hash changes
+window.addEventListener('load', loadTabFromHash);
+window.addEventListener('hashchange', loadTabFromHash);
 // Toggle dark mode
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
@@ -44,21 +66,6 @@ function openSidePanel() {
 // Close the side panel
 function closeSidePanel() {
     document.getElementById("sidePanel").style.width = "0";
-}
-// Tab Switching
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    // Remove active class from all tabs
-    tabs.forEach(tab => tab.classList.remove('active'));
-
-    // Hide all tab content
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Show the clicked tab's content and highlight the active tab
-    document.getElementById(tabId).classList.add('active');
-    document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
 }
 // Handle keyboard navigation for tabs
 function handleKeyPress(event, tabId) {

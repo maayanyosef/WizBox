@@ -68,21 +68,21 @@
 <div class="container">
     <!-- Left-side Tabs -->
     <div class="tabs">
-        <div class="tab active" role="button" tabindex="0" onclick="switchTab('myip-tab')" onkeydown="handleKeyPress(event, 'myip-tab')">What Is My IP</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('cdn-tab')" onkeydown="handleKeyPress(event, 'cdn-tab')">CDN Finder</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('ssl-tab')" onkeydown="handleKeyPress(event, 'ssl-tab')">SSL Certificate Checker</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('dns-tab')" onkeydown="handleKeyPress(event, 'dns-tab')">DNS Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('blacklist-tab')" onkeydown="handleKeyPress(event, 'blacklist-tab')">DNS Blacklist Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('dmarc-tab')" onkeydown="handleKeyPress(event, 'dmarc-tab')">DMARC Record Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('whois-tab')" onkeydown="handleKeyPress(event, 'whois-tab')">WHOIS Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('ping-tab')" onkeydown="handleKeyPress(event, 'ping-tab')">Ping</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('traceroute-tab')" onkeydown="handleKeyPress(event, 'traceroute-tab')">Traceroute</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('mx-tab')" onkeydown="handleKeyPress(event, 'mx-tab')">MX Record Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('security-headers-tab')" onkeydown="handleKeyPress(event, 'security-headers-tab')">Security Headers Check</div>
+        <div class="tab active" role="button" tabindex="0" onclick="switchTab('what-is-my-ip')" onkeydown="handleKeyPress(event, 'what-is-my-ip')">What Is My IP</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('cdn-finder')" onkeydown="handleKeyPress(event, 'cdn-finder')">CDN Finder</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('ssl-checker')" onkeydown="handleKeyPress(event, 'ssl-checker')">SSL Certificate Checker</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('dns-lookup')" onkeydown="handleKeyPress(event, 'dns-lookup')">DNS Lookup</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('blacklist-lookup')" onkeydown="handleKeyPress(event, 'blacklist-lookup')">DNS blacklist-lookup Lookup</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('dmarc-lookup')" onkeydown="handleKeyPress(event, 'dmarc-lookup')">DMARC Record Lookup</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('whois-lookup')" onkeydown="handleKeyPress(event, 'whois-lookup')">WHOIS Lookup</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('ping')" onkeydown="handleKeyPress(event, 'ping')">Ping</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('traceroute')" onkeydown="handleKeyPress(event, 'traceroute')">Traceroute</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('mx-lookup')" onkeydown="handleKeyPress(event, 'mx-lookup')">MX Record Lookup</div>
+        <div class="tab" role="button" tabindex="0" onclick="switchTab('security-headers-check')" onkeydown="handleKeyPress(event, 'security-headers-check')">Security Headers Check</div>
     </div>
 
    <!-- WhatIsMyIP Section -->
-    <div class="tab-content active" id="myip-tab">
+    <div class="tab-content active" id="what-is-my-ip">
         <h2>My Public IP Details</h2>
         <button onclick="trackUsage('My IP', 'click', 'Show My IP Details'); getMyIPDetails();">Show My IP Details</button>
         <div class="spinner" id="myipSpinner" style="display:none;"></div>
@@ -92,7 +92,7 @@
     </div>
 
     <!-- CDN Finder Section -->
-    <div class="tab-content" id="cdn-tab">
+    <div class="tab-content" id="cdn-finder">
         <h2>CDN Finder</h2>
         <label for="cdnDomain">Enter a domain to check for CDN</label>
         <input type="text" id="cdnDomain" placeholder="example.com">
@@ -102,7 +102,7 @@
     </div>
 
     <!-- SSL Certificate Checker Section -->
-    <div class="tab-content" id="ssl-tab">
+    <div class="tab-content" id="ssl-checker">
         <h2>SSL Certificate Checker</h2>
         <label for="sslDomain">Enter a domain to check its SSL certificate</label>
         <input type="text" id="sslDomain" placeholder="example.com">
@@ -112,7 +112,7 @@
     </div>
 
     <!-- DNS Lookup Section -->
-    <div class="tab-content" id="dns-tab">
+    <div class="tab-content" id="dns-lookup">
         <h2>DNS Lookup</h2>
         <label for="dnsDomain">Enter a domain to perform DNS lookup</label>
         <input type="text" id="dnsDomain" placeholder="example.com">
@@ -129,7 +129,7 @@
     </div>
 
     <!-- DNS Blacklist Lookup Section -->
-    <div class="tab-content" id="blacklist-tab">
+    <div class="tab-content" id="blacklist-lookup">
         <h2>DNS Blacklist Lookup</h2>
         <label for="blacklistDomain">Enter a domain or IP to check for blacklist</label>
         <input type="text" id="blacklistDomain" placeholder="example.com">
@@ -139,7 +139,7 @@
     </div>
 
     <!-- DMARC Record Lookup Section -->
-    <div class="tab-content" id="dmarc-tab">
+    <div class="tab-content" id="dmarc-lookup">
         <h2>DMARC Record Lookup</h2>
         <label for="dmarcDomain">Enter a domain to check for DMARC record</label>
         <input type="text" id="dmarcDomain" placeholder="example.com">
@@ -149,7 +149,7 @@
     </div>
 
     <!-- WHOIS Lookup Section -->
-    <div class="tab-content" id="whois-tab">
+    <div class="tab-content" id="whois-lookup">
         <h2>WHOIS Lookup</h2>
         <label for="whoisDomain">Enter a domain to perform WHOIS lookup</label>
         <input type="text" id="whoisDomain" placeholder="example.com">
@@ -159,7 +159,7 @@
     </div>
 
     <!-- Ping Section -->
-    <div class="tab-content" id="ping-tab">
+    <div class="tab-content" id="ping">
         <h2>Ping</h2>
         <label for="pingHost">Enter a host or IP to ping</label>
         <input type="text" id="pingHost" placeholder="example.com">
@@ -169,7 +169,7 @@
     </div>
 
     <!-- Traceroute Section -->
-    <div class="tab-content" id="traceroute-tab">
+    <div class="tab-content" id="traceroute">
         <h2>Traceroute</h2>
         <label for="tracerouteHost">Enter a host or IP for traceroute</label>
         <input type="text" id="tracerouteHost" placeholder="example.com">
@@ -179,7 +179,7 @@
     </div>
 
     <!-- MX Record Lookup Section -->
-    <div class="tab-content" id="mx-tab">
+    <div class="tab-content" id="mx-lookup">
         <h2>MX Record Lookup</h2>
         <label for="mxDomain">Enter a domain to check MX records</label>
         <input type="text" id="mxDomain" placeholder="example.com">
@@ -189,7 +189,7 @@
     </div>
 
     <!-- Security Headers Check Section -->
-    <div class="tab-content" id="security-headers-tab">
+    <div class="tab-content" id="security-headers-check">
         <h2>Security Headers Check</h2>
         <label for="securityHeadersDomain">Enter a domain to check for security headers</label>
         <input type="text" id="securityHeadersDomain" placeholder="example.com">

@@ -5,17 +5,17 @@ function changeLanguage() {
 
     // Update page content with the selected language
     document.getElementById("pageTitle").innerText = translation.pageTitle;
-    document.querySelector(`[onclick="switchTab('cdn-tab')"]`).innerText = translation.cdnFinder;
-    document.querySelector(`[onclick="switchTab('ssl-tab')"]`).innerText = translation.sslChecker;
-    document.querySelector(`[onclick="switchTab('dns-tab')"]`).innerText = translation.dnsLookup;
-    document.querySelector(`[onclick="switchTab('myip-tab')"]`).innerText = translation.myIPDetails;
-    document.querySelector(`[onclick="switchTab('blacklist-tab')"]`).innerText = translation.blacklistLookup;
-    document.querySelector(`[onclick="switchTab('dmarc-tab')"]`).innerText = translation.dmarcLookup;
-    document.querySelector(`[onclick="switchTab('whois-tab')"]`).innerText = translation.whoisLookup;
-    document.querySelector(`[onclick="switchTab('ping-tab')"]`).innerText = translation.pingTool;
-    document.querySelector(`[onclick="switchTab('traceroute-tab')"]`).innerText = translation.tracerouteTool;
-    document.querySelector(`[onclick="switchTab('mx-tab')"]`).innerText = translation.mxLookup;
-    document.querySelector(`[onclick="switchTab('security-headers-tab')"]`).innerText = translation.securityHeaders;
+    document.querySelector(`[onclick="switchTab('cdn-finder')"]`).innerText = translation.cdnFinder;
+    document.querySelector(`[onclick="switchTab('ssl-checker')"]`).innerText = translation.sslChecker;
+    document.querySelector(`[onclick="switchTab('dns-lookup')"]`).innerText = translation.dnsLookup;
+    document.querySelector(`[onclick="switchTab('what-is-my-ip')"]`).innerText = translation.myIPDetails;
+    document.querySelector(`[onclick="switchTab('blacklist-lookup')"]`).innerText = translation.blacklistLookup;
+    document.querySelector(`[onclick="switchTab('dmarc-lookup')"]`).innerText = translation.dmarcLookup;
+    document.querySelector(`[onclick="switchTab('whois-lookup')"]`).innerText = translation.whoisLookup;
+    document.querySelector(`[onclick="switchTab('ping')"]`).innerText = translation.pingTool;
+    document.querySelector(`[onclick="switchTab('traceroute')"]`).innerText = translation.tracerouteTool;
+    document.querySelector(`[onclick="switchTab('mx-lookup')"]`).innerText = translation.mxLookup;
+    document.querySelector(`[onclick="switchTab('security-headers-check')"]`).innerText = translation.securityHeaders;
 }
 // Translations for each language
 const translations = {
