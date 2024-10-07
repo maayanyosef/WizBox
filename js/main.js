@@ -31,7 +31,7 @@ function switchTab(tabId) {
         activeTabButton.classList.add('active');
     }
 
-    // Update the URL hash
+    // Update the URL hash without triggering a scroll or page refresh
     if (window.location.hash !== `#${tabId}`) {
         window.history.pushState(null, null, `#${tabId}`);
     }
@@ -49,7 +49,7 @@ function loadTabFromHash() {
 }
 
 // Event listener to handle page load and hash changes
-window.addEventListener('load', loadTabFromHash);
+window.addEventListener('DOMContentLoaded', loadTabFromHash);
 window.addEventListener('hashchange', loadTabFromHash);
 // Toggle dark mode
 function toggleDarkMode() {
