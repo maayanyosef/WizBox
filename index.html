@@ -75,10 +75,10 @@
         <div class="tab" role="button" tabindex="0" onclick="switchTab('security-headers-tab')" onkeydown="handleKeyPress(event, 'security-headers-tab')">Security Headers Check</div>
     </div>
 
-    <!-- WhatIsMyIP Section -->
+   <!-- WhatIsMyIP Section -->
     <div class="tab-content active" id="myip-tab">
         <h2>My Public IP Details</h2>
-        <button onclick="getMyIPDetails()">Show My IP Details</button>
+        <button onclick="trackUsage('My IP', 'click', 'Show My IP Details'); getMyIPDetails();">Show My IP Details</button>
         <div class="spinner" id="myipSpinner" style="display:none;"></div>
         <div class="result" id="myipResult"></div>
         <!-- Add map container -->
@@ -90,7 +90,7 @@
         <h2>CDN Finder</h2>
         <label for="cdnDomain">Enter a domain to check for CDN</label>
         <input type="text" id="cdnDomain" placeholder="example.com">
-        <button onclick="checkCDN()">Check CDN</button>
+        <button onclick="trackUsage('CDN Finder', 'click', 'Check CDN Button'); checkCDN();">Check CDN</button>
         <div class="spinner" id="cdnSpinner" style="display:none;"></div>
         <div class="result" id="cdnResult"></div>
     </div>
@@ -100,7 +100,7 @@
         <h2>SSL Certificate Checker</h2>
         <label for="sslDomain">Enter a domain to check its SSL certificate</label>
         <input type="text" id="sslDomain" placeholder="example.com">
-        <button onclick="checkSSL()">Check SSL</button>
+        <button onclick="trackUsage('SSL Checker', 'click', 'SSL Check Button'); checkSSL();">Check SSL</button>
         <div class="spinner" id="sslSpinner" style="display:none;"></div>
         <div class="result" id="sslResult"></div>
     </div>
@@ -117,7 +117,7 @@
             <option value="TXT">TXT</option>
             <option value="MX">MX</option>
         </select>
-        <button onclick="performDNSLookup()">Lookup DNS</button>
+        <button onclick="trackUsage('DNS Lookup', 'click', 'DNS Lookup Button'); performDNSLookup();">Lookup DNS</button>
         <div class="spinner" id="dnsSpinner" style="display:none;"></div>
         <div class="result" id="dnsResult"></div>
     </div>
@@ -127,7 +127,7 @@
         <h2>DNS Blacklist Lookup</h2>
         <label for="blacklistDomain">Enter a domain or IP to check for blacklist</label>
         <input type="text" id="blacklistDomain" placeholder="example.com">
-        <button onclick="checkBlacklist()">Check Blacklist</button>
+        <button onclick="trackUsage('Blacklist Check', 'click', 'Blacklist Check Button'); checkBlacklist();">Check Blacklist</button>
         <div class="spinner" id="blacklistSpinner" style="display:none;"></div>
         <div class="result" id="blacklistResult"></div>
     </div>
@@ -137,7 +137,7 @@
         <h2>DMARC Record Lookup</h2>
         <label for="dmarcDomain">Enter a domain to check for DMARC record</label>
         <input type="text" id="dmarcDomain" placeholder="example.com">
-        <button onclick="checkDMARC()">Check DMARC</button>
+        <button onclick="trackUsage('DMARC Record Lookup', 'click', 'DMARC Check Button'); checkDMARC();">Check DMARC</button>
         <div class="spinner" id="dmarcSpinner" style="display:none;"></div>
         <div class="result" id="dmarcResult"></div>
     </div>
@@ -147,7 +147,7 @@
         <h2>WHOIS Lookup</h2>
         <label for="whoisDomain">Enter a domain to perform WHOIS lookup</label>
         <input type="text" id="whoisDomain" placeholder="example.com">
-        <button onclick="performWHOISLookup()">Lookup WHOIS</button>
+        <button onclick="trackUsage('WHOIS Lookup', 'click', 'WHOIS Lookup Button'); performWHOISLookup();">Lookup WHOIS</button>
         <div class="spinner" id="whoisSpinner" style="display:none;"></div>
         <div class="result" id="whoisResult"></div>
     </div>
@@ -157,7 +157,7 @@
         <h2>Ping</h2>
         <label for="pingHost">Enter a host or IP to ping</label>
         <input type="text" id="pingHost" placeholder="example.com">
-        <button onclick="performPing()">Ping</button>
+        <button onclick="trackUsage('Ping Tool', 'click', 'Ping Button'); performPing();">Ping</button>
         <div class="spinner" id="pingSpinner" style="display:none;"></div>
         <div class="result" id="pingResult"></div>
     </div>
@@ -167,7 +167,7 @@
         <h2>Traceroute</h2>
         <label for="tracerouteHost">Enter a host or IP for traceroute</label>
         <input type="text" id="tracerouteHost" placeholder="example.com">
-        <button onclick="performTraceroute()">Traceroute</button>
+        <button onclick="trackUsage('Traceroute Tool', 'click', 'Traceroute Button'); performTraceroute();">Traceroute</button>
         <div class="spinner" id="tracerouteSpinner" style="display:none;"></div>
         <div class="result" id="tracerouteResult"></div>
     </div>
@@ -177,7 +177,7 @@
         <h2>MX Record Lookup</h2>
         <label for="mxDomain">Enter a domain to check MX records</label>
         <input type="text" id="mxDomain" placeholder="example.com">
-        <button onclick="checkMXRecords()">Check MX Records</button>
+        <button onclick="trackUsage('MX Record Lookup', 'click', 'MX Check Button'); checkMXRecords();">Check MX Records</button>
         <div class="spinner" id="mxSpinner" style="display:none;"></div>
         <div class="result" id="mxResult"></div>
     </div>
@@ -187,7 +187,7 @@
         <h2>Security Headers Check</h2>
         <label for="securityHeadersDomain">Enter a domain to check for security headers</label>
         <input type="text" id="securityHeadersDomain" placeholder="example.com">
-        <button onclick="checkSecurityHeaders()">Check Headers</button>
+        <button onclick="trackUsage('Security Headers Check', 'click', 'Security Headers Check Button'); checkSecurityHeaders();">Check Headers</button>
         <div class="spinner" id="securityHeadersSpinner" style="display:none;"></div>
         <div class="result" id="securityHeadersResult"></div>
     </div>

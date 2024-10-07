@@ -8,6 +8,14 @@ function handleKeyPress(event, tabId) {
     }
 }
 
+// Google Analytics event tracking function
+function trackUsage(eventCategory, eventAction, eventLabel = '') {
+    gtag('event', eventAction, {
+        'event_category': eventCategory,
+        'event_label': eventLabel,
+    });
+}
+
 // Example function to switch tabs (Adjust this based on your needs)
 function switchTab(tabId) {
     const tabs = document.querySelectorAll('.tab');
@@ -20,6 +28,9 @@ function switchTab(tabId) {
     // Add active class to selected tab and its content
     document.querySelector(`#${tabId}`).classList.add('active');
     document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+
+    // Track the usage of the tab
+    trackUsage('Tab', 'click', tabId);
 }
 
 function toggleDarkMode() {
