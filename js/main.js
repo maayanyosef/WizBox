@@ -31,11 +31,12 @@ function switchTab(tabId) {
         activeTabButton.classList.add('active');
     }
 
-    // Update the URL hash without triggering a scroll or page refresh
+    // Update the URL hash without causing a page reload or scroll
     if (window.location.hash !== `#${tabId}`) {
-        window.history.pushState(null, null, `#${tabId}`);
+        window.location.hash = `#${tabId}`;
     }
 }
+
 
 // Function to load the appropriate tab based on the URL hash when the page loads
 function loadTabFromHash() {
