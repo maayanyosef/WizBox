@@ -1,164 +1,3 @@
-// Define the base URL as a parameter
-const BASE_URL = 'https://app.wizbox.tools';
-
-// Function to handle keypress for accessibility (space or enter key)
-function handleKeyPress(event, tabId) {
-    if (event.key === 'Enter' || event.key === ' ') {
-        switchTab(tabId);
-    }
-}
-
-// Google Analytics event tracking function
-function trackUsage(eventCategory, eventAction, eventLabel = '') {
-    gtag('event', eventAction, {
-        'event_category': eventCategory,
-        'event_label': eventLabel,
-    });
-}
-
-// Example function to switch tabs (Adjust this based on your needs)
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    // Remove active class from all tabs and contents
-    tabs.forEach(tab => tab.classList.remove('active'));
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Add active class to selected tab and its content
-    document.querySelector(`#${tabId}`).classList.add('active');
-    document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-
-    // Track the usage of the tab
-    trackUsage('Tab', 'click', tabId);
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-}
-
-window.onload = function() {
-    changeLanguage();  // Set default language on page load
-};
-
-// Function to change the language
-function changeLanguage() {
-    const languageSelect = document.getElementById("languageSelect").value;
-    const translation = translations[languageSelect];
-
-    // Update page content with the selected language
-    document.getElementById("pageTitle").innerText = translation.pageTitle;
-    document.querySelector(`[onclick="switchTab('cdn-tab')"]`).innerText = translation.cdnFinder;
-    document.querySelector(`[onclick="switchTab('ssl-tab')"]`).innerText = translation.sslChecker;
-    document.querySelector(`[onclick="switchTab('dns-tab')"]`).innerText = translation.dnsLookup;
-    document.querySelector(`[onclick="switchTab('myip-tab')"]`).innerText = translation.myIPDetails;
-    document.querySelector(`[onclick="switchTab('blacklist-tab')"]`).innerText = translation.blacklistLookup;
-    document.querySelector(`[onclick="switchTab('dmarc-tab')"]`).innerText = translation.dmarcLookup;
-    document.querySelector(`[onclick="switchTab('whois-tab')"]`).innerText = translation.whoisLookup;
-    document.querySelector(`[onclick="switchTab('ping-tab')"]`).innerText = translation.pingTool;
-    document.querySelector(`[onclick="switchTab('traceroute-tab')"]`).innerText = translation.tracerouteTool;
-    document.querySelector(`[onclick="switchTab('mx-tab')"]`).innerText = translation.mxLookup;
-    document.querySelector(`[onclick="switchTab('security-headers-tab')"]`).innerText = translation.securityHeaders;
-}
-
-// Translations for each language
-const translations = {
-    en: {
-        pageTitle: "WizBox Tool Checks - Domain Lookup and Security Tools",
-        cdnFinder: "CDN Finder",
-        sslChecker: "SSL Certificate Checker",
-        dnsLookup: "DNS Lookup",
-        myIPDetails: "My IP Details",
-        blacklistLookup: "Blacklist Lookup",
-        dmarcLookup: "DMARC Record Lookup",
-        whoisLookup: "WHOIS Lookup",
-        pingTool: "Ping Tool",
-        tracerouteTool: "Traceroute Tool",
-        mxLookup: "MX Lookup",
-        securityHeaders: "Security Headers Check",
-    },
-    es: {
-        pageTitle: "Herramientas de API WizBox - Búsqueda de Dominios y Herramientas de Seguridad",
-        cdnFinder: "Buscador de CDN",
-        sslChecker: "Comprobador de Certificado SSL",
-        dnsLookup: "Consulta de DNS",
-        myIPDetails: "Mis Detalles de IP",
-        blacklistLookup: "Búsqueda en Lista Negra",
-        dmarcLookup: "Búsqueda de Registro DMARC",
-        whoisLookup: "Búsqueda WHOIS",
-        pingTool: "Herramienta Ping",
-        tracerouteTool: "Herramienta Traceroute",
-        mxLookup: "Búsqueda MX",
-        securityHeaders: "Comprobación de Cabeceras de Seguridad",
-    },
-    fr: {
-        pageTitle: "API d'Outils WizBox - Recherche de Domaines et Outils de Sécurité",
-        cdnFinder: "Chercheur de CDN",
-        sslChecker: "Vérificateur de Certificat SSL",
-        dnsLookup: "Recherche DNS",
-        myIPDetails: "Mes Détails IP",
-        blacklistLookup: "Recherche de Liste Noire",
-        dmarcLookup: "Recherche d'Enregistrement DMARC",
-        whoisLookup: "Recherche WHOIS",
-        pingTool: "Outil de Ping",
-        tracerouteTool: "Outil de Traceroute",
-        mxLookup: "Recherche MX",
-        securityHeaders: "Vérification des En-têtes de Sécurité",
-    },
-    de: {
-        pageTitle: "WizBox-Tool-API - Domain-Suche und Sicherheitstools",
-        cdnFinder: "CDN-Finder",
-        sslChecker: "SSL-Zertifikat-Checker",
-        dnsLookup: "DNS-Suche",
-        myIPDetails: "Meine IP-Details",
-        blacklistLookup: "Blacklist-Suche",
-        dmarcLookup: "DMARC-Record-Suche",
-        whoisLookup: "WHOIS-Suche",
-        pingTool: "Ping-Tool",
-        tracerouteTool: "Traceroute-Tool",
-        mxLookup: "MX-Suche",
-        securityHeaders: "Sicherheitsheader-Check",
-    }
-};
-
-// Fetch current IP and display in footer
-async function fetchIP() {
-    try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        document.getElementById('userIp').innerText = `Your IP is: ${data.ip}`;
-    } catch (error) {
-        document.getElementById('userIp').innerText = 'Your IP is: Unable to fetch IP';
-    }
-}
-
-// Call the function when the page loads
-fetchIP();
-
-// Tab Switching Logic
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    // Remove active class from all tabs and contents
-    tabs.forEach(tab => tab.classList.remove('active'));
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Add active class to selected tab and its content
-    document.querySelector(`#${tabId}`).classList.add('active');
-    document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-}
-
-// Show the spinner
-function showSpinner(spinnerId) {
-    document.getElementById(spinnerId).style.display = 'block';
-}
-
-// Hide the spinner
-function hideSpinner(spinnerId) {
-    document.getElementById(spinnerId).style.display = 'none';
-}
-
 // CDN Finder Function with Emoji for CDN Providers
 async function checkCDN() {
     const domain = document.getElementById("cdnDomain").value;
@@ -215,9 +54,6 @@ async function checkCDN() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
-
-
 // SSL Checker Function
 async function checkSSL() {
     const domain = document.getElementById("sslDomain").value;
@@ -259,8 +95,6 @@ async function checkSSL() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
-
 // DNS Lookup Function
 async function performDNSLookup() {
     const domain = document.getElementById("dnsDomain").value;
@@ -285,7 +119,6 @@ async function performDNSLookup() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
 // Function to format DNS result into an HTML table
 function formatDNSResultTable(result, recordType) {
     let tableHTML = `<h4>DNS Results for ${result.domain} (${recordType} Records)</h4>`;
@@ -311,7 +144,6 @@ function formatDNSResultTable(result, recordType) {
                  </table>`;
     return tableHTML;
 }
-
 // DNS Blacklist Lookup
 async function checkBlacklist() {
     const domain = document.getElementById("blacklistDomain").value;
@@ -332,7 +164,6 @@ async function checkBlacklist() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
 // DMARC Record Lookup
 async function checkDMARC() {
     const domain = document.getElementById("dmarcDomain").value;
@@ -353,7 +184,6 @@ async function checkDMARC() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
 // WHOIS Lookup Function
 async function performWHOISLookup() {
     const domain = document.getElementById("whoisDomain").value;
@@ -380,7 +210,6 @@ async function performWHOISLookup() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
 // Helper function to format the WHOIS result into an HTML table
 function formatWhoisResult(result) {
     const domainProfile = result['Domain Profile'] || {};
@@ -434,9 +263,6 @@ function formatWhoisResult(result) {
 
     return html;
 }
-
-
-
 // Ping
 async function performPing() {
     const host = document.getElementById("pingHost").value;
@@ -458,11 +284,6 @@ async function performPing() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
-
-
-
-
 // Traceroute
 async function performTraceroute() {
     const host = document.getElementById("tracerouteHost").value;
@@ -479,7 +300,6 @@ async function performTraceroute() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
 // MX Record Lookup
 async function checkMXRecords() {
     const domain = document.getElementById("mxDomain").value;
@@ -533,8 +353,6 @@ async function checkMXRecords() {
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
     }
 }
-
-
 // Security Headers Check with explanations for fixing missing headers
 async function checkSecurityHeaders() {
     const domain = document.getElementById("securityHeadersDomain").value;
@@ -609,87 +427,5 @@ async function checkSecurityHeaders() {
     } catch (error) {
         hideSpinner('securityHeadersSpinner');
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
-    }
-}
-
-// Fetch My IP details
-async function getMyIPDetails() {
-    const resultDiv = document.getElementById('myipResult');
-    const mapDiv = document.getElementById('map');
-    const spinner = document.getElementById('myipSpinner'); // Ensure spinner is present
-
-    resultDiv.innerHTML = '';
-    mapDiv.style.display = 'none';  // Hide map initially
-    spinner.style.display = 'block';  // Show spinner
-
-    try {
-        const response = await fetch('https://ipapi.co/json/');  // You can replace with any other IP geolocation API
-        const data = await response.json();
-        spinner.style.display = 'none';  // Hide spinner after data is fetched
-
-        if (data.error) {
-            resultDiv.innerHTML = `<span class="error">${data.reason}</span>`;
-        } else {
-            const { ip, city, region, country_name, latitude, longitude, org } = data;
-
-            resultDiv.innerHTML = `
-                <p>My Public IPv4: ${ip}</p>
-                <p>Location: ${city}, ${region}, ${country_name}</p>
-                <p>ISP: ${org}</p>
-                <p>Coordinates: ${latitude}, ${longitude}</p>
-            `;
-
-            // Show the map and set the location
-            mapDiv.style.display = 'block';
-            showMap(latitude, longitude);
-        }
-    } catch (error) {
-        spinner.style.display = 'none';  // Hide spinner on error
-        resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
-    }
-}
-
-// Function to show map
-function showMap(lat, lon) {
-    const map = L.map('map').setView([lat, lon], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    L.marker([lat, lon]).addTo(map)
-        .bindPopup(`Your location: ${lat}, ${lon}`)
-        .openPopup();
-}
-/* Open the side panel */
-function openSidePanel() {
-    document.getElementById("sidePanel").style.width = "260px";
-}
-
-/* Close the side panel */
-function closeSidePanel() {
-    document.getElementById("sidePanel").style.width = "0";
-}
-
-/* Tab Switching */
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    // Remove active class from all tabs
-    tabs.forEach(tab => tab.classList.remove('active'));
-
-    // Hide all tab content
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Show the clicked tab's content and highlight the active tab
-    document.getElementById(tabId).classList.add('active');
-    document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-}
-
-/* Handle keyboard navigation */
-function handleKeyPress(event, tabId) {
-    if (event.key === 'Enter' || event.key === ' ') {
-        switchTab(tabId);
     }
 }
