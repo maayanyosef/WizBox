@@ -58,7 +58,8 @@ function toggleDarkMode() {
 }
 // Change the language of the page
 window.onload = function() {
-    changeLanguage();
+    changeLanguage(); // This ensures the correct language is set on page load
+    getMyIPDetails(); // Automatically fetch IP details when the page loads
 };
 // Open the side panel
 function openSidePanel() {
@@ -73,4 +74,7 @@ function handleKeyPress(event, tabId) {
     if (event.key === 'Enter' || event.key === ' ') {
         switchTab(tabId);
     }
+}
+function refreshIPDetails() {
+    window.location.reload();
 }
