@@ -401,13 +401,19 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-// Function to copy all displayed file content to clipboard
+// Function to copy all displayed file content and file tree structure to clipboard
 function copyAllContent() {
     const contentContainer = document.getElementById('file-content');
-    const textToCopy = contentContainer.innerText;
+    const fileTreeContainer = document.getElementById('file-tree');
+
+    // Combine both the file tree and file content into a single text block
+    const fileTreeText = fileTreeContainer ? fileTreeContainer.innerText : '';
+    const fileContentText = contentContainer ? contentContainer.innerText : '';
+
+    const textToCopy = `### Files Tree:\n${fileTreeText}\n\n### Files Content:\n${fileContentText}`;
 
     navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('All file content has been copied to the clipboard.');
+        alert('Files Tree and file content have been copied to the clipboard.');
     }).catch(err => {
         console.error('Failed to copy content: ', err);
         alert('Failed to copy content. Please try again.');
