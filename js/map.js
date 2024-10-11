@@ -37,17 +37,24 @@ async function getMyIPDetails() {
     }
 }
 
-// Function to display IP details from ipwho.is on the page
+// Function to display IP details on the page including browser and OS details
 function displayIPDetails(data) {
     const resultDiv = document.getElementById('myipResult');
     const mapDiv = document.getElementById('map');
     const { ip, city, region, country, latitude, longitude, connection } = data;
 
+    // Fetch browser and operating system details
+    const browser = `${navigator.appName} ${navigator.appVersion}`;
+    const operatingSystem = navigator.platform;
+
     resultDiv.innerHTML = `
-        <p>My Public IPv4: ${ip}</p>
-        <p>Location: ${city}, ${region}, ${country}</p>
-        <p>ISP: ${connection.isp || 'N/A'}</p>
-        <p>Coordinates: ${latitude}, ${longitude}</p>
+        <p><i class="fas fa-globe"></i> <strong>Your IP address:</strong> ${ip}</p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> ${city}, ${region}, ${country}</p>
+        <p><i class="fas fa-desktop"></i> <strong>Operating system:</strong> ${operatingSystem}</p>
+        <p><i class="fas fa-browser"></i> <strong>Your browser:</strong> ${browser}</p>
+        <p><i class="fas fa-building"></i> <strong>Your ISP:</strong> ${connection.isp || 'N/A'}</p>
+        <p><i class="fas fa-shield-alt"></i> <strong>Proxy:</strong> ${data.proxy ? 'Used' : 'Not used'}</p>
+        <p><i class="fas fa-map-pin"></i> <strong>Coordinates:</strong> ${latitude}, ${longitude}</p>
     `;
 
     // Show the map and set the location
@@ -59,7 +66,7 @@ function displayIPDetails(data) {
 function displayBackupIPDetails(data) {
     const resultDiv = document.getElementById('myipResult');
     resultDiv.innerHTML = `
-        <p>My Public IPv4: ${data.ip}</p>
+        <p><strong>Your IP address:</strong> ${data.ip}</p>
         <p>Location information is not available from this provider.</p>
     `;
 }
