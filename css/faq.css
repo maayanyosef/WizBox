@@ -1,0 +1,77 @@
+/* Center the main content area */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Make it take up the full viewport height */
+    padding: 20px;
+}
+
+/* FAQ Container Styling */
+section {
+    max-width: 800px; /* Restrict to a maximum width */
+    width: 90%; /* Make it responsive by using a percentage width */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* FAQ Header Styling */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+/* FAQ Container Styling */
+.faq-item {
+    margin: 10px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+/* FAQ Question Button Styling */
+.faq-question {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #00796b;
+    background-color: #f9f9f9;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #e0f2f1;
+}
+
+/* FAQ Answer Styling */
+.faq-answer {
+    display: none;
+    padding: 15px;
+    font-size: 16px;
+    color: #333;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* FAQ Opened State Styling */
+.faq-question.open {
+    background-color: #e0f2f1;
+}
+
+.faq-question::after {
+    content: '\25BC'; /* Down arrow */
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.open::after {
+    transform: rotate(180deg); /* Flip arrow to point up */
+}

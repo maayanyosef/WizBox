@@ -35,12 +35,13 @@
     <meta name="twitter:title" content="What Is My IP - WizBox Tool Checks">
     <meta name="twitter:description" content="Find your public IP address and view related details instantly with the What Is My IP tool.">
     <meta name="twitter:image" content="https://wizbox.tools/your-image.jpg">
-    <title>What Is My IP - WizBox Tool Checks </title>
+    <title>WizBox Tool Checks - What is My IP - What is My IP, Domain Lookup, SSL Check, CDN Finder</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Link the external CSS file -->
     <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/faq.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Link the external JS file -->
@@ -88,13 +89,105 @@
         <h2>My Public IP Details
             <i class="fas fa-sync-alt" style="cursor: pointer; margin-left: 10px;" onclick="refreshIPDetails()" title="Refresh"></i>
         </h2>
-        <!-- <button onclick="trackUsage('My IP', 'click', 'Show My IP Details'); getMyIPDetails();">Show My IP Details</button> -->
         <div class="spinner" id="myipSpinner" style="display:none;"></div>
         <div class="result" id="myipResult"></div>
-        <!-- Add map container -->
-        <div id="map" style="height: 400px; margin-top: 20px; display: none;"></div> <!-- Ensure map div is hidden by default -->
+        <!-- Map Container -->
+        <div id="map" style="height: 400px; margin-top: 20px; display: none;"></div>
+   <!-- FAQ Section for "What Is My IP" -->
+    <section>
+    <h2>Frequently Asked Questions (FAQ)</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is an IP address and why is it important?
+        </button>
+        <div class="faq-answer">
+            <p>An IP (Internet Protocol) address is a unique number assigned to devices connected to the internet. It allows devices to communicate and exchange data across the web, making it essential for browsing, streaming, and accessing online services.</p>
+        </div>
     </div>
 
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I find my public IP address?
+        </button>
+        <div class="faq-answer">
+            <p>You can find your public IP address using tools like "What Is My IP." These tools display the current IP address assigned to your internet connection by your Internet Service Provider (ISP).</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between IPv4 and IPv6 addresses?
+        </button>
+        <div class="faq-answer">
+            <p>IPv4 addresses are the most commonly used format and consist of four sets of numbers. IPv6 is the newer version designed to provide more IP addresses as the internet grows, using a longer, hexadecimal format.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is my public vs private IP address?
+        </button>
+        <div class="faq-answer">
+            <p>A public IP address is the one assigned to your network by your ISP and is used to access the internet. A private IP address is used within your local network and is not visible to the outside world.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I hide or change my IP address?
+        </button>
+        <div class="faq-answer">
+            <p>You can hide or change your IP address using a VPN (Virtual Private Network), which masks your real IP and provides a different one from another location, enhancing your online privacy and security.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does my IP address reveal my location?
+        </button>
+        <div class="faq-answer">
+            <p>Your IP address is linked to your ISP, which assigns a range of IP addresses to geographic regions. This allows websites and services to approximate your location based on the IP address.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can my IP address be used to track me online?
+        </button>
+        <div class="faq-answer">
+            <p>While your IP address reveals your general location, it doesn’t provide detailed personal information. However, it can be used by websites and law enforcement agencies to track online activity, which is why using a VPN is recommended for privacy.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why does my IP address keep changing?
+        </button>
+        <div class="faq-answer">
+            <p>If you have a dynamic IP address, your ISP can assign a new one periodically. This is common for residential internet connections. If you want a permanent IP, you can request a static IP from your ISP, though it may come with additional costs.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the risks of exposing my public IP address?
+        </button>
+        <div class="faq-answer">
+            <p>While knowing your public IP address is generally not harmful, sharing it publicly can expose you to risks like DDoS attacks or unwanted surveillance. Using security tools like firewalls and VPNs can mitigate these risks.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I check if my IP address is blacklisted?
+        </button>
+        <div class="faq-answer">
+            <p>You can use a DNSBL (DNS-based Blackhole List) Lookup tool to check if your IP address is blacklisted. Being blacklisted means your IP is flagged for suspicious activity, often due to spam or hacking attempts.</p>
+        </div>
+    </div>
+</section>
+    </div>
     <!-- CDN Finder Section -->
     <div class="tab-content" id="cdn-finder">
         <h2>CDN Finder</h2>
@@ -215,6 +308,17 @@
     "target": "https://wizbox.tools/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
+}
+</script>
+<script>
+function toggleAnswer(button) {
+    const answer = button.nextElementSibling;
+    const isOpen = button.classList.toggle('open');
+    if (isOpen) {
+        answer.style.display = 'block';
+    } else {
+        answer.style.display = 'none';
+    }
 }
 </script>
 <!-- Footer -->
