@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/faq.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Link the external JS file -->
@@ -89,11 +90,103 @@
         <h2>My Public IP Details
             <i class="fas fa-sync-alt" style="cursor: pointer; margin-left: 10px;" onclick="refreshIPDetails()" title="Refresh"></i>
         </h2>
-        <!-- <button onclick="trackUsage('My IP', 'click', 'Show My IP Details'); getMyIPDetails();">Show My IP Details</button> -->
         <div class="spinner" id="myipSpinner" style="display:none;"></div>
         <div class="result" id="myipResult"></div>
         <!-- Add map container -->
         <div id="map" style="height: 400px; margin-top: 20px; display: none;"></div> <!-- Ensure map div is hidden by default -->
+        <div id="faq-what-is-my-ip">
+    <h2>Frequently Asked Questions (FAQ)</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is an IP address and why is it important?
+        </button>
+        <div class="faq-answer">
+            <p>An IP (Internet Protocol) address is a unique number assigned to devices connected to the internet. It allows devices to communicate and exchange data across the web, making it essential for browsing, streaming, and accessing online services.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I find my public IP address?
+        </button>
+        <div class="faq-answer">
+            <p>You can find your public IP address using tools like "What Is My IP." These tools display the current IP address assigned to your internet connection by your Internet Service Provider (ISP).</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between IPv4 and IPv6 addresses?
+        </button>
+        <div class="faq-answer">
+            <p>IPv4 addresses are the most commonly used format and consist of four sets of numbers. IPv6 is the newer version designed to provide more IP addresses as the internet grows, using a longer, hexadecimal format.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is my public vs private IP address?
+        </button>
+        <div class="faq-answer">
+            <p>A public IP address is the one assigned to your network by your ISP and is used to access the internet. A private IP address is used within your local network and is not visible to the outside world.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I hide or change my IP address?
+        </button>
+        <div class="faq-answer">
+            <p>You can hide or change your IP address using a VPN (Virtual Private Network), which masks your real IP and provides a different one from another location, enhancing your online privacy and security.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does my IP address reveal my location?
+        </button>
+        <div class="faq-answer">
+            <p>Your IP address is linked to your ISP, which assigns a range of IP addresses to geographic regions. This allows websites and services to approximate your location based on the IP address.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can my IP address be used to track me online?
+        </button>
+        <div class="faq-answer">
+            <p>While your IP address reveals your general location, it doesn’t provide detailed personal information. However, it can be used by websites and law enforcement agencies to track online activity, which is why using a VPN is recommended for privacy.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why does my IP address keep changing?
+        </button>
+        <div class="faq-answer">
+            <p>If you have a dynamic IP address, your ISP can assign a new one periodically. This is common for residential internet connections. If you want a permanent IP, you can request a static IP from your ISP, though it may come with additional costs.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the risks of exposing my public IP address?
+        </button>
+        <div class="faq-answer">
+            <p>While knowing your public IP address is generally not harmful, sharing it publicly can expose you to risks like DDoS attacks or unwanted surveillance. Using security tools like firewalls and VPNs can mitigate these risks.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I check if my IP address is blacklisted?
+        </button>
+        <div class="faq-answer">
+            <p>You can use a DNSBL (DNS-based Blackhole List) Lookup tool to check if your IP address is blacklisted. Being blacklisted means your IP is flagged for suspicious activity, often due to spam or hacking attempts.</p>
+        </div>
+        </div>
+        </div>
     </div>
 
     <!-- CDN Finder Section -->
@@ -104,6 +197,89 @@
         <button onclick="trackUsage('CDN Finder', 'click', 'Check CDN Button'); checkCDN();">Check CDN</button>
         <div class="spinner" id="cdnSpinner" style="display:none;"></div>
         <div class="result" id="cdnResult"></div>
+        <div id="faq-cdn-finder">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What is a CDN?
+                </button>
+                <div class="faq-answer">
+                    <p>A CDN (Content Delivery Network) is a system of distributed servers that deliver web content to users based on their geographic location. This helps improve the speed, reliability, and performance of websites by caching content close to the user.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How does a CDN work?
+                </button>
+                <div class="faq-answer">
+                    <p>A CDN works by distributing content across multiple servers in different geographic locations. When a user requests content, the CDN delivers it from the nearest server, reducing latency and improving load times.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What are the benefits of using a CDN?
+                </button>
+                <div class="faq-answer">
+                    <p>Using a CDN improves website speed, reduces server load, enhances security through features like DDoS protection, and provides better content availability and redundancy. It also optimizes content delivery for users in different regions.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How can I check if a website is using a CDN?
+                </button>
+                <div class="faq-answer">
+                    <p>You can use our CDN Finder tool to check if a website is using a CDN. Simply enter the domain, and the tool will analyze the network and tell you if a CDN is being used, along with which CDN provider is serving the content.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What are popular CDN providers?
+                </button>
+                <div class="faq-answer">
+                    <p>Some popular CDN providers include Cloudflare, Akamai, Amazon CloudFront, Fastly, and Google Cloud CDN. These services are widely used to deliver web content faster and more securely.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Can a CDN improve my website’s SEO?
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, using a CDN can improve your website’s SEO by enhancing page load times, which is a ranking factor for search engines. Faster websites provide a better user experience, leading to lower bounce rates and higher rankings in search results.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How does a CDN help with website security?
+                </button>
+                <div class="faq-answer">
+                    <p>A CDN can improve website security by providing features such as DDoS protection, SSL/TLS encryption, and Web Application Firewalls (WAF). These features help safeguard your website against various cyberattacks and ensure secure data transmission.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Is a CDN necessary for all websites?
+                </button>
+                <div class="faq-answer">
+                    <p>While a CDN is not necessary for all websites, it is highly recommended for sites with a global audience or heavy traffic. Websites with large files (like videos and images) or those that need to maintain high performance under load can greatly benefit from using a CDN.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Does a CDN affect website performance in local markets?
+                </button>
+                <div class="faq-answer">
+                    <p>A CDN can improve website performance for users in both local and global markets. It reduces latency by caching content on servers closer to the users' location, which speeds up load times and enhances the browsing experience for local visitors as well.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Can a CDN reduce bandwidth costs?
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, using a CDN can reduce bandwidth costs. By caching content closer to users and offloading traffic from your origin server, a CDN reduces the amount of data that your server has to deliver, potentially lowering hosting and bandwidth expenses.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- SSL Certificate Checker Section -->
@@ -114,6 +290,89 @@
         <button onclick="trackUsage('SSL Checker', 'click', 'SSL Check Button'); checkSSL();">Check SSL</button>
         <div class="spinner" id="sslSpinner" style="display:none;"></div>
         <div class="result" id="sslResult"></div>
+        <div id="faq-ssl-certificate">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What is an SSL certificate?
+                </button>
+                <div class="faq-answer">
+                    <p>An SSL (Secure Sockets Layer) certificate is a digital certificate that authenticates a website’s identity and enables an encrypted connection between the website and the user's browser, ensuring that data transmitted remains private and secure.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Why is an SSL certificate important for my website?
+                </button>
+                <div class="faq-answer">
+                    <p>An SSL certificate is crucial for protecting sensitive information such as passwords, credit card details, and personal data. It also helps boost your site's SEO and builds trust by displaying the padlock symbol in the browser address bar.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How do I check if a website has an SSL certificate?
+                </button>
+                <div class="faq-answer">
+                    <p>You can check if a website has an SSL certificate by looking for the padlock symbol in the browser's address bar. Alternatively, you can use our SSL Certificate Checker tool to verify the certificate’s details, such as validity, issuer, and expiration date.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What happens if my SSL certificate expires?
+                </button>
+                <div class="faq-answer">
+                    <p>If your SSL certificate expires, your website may display security warnings to visitors, and the encrypted connection will no longer be secure. Renewing your SSL certificate before it expires is important to maintain security and user trust.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How do I renew an SSL certificate?
+                </button>
+                <div class="faq-answer">
+                    <p>You can renew your SSL certificate by contacting your SSL certificate provider or through your hosting provider. The process usually involves verifying your domain ownership again and re-installing the new certificate on your server.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What types of SSL certificates are available?
+                </button>
+                <div class="faq-answer">
+                    <p>There are three main types of SSL certificates: Domain Validated (DV), Organization Validated (OV), and Extended Validation (EV). DV certificates provide basic encryption, while OV and EV certificates offer higher levels of validation and assurance, often used by businesses.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Does having an SSL certificate improve SEO?
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, having an SSL certificate improves your SEO. Google considers HTTPS a ranking factor, and websites with SSL certificates may rank higher in search results. It also builds user trust, which can lead to better engagement and reduced bounce rates.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    How do I know if my SSL certificate is valid?
+                </button>
+                <div class="faq-answer">
+                    <p>You can check the validity of your SSL certificate using our SSL Certificate Checker tool, which will show details like the expiration date and whether the certificate is correctly installed and functioning.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    What is the difference between HTTP and HTTPS?
+                </button>
+                <div class="faq-answer">
+                    <p>HTTP (HyperText Transfer Protocol) is the standard protocol for transmitting data over the web. HTTPS (HyperText Transfer Protocol Secure) adds a layer of encryption using SSL/TLS, ensuring that data sent between your browser and the website is secure.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleAnswer(this)">
+                    Can I get an SSL certificate for free?
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, you can get a free SSL certificate from providers like Let’s Encrypt. These certificates provide basic encryption and are suitable for most websites. However, for enhanced security or business validation, you may want to opt for a paid certificate from a recognized Certificate Authority (CA).</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- DNS Lookup Section -->
@@ -131,6 +390,99 @@
         <button onclick="trackUsage('DNS Lookup', 'click', 'DNS Lookup Button'); performDNSLookup();">Lookup DNS</button>
         <div class="spinner" id="dnsSpinner" style="display:none;"></div>
         <div class="result" id="dnsResult"></div>
+        <div id="faq-dns-lookup">
+    <h2>Frequently Asked Questions (FAQ) - DNS Lookup</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is DNS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>A DNS (Domain Name System) lookup is the process of translating a domain name, like example.com, into an IP address. This allows browsers to locate websites and servers on the internet.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does DNS lookup work?
+        </button>
+        <div class="faq-answer">
+            <p>When you enter a domain name in a browser, a DNS lookup occurs to match the domain name with its corresponding IP address. This process involves multiple DNS servers, including recursive resolvers, root servers, TLD servers, and authoritative DNS servers.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the types of DNS records?
+        </button>
+        <div class="faq-answer">
+            <p>The most common DNS records include A (Address), AAAA (IPv6 Address), CNAME (Canonical Name), MX (Mail Exchange), TXT (Text), NS (Name Server), and SOA (Start of Authority). Each serves a different purpose in mapping domain names to services.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a recursive DNS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>A recursive DNS lookup is when a DNS resolver queries various DNS servers on behalf of the client (such as a browser), starting from the root DNS server, to resolve the domain name into an IP address.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a DNS A record?
+        </button>
+        <div class="faq-answer">
+            <p>A DNS A (Address) record maps a domain name to its corresponding IPv4 address. For example, if example.com has an A record, it will point to a specific IP address such as 93.184.216.34.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between a DNS A record and a CNAME record?
+        </button>
+        <div class="faq-answer">
+            <p>An A record maps a domain to a specific IP address, while a CNAME (Canonical Name) record maps one domain name to another. CNAME records are useful for pointing subdomains to the main domain or for redirection purposes.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why is DNS lookup important?
+        </button>
+        <div class="faq-answer">
+            <p>DNS lookup is crucial because it enables users to access websites by typing domain names instead of IP addresses. Without DNS, navigating the web would be complex and difficult, as users would need to remember numerical IP addresses for each website.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I perform a DNS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>You can perform a DNS lookup using online tools like the WizBox DNS Lookup tool or through command-line utilities such as `nslookup` or `dig` (Linux/Mac) to retrieve DNS records and resolve domain names to IP addresses.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How long does DNS lookup take?
+        </button>
+        <div class="faq-answer">
+            <p>A DNS lookup usually takes milliseconds to complete, but it may take longer depending on factors like DNS caching, network latency, or server response times. Cached DNS records can speed up the lookup process significantly.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I fix a slow DNS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>You can fix a slow DNS lookup by clearing your DNS cache, switching to a faster DNS provider (e.g., Google Public DNS or Cloudflare DNS), or checking your network settings for issues that might be causing delays in resolving domain names.</p>
+        </div>
+    </div>
+    </div>
     </div>
 
     <!-- DNS Blacklist Lookup Section -->
@@ -141,6 +493,99 @@
         <button onclick="trackUsage('Blacklist Check', 'click', 'Blacklist Check Button'); checkBlacklist();">Check Blacklist</button>
         <div class="spinner" id="blacklistSpinner" style="display:none;"></div>
         <div class="result" id="blacklistResult"></div>
+        <div id="faq-blacklist-lookup">
+    <h2>Frequently Asked Questions (FAQ) - DNS Blacklist Lookup</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a DNS blacklist?
+        </button>
+        <div class="faq-answer">
+            <p>A DNS blacklist (DNSBL) is a real-time database used to track IP addresses that are suspected of sending spam or other malicious activity. DNS blacklists are often used by email servers to block spam emails and prevent cyberattacks.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does a DNS blacklist lookup work?
+        </button>
+        <div class="faq-answer">
+            <p>A DNS blacklist lookup checks if a specific IP address or domain is listed on any known DNS blacklists. If the IP is blacklisted, it indicates that it has been flagged for suspicious activity, such as sending spam emails or hosting malicious content.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why is my IP address blacklisted?
+        </button>
+        <div class="faq-answer">
+            <p>Your IP address may be blacklisted if it is associated with spam emails, botnets, malware, or other malicious activity. Sometimes, even legitimate users can be blacklisted if their IP address is part of a shared network with suspicious activity.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I check if my IP is on a DNS blacklist?
+        </button>
+        <div class="faq-answer">
+            <p>You can use a DNS blacklist lookup tool, like the WizBox DNS Blacklist Lookup, to check if your IP address or domain is listed on any DNS blacklists. Simply enter your IP or domain, and the tool will search through multiple blacklists.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I remove my IP from a DNS blacklist?
+        </button>
+        <div class="faq-answer">
+            <p>To remove your IP from a DNS blacklist, you need to contact the blacklist provider. First, investigate and resolve any issues that led to the blacklisting (such as spam or malware). Then, request delisting through the provider’s removal process, which may take time depending on their policies.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How long does it take to get off a DNS blacklist?
+        </button>
+        <div class="faq-answer">
+            <p>Getting removed from a DNS blacklist can take anywhere from a few hours to several weeks, depending on the blacklist provider and the severity of the issue. Some providers have an automated delisting process, while others may require manual intervention.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I prevent my IP from being blacklisted?
+        </button>
+        <div class="faq-answer">
+            <p>To avoid being blacklisted, make sure your network is secure, use reputable email services to prevent spam, and regularly scan for malware. Implement proper email authentication methods like SPF, DKIM, and DMARC to prevent spoofing.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the consequences of being on a DNS blacklist?
+        </button>
+        <div class="faq-answer">
+            <p>If your IP or domain is on a DNS blacklist, it can lead to email delivery issues, blocked website traffic, and a damaged reputation. Email servers may reject your messages, and users might be unable to access your site if their internet service provider blocks it.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How often should I check for DNS blacklisting?
+        </button>
+        <div class="faq-answer">
+            <p>It's a good practice to regularly check if your IP or domain is blacklisted, especially if you're running email servers, websites, or online services. Set up monitoring tools to automatically alert you if you're blacklisted.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the most common DNS blacklists?
+        </button>
+        <div class="faq-answer">
+            <p>Some of the most well-known DNS blacklists include Spamhaus, Barracuda, SORBS, and SpamCop. These blacklists are commonly used by email servers to prevent spam and malicious activity.</p>
+        </div>
+    </div>
+    </div>
     </div>
 
     <!-- DMARC Record Lookup Section -->
@@ -151,6 +596,99 @@
         <button onclick="trackUsage('DMARC Record Lookup', 'click', 'DMARC Check Button'); checkDMARC();">Check DMARC</button>
         <div class="spinner" id="dmarcSpinner" style="display:none;"></div>
         <div class="result" id="dmarcResult"></div>
+        <div id="faq-dmarc-lookup">
+    <h2>Frequently Asked Questions (FAQ) - DMARC Record Lookup</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is DMARC?
+        </button>
+        <div class="faq-answer">
+            <p>DMARC (Domain-based Message Authentication, Reporting, and Conformance) is an email authentication protocol that allows domain owners to protect their domain from unauthorized use, including phishing and email spoofing. DMARC helps verify that emails are genuinely sent by the domain they claim to be from.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a DMARC record?
+        </button>
+        <div class="faq-answer">
+            <p>A DMARC record is a DNS (Domain Name System) entry that specifies a domain’s DMARC policy. It tells receiving email servers how to handle emails that fail SPF (Sender Policy Framework) or DKIM (DomainKeys Identified Mail) checks, such as whether to reject, quarantine, or allow them.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does DMARC help prevent phishing and spoofing?
+        </button>
+        <div class="faq-answer">
+            <p>DMARC prevents phishing and email spoofing by authenticating emails using SPF and DKIM. If an email fails these checks, the DMARC policy instructs the receiving server on how to handle the email, reducing the risk of fake emails being delivered to recipients.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I check my DMARC record?
+        </button>
+        <div class="faq-answer">
+            <p>You can check your DMARC record using a DMARC lookup tool like WizBox DMARC Record Lookup. Enter your domain, and the tool will retrieve and display your DMARC record, including policy details and email authentication status.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does a DMARC policy mean?
+        </button>
+        <div class="faq-answer">
+            <p>A DMARC policy defines how an email server should treat emails that fail SPF or DKIM checks. The policy options include "none" (monitor only), "quarantine" (send emails to spam), and "reject" (block the email entirely). It helps domain owners take control of their email authentication.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is SPF and DKIM, and how do they relate to DMARC?
+        </button>
+        <div class="faq-answer">
+            <p>SPF (Sender Policy Framework) and DKIM (DomainKeys Identified Mail) are two email authentication methods used by DMARC. SPF ensures that an email comes from an authorized server, while DKIM verifies that the message hasn't been altered in transit. DMARC builds on both to further secure email communications.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I add a DMARC record to my domain?
+        </button>
+        <div class="faq-answer">
+            <p>To add a DMARC record, you need to create a TXT record in your domain's DNS settings. The TXT record will contain the DMARC policy, such as "v=DMARC1; p=none;" for monitoring. Consult your DNS provider’s documentation for specific instructions on adding DNS records.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How long does it take for a DMARC record to update?
+        </button>
+        <div class="faq-answer">
+            <p>After adding or updating a DMARC record, it can take anywhere from a few minutes to 48 hours for the changes to propagate across DNS servers globally. You can use a DMARC lookup tool to verify if the new record is live.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are DMARC aggregate and forensic reports?
+        </button>
+        <div class="faq-answer">
+            <p>DMARC aggregate reports provide a summary of email authentication results across multiple emails, while forensic reports give detailed information about specific email failures. These reports help domain owners understand and improve their email authentication practices.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What should I do if emails are failing DMARC checks?
+        </button>
+        <div class="faq-answer">
+            <p>If emails are failing DMARC checks, review your SPF and DKIM configurations to ensure they are set up correctly. You may need to adjust your DMARC policy, update DNS records, or investigate whether unauthorized parties are sending emails on behalf of your domain.</p>
+        </div>
+    </div>
+        </div>
     </div>
 
     <!-- WHOIS Lookup Section -->
@@ -161,6 +699,99 @@
         <button onclick="trackUsage('WHOIS Lookup', 'click', 'WHOIS Lookup Button'); performWHOISLookup();">Lookup WHOIS</button>
         <div class="spinner" id="whoisSpinner" style="display:none;"></div>
         <div class="result" id="whoisResult"></div>
+        <div id="faq-whois-lookup">
+    <h2>Frequently Asked Questions (FAQ) - WHOIS Lookup</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a WHOIS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>A WHOIS lookup is a tool used to retrieve domain registration details. It provides information about the domain's owner, registration and expiration dates, name servers, and sometimes the registrant’s contact information.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does WHOIS lookup work?
+        </button>
+        <div class="faq-answer">
+            <p>WHOIS lookup works by querying databases maintained by domain registrars and WHOIS services. When you perform a WHOIS lookup, the tool retrieves the domain registration details from these public databases.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What information can I get from a WHOIS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>A WHOIS lookup provides details such as the domain owner's name, organization, contact information, registration date, expiration date, name servers, and sometimes administrative and technical contact details, depending on the registrar.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Is WHOIS lookup legal?
+        </button>
+        <div class="faq-answer">
+            <p>Yes, WHOIS lookup is legal. WHOIS information is public by default, as domain owners agree to provide certain details when registering a domain. However, domain privacy protection services can hide personal details from public WHOIS databases.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I hide my personal information in WHOIS?
+        </button>
+        <div class="faq-answer">
+            <p>You can use a domain privacy protection service, often provided by your domain registrar. This service replaces your personal details with the registrar’s contact information, keeping your personal data private while maintaining your domain registration.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why is WHOIS information important?
+        </button>
+        <div class="faq-answer">
+            <p>WHOIS information is important for verifying the legitimacy of a domain. It helps with domain ownership disputes, identifying potential fraud, and contacting domain owners. It’s also used by law enforcement to investigate cybercrime.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does it mean if a domain's WHOIS information is private?
+        </button>
+        <div class="faq-answer">
+            <p>If a domain's WHOIS information is private, the domain owner is using a privacy protection service to hide personal details like name, email, and contact information. Instead, the registrar’s contact details are displayed in the WHOIS lookup results.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I perform a WHOIS lookup?
+        </button>
+        <div class="faq-answer">
+            <p>You can perform a WHOIS lookup using an online tool like WizBox WHOIS Lookup. Simply enter the domain name, and the tool will retrieve and display the WHOIS information from the relevant database.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can I find out when a domain expires using WHOIS?
+        </button>
+        <div class="faq-answer">
+            <p>Yes, a WHOIS lookup shows the domain's registration and expiration dates. This information is useful for checking when a domain will expire or if it is available for renewal or purchase.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What should I do if my WHOIS information is incorrect?
+        </button>
+        <div class="faq-answer">
+            <p>If your WHOIS information is incorrect, you should contact your domain registrar to update the information. Most registrars provide an interface where you can modify your WHOIS details to ensure they are accurate and compliant with ICANN regulations.</p>
+        </div>
+    </div>
+        </div>
     </div>
 
     <!-- Ping Section -->
@@ -171,6 +802,99 @@
         <button onclick="trackUsage('Ping Tool', 'click', 'Ping Button'); performPing();">Ping</button>
         <div class="spinner" id="pingSpinner" style="display:none;"></div>
         <div class="result" id="pingResult"></div>
+        <div id="faq-ping">
+    <h2>Frequently Asked Questions (FAQ) - Ping</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a ping command?
+        </button>
+        <div class="faq-answer">
+            <p>The ping command is a network utility used to test the reachability of a host on an IP network. It works by sending ICMP echo request packets to the target host and waits for a reply to measure the round-trip time and check the connection status.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does the ping command work?
+        </button>
+        <div class="faq-answer">
+            <p>When you run a ping command, it sends small data packets (ICMP Echo Requests) to a specified IP address or domain. If the target is reachable, it responds with an ICMP Echo Reply. The ping utility then measures the time it took to get the response, indicating how fast the connection is.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does the ping command measure?
+        </button>
+        <div class="faq-answer">
+            <p>The ping command measures the round-trip time (RTT) for packets sent from your device to the target host and back. It also reports packet loss if the target is unreachable or packets are dropped along the way.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a good ping time?
+        </button>
+        <div class="faq-answer">
+            <p>A good ping time is usually under 20ms for local networks, 50ms to 100ms for standard internet connections, and over 150ms is considered high latency, which could lead to delays in applications like online gaming or video conferencing.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does "Request Timed Out" mean in ping?
+        </button>
+        <div class="faq-answer">
+            <p>"Request Timed Out" in a ping result means that the ICMP packets sent to the target were not responded to within the expected time frame. This could be due to the target being unreachable, a firewall blocking ICMP traffic, or network congestion.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What causes packet loss in ping?
+        </button>
+        <div class="faq-answer">
+            <p>Packet loss in ping can occur due to various reasons, such as network congestion, faulty hardware, poor Wi-Fi signal, or a firewall or security configuration that blocks certain types of network traffic.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I perform a ping test?
+        </button>
+        <div class="faq-answer">
+            <p>To perform a ping test, open a command-line interface (CLI) like Command Prompt on Windows or Terminal on macOS/Linux. Type `ping` followed by the IP address or domain name you want to test (e.g., `ping google.com`), and press Enter. The system will send ping requests and display the results.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is a ping flood attack?
+        </button>
+        <div class="faq-answer">
+            <p>A ping flood, also known as a "ping of death" attack, is a type of Denial of Service (DoS) attack where an attacker overwhelms a target with a large number of ping requests, consuming its bandwidth and resources, potentially causing the system to crash.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between ping and traceroute?
+        </button>
+        <div class="faq-answer">
+            <p>Ping checks the availability and response time of a specific host, while traceroute tracks the path that data packets take from your device to the destination. Traceroute provides information about each hop (router) the data passes through, which can help diagnose network issues.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I improve high ping or latency?
+        </button>
+        <div class="faq-answer">
+            <p>To improve high ping or latency, you can try using a wired connection instead of Wi-Fi, reducing network congestion, upgrading your internet plan, using a DNS service like Google DNS or Cloudflare DNS, or connecting to servers closer to your location.</p>
+        </div>
+    </div>
+        </div>
     </div>
 
     <!-- Traceroute Section -->
@@ -181,6 +905,99 @@
         <button onclick="trackUsage('Traceroute Tool', 'click', 'Traceroute Button'); performTraceroute();">Traceroute</button>
         <div class="spinner" id="tracerouteSpinner" style="display:none;"></div>
         <div class="result" id="tracerouteResult"></div>
+        <div id="faq-traceroute">
+    <h2>Frequently Asked Questions (FAQ) - Traceroute</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is traceroute?
+        </button>
+        <div class="faq-answer">
+            <p>Traceroute is a network diagnostic tool used to track the path that data packets take from your device to a destination, such as a website or server. It displays each hop along the route, revealing the routers or gateways the packets pass through.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does traceroute work?
+        </button>
+        <div class="faq-answer">
+            <p>Traceroute works by sending packets to the destination with increasing time-to-live (TTL) values. Each hop along the route decreases the TTL, forcing the routers to return error messages when the TTL reaches zero. These messages reveal the IP address and response time of each router along the path.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What can traceroute tell me about my network?
+        </button>
+        <div class="faq-answer">
+            <p>Traceroute provides insights into the path your data takes to reach its destination, identifying where delays, network congestion, or connectivity issues occur. It can also show whether there are routing issues between your device and the target server.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I run a traceroute?
+        </button>
+        <div class="faq-answer">
+            <p>You can run a traceroute from the command line. On Windows, open Command Prompt and type `tracert` followed by the domain or IP address (e.g., `tracert google.com`). On macOS or Linux, open Terminal and type `traceroute` followed by the destination.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between ping and traceroute?
+        </button>
+        <div class="faq-answer">
+            <p>Ping measures the round-trip time for data to travel between your device and a destination, indicating the speed and reachability of the host. Traceroute, on the other hand, shows the path the data takes and reveals each hop and the time spent at each hop.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does “Request Timed Out” mean in traceroute?
+        </button>
+        <div class="faq-answer">
+            <p>“Request Timed Out” in traceroute indicates that a specific router or hop along the path did not respond within the set time limit. This could be due to network congestion, a firewall blocking ICMP traffic, or an issue with the router itself.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I interpret traceroute results?
+        </button>
+        <div class="faq-answer">
+            <p>Traceroute results show each hop along the route to the destination. Each line represents a hop, displaying the IP address of the router, the time taken (in milliseconds) to reach that router, and, sometimes, the domain name of the router. Higher times indicate possible network delays or bottlenecks.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How long does traceroute take to complete?
+        </button>
+        <div class="faq-answer">
+            <p>Traceroute typically completes within a few seconds to a minute, depending on the number of hops and network conditions. If there are issues like network congestion or unreachable hops, it may take longer or timeout.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What can I do if traceroute shows high latency?
+        </button>
+        <div class="faq-answer">
+            <p>If traceroute shows high latency at a specific hop, you can try contacting your internet service provider (ISP) or the hosting provider of the destination. You can also check for local network issues like router performance, firewalls, or traffic congestion.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can I use traceroute to troubleshoot network issues?
+        </button>
+        <div class="faq-answer">
+            <p>Yes, traceroute is a valuable tool for troubleshooting network issues. It helps identify where delays or failures occur in the network path, allowing you to pinpoint problematic hops and address routing problems or network outages.</p>
+        </div>
+    </div>
+        </div>
     </div>
 
     <!-- MX Record Lookup Section -->
@@ -191,6 +1008,99 @@
         <button onclick="trackUsage('MX Record Lookup', 'click', 'MX Check Button'); checkMXRecords();">Check MX Records</button>
         <div class="spinner" id="mxSpinner" style="display:none;"></div>
         <div class="result" id="mxResult"></div>
+        <div id="faq-mx-lookup">
+    <h2>Frequently Asked Questions (FAQ) - MX Record Lookup</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is an MX record?
+        </button>
+        <div class="faq-answer">
+            <p>An MX (Mail Exchange) record is a type of DNS record that directs email to the mail server responsible for receiving emails on behalf of a domain. It tells the sending mail server where to deliver messages addressed to users on that domain.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does an MX record work?
+        </button>
+        <div class="faq-answer">
+            <p>When an email is sent, the sending server performs an MX record lookup to find the receiving domain’s mail servers. The MX record specifies the mail servers and their priority, ensuring the email is routed to the correct destination server for that domain.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How can I look up the MX records for a domain?
+        </button>
+        <div class="faq-answer">
+            <p>You can use an MX Record Lookup tool, like WizBox MX Record Lookup, to query a domain's MX records. Simply enter the domain name, and the tool will display the MX records along with their priorities.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What does MX record priority mean?
+        </button>
+        <div class="faq-answer">
+            <p>MX record priority determines the order in which mail servers should be used when delivering emails. The lower the priority number, the higher the preference for that mail server. If the first server is unavailable, the next one in line is used.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I change the MX records for my domain?
+        </button>
+        <div class="faq-answer">
+            <p>You can change your MX records by logging into your domain registrar or DNS hosting provider and updating the MX records in the DNS settings. Make sure to enter the correct mail server addresses and set the desired priority for each server.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How long does it take for MX record changes to propagate?
+        </button>
+        <div class="faq-answer">
+            <p>MX record changes typically take between a few minutes and 48 hours to fully propagate across DNS servers. The time depends on the TTL (Time-to-Live) value set for the records, as well as DNS caching by ISPs and mail servers.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can a domain have multiple MX records?
+        </button>
+        <div class="faq-answer">
+            <p>Yes, a domain can have multiple MX records. Having multiple MX records with different priorities allows for redundancy. If one mail server is unavailable, emails will be routed to the next server in the priority list.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why is my email not being delivered to the correct server?
+        </button>
+        <div class="faq-answer">
+            <p>Email delivery issues can occur if your MX records are incorrectly configured or if there is an issue with your mail server. Make sure your MX records point to the correct mail servers and that the priorities are set appropriately. DNS propagation delays or server downtime may also cause problems.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the difference between an A record and an MX record?
+        </button>
+        <div class="faq-answer">
+            <p>An A (Address) record maps a domain to an IP address, while an MX record specifies the mail servers responsible for receiving emails for that domain. A records are used for website traffic, while MX records are used for email routing.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can I use a third-party email service with my domain's MX records?
+        </button>
+        <div class="faq-answer">
+            <p>Yes, you can use a third-party email service (like Google Workspace or Microsoft 365) by updating your domain’s MX records to point to the mail servers provided by the third-party service. Ensure you follow their setup instructions to correctly configure your domain for email routing.</p>
+        </div>
+    </div>
+        </div>
     </div>
 
     <!-- Security Headers Check Section -->
@@ -201,6 +1111,107 @@
         <button onclick="trackUsage('Security Headers Check', 'click', 'Security Headers Check Button'); checkSecurityHeaders();">Check Headers</button>
         <div class="spinner" id="securityHeadersSpinner" style="display:none;"></div>
         <div class="result" id="securityHeadersResult"></div>
+        <div id="faq-security-headers-check">
+    <h2>Frequently Asked Questions (FAQ) - Security Headers Check</h2>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are security headers?
+        </button>
+        <div class="faq-answer">
+            <p>Security headers are HTTP response headers that enhance the security of a website by controlling how browsers behave when interacting with your site. They help protect against various attacks like XSS (Cross-Site Scripting), clickjacking, and code injection.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Why are security headers important?
+        </button>
+        <div class="faq-answer">
+            <p>Security headers are important because they add an extra layer of protection to your website by enforcing security policies. They help mitigate vulnerabilities like cross-site scripting, code injection, and protocol downgrade attacks, ensuring that your users' data is more secure.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What are the most important security headers I should implement?
+        </button>
+        <div class="faq-answer">
+            <p>Some of the most important security headers include:
+               <ul>
+                  <li><strong>Strict-Transport-Security (HSTS)</strong>: Enforces HTTPS and prevents protocol downgrade attacks.</li>
+                  <li><strong>Content-Security-Policy (CSP)</strong>: Prevents cross-site scripting and data injection attacks.</li>
+                  <li><strong>X-Frame-Options</strong>: Prevents clickjacking attacks by disallowing your website to be loaded in iframes.</li>
+                  <li><strong>X-Content-Type-Options</strong>: Prevents MIME-type sniffing and forces browsers to stick to declared content types.</li>
+                  <li><strong>Referrer-Policy</strong>: Controls how much referrer information is shared when users navigate between websites.</li>
+               </ul>
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I check if my website has security headers?
+        </button>
+        <div class="faq-answer">
+            <p>You can check your website’s security headers by using a Security Headers Check tool like WizBox Security Headers Check. Simply enter your domain, and the tool will analyze your website’s HTTP response headers to determine which security headers are implemented and which are missing.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is the Content-Security-Policy (CSP) header?
+        </button>
+        <div class="faq-answer">
+            <p>The Content-Security-Policy (CSP) header is designed to protect your website against cross-site scripting (XSS) attacks and data injection by restricting the sources from which content (such as scripts, styles, or images) can be loaded. It allows you to define which external sources are considered safe.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How does the HTTP Strict-Transport-Security (HSTS) header work?
+        </button>
+        <div class="faq-answer">
+            <p>The HTTP Strict-Transport-Security (HSTS) header tells browsers that your site should only be accessed via HTTPS. It helps prevent protocol downgrade attacks and ensures secure connections by automatically redirecting all HTTP requests to HTTPS.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            How do I add security headers to my website?
+        </button>
+        <div class="faq-answer">
+            <p>You can add security headers by modifying your web server configuration (such as Apache, NGINX, or IIS). Alternatively, you can use a Content Delivery Network (CDN) or a web application firewall (WAF) to inject the security headers into your HTTP responses. Specific implementation steps will depend on the platform you are using.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What is X-Frame-Options and why is it important?
+        </button>
+        <div class="faq-answer">
+            <p>The X-Frame-Options header prevents your website from being embedded in an iframe on other websites. This helps protect against clickjacking attacks, where malicious sites try to trick users into clicking hidden buttons or links that perform unwanted actions on your site.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            What happens if I don’t use security headers?
+        </button>
+        <div class="faq-answer">
+            <p>If you don’t use security headers, your website may be vulnerable to a variety of attacks, such as cross-site scripting (XSS), clickjacking, and MIME-type sniffing. These attacks can lead to unauthorized access, data theft, or malicious code injection that compromises the security of your users and your website.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleAnswer(this)">
+            Can security headers improve my website’s SEO?
+        </button>
+        <div class="faq-answer">
+            <p>While security headers don’t directly affect SEO rankings, implementing security headers like HTTPS through HSTS can improve user trust and website security. Google prioritizes secure websites, so having security headers can contribute indirectly to better search engine rankings by ensuring your website is secure and trusted by users.</p>
+        </div>
+    </div>
+        </div>
     </div>
 </div>
 <script type="application/ld+json">
@@ -215,6 +1226,18 @@
     "target": "https://wizbox.tools/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
+}
+</script>
+<script>
+function toggleAnswer(button) {
+    const answer = button.nextElementSibling;
+    const isOpen = button.classList.toggle('open');
+
+    if (isOpen) {
+        answer.style.display = 'block';
+    } else {
+        answer.style.display = 'none';
+    }
 }
 </script>
 <!-- Footer -->
