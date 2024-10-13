@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A powerful tool for DNS Lookup, SSL Certificate Check, CDN Finder, and more. Use our free web tool to check the security and performance of your domain.">
+    <title>WizBox Tools Check - Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #searchResult {
+            margin-top: 20px;
+        }
+
+        .search-result div {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-result div strong {
+            color: #007BFF;
+        }
+
+        /* Highlighting matched terms */
+        mark {
+            background-color: #ffff00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Tools</h1>
+
+    <!-- Search Form -->
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search for tools..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Search Results Area -->
+    <div class="search-result" id="searchResult"></div>
+
+    <script>
+        // Mock data for your tools, replace this with your actual data
+        const toolsData = [
+            { name: "What is My IP", description: "Find out your public IP address." },
+            { name: "CDN Finder", description: "Identify which CDN a website is using." },
+            { name: "SSL Checker", description: "Check the validity of SSL certificates." },
+            { name: "DNS Lookup", description: "Use this tool to check DNS records." },
+            { name: "Blacklist Lookup", description: "Check if an IP or domain is blacklisted." },
+            { name: "DMARC Lookup", description: "Check a domain's DMARC policy." },
+            { name: "WHOIS Lookup", description: "Get information about domain registration details." },
+            { name: "Ping", description: "Test the reachability of a host on the network." },
+            { name: "Traceroute", description: "Track the path packets take to a destination." },
+            { name: "MX Lookup", description: "Check mail server records for a domain." },
+            { name: "Security Headers", description: "Check the security headers of a website." },
+            { name: "Git To LLM", description: "Convert GitHub repo to LLM format." }
+        ];
+
+        // Function to perform search
+        function performSearch(query) {
+            const lowerCaseQuery = query.toLowerCase();
+            const results = toolsData.filter(tool =>
+                tool.name.toLowerCase().includes(lowerCaseQuery) ||
+                tool.description.toLowerCase().includes(lowerCaseQuery)
+            );
+
+            // Highlight the search term in the results
+            const highlightedResults = results.map(result => {
+                const regex = new RegExp(`(${query})`, 'gi');
+                return {
+                    name: result.name.replace(regex, "<mark>$1</mark>"),
+                    description: result.description.replace(regex, "<mark>$1</mark>")
+                };
+            });
+
+            return highlightedResults;
+        }
+
+        // Event listener for the search form submission
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from submitting/reloading
+
+            // Get the value of the search input
+            const searchQuery = document.getElementById('searchInput').value;
+
+            // Perform search
+            const results = performSearch(searchQuery);
+
+            // Display results
+            const searchResultDiv = document.getElementById('searchResult');
+            searchResultDiv.innerHTML = ''; // Clear previous results
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.innerHTML = `<strong>${result.name}</strong>: ${result.description}`;
+                    searchResultDiv.appendChild(resultItem);
+                });
+            } else {
+                searchResultDiv.innerHTML = 'No results found.';
+            }
+        });
+    </script>
+<!-- Footer -->
+<div class="footer">
+    © 2024 WizBox Tool Checks, Inc. | <a href="https://wizbox.tools/what-is-my-ip" style="text-decoration: none; color: inherit;">What is My IP</a> | <a href="https://wizbox.tools/faq" style="text-decoration: none; color: inherit;">FAQ</a> | <span id="userIp">Your IP is: Fetching...</span>
+</div>
+</body>
+</html>
