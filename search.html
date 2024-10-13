@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A powerful tool for DNS Lookup, SSL Certificate Check, CDN Finder, and more. Use our free web tool to check the security and performance of your domain.">
+    <meta name="keywords" content="DNS Lookup, SSL Checker, CDN Finder, Security Headers, WHOIS Lookup, FastAPI">
     <title>WizBox Tools Check - Search</title>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="WizBox Tool Checks - Domain Lookup and Security Tools">
+    <meta property="og:description" content="Check your domain security with DNS lookup, SSL check, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wizbox.tools">
+    <meta property="og:image" content="https://wizbox.tools/apple-touch-icon.png">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WizBox Tool Checks">
+    <meta name="twitter:description" content="Check your domain security with DNS lookup, SSL check, and more.">
+    <meta name="twitter:image" content="https://wizbox.tools/apple-touch-icon.png">
+    <!-- Link the external JS file -->
+    <script src="js/main.js" defer></script>
+    <script src="js/api-handlers.js" defer></script>
+    <script src="js/map.js" defer></script>
+    <script src="js/language.js" defer></script>
+    <script src="js/ui-helpers.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,7 +78,7 @@
     <div class="search-result" id="searchResult"></div>
 
     <script>
-        // Mock data for your tools, replace this with your actual data
+        // Mock data for your tools
         const toolsData = [
             { name: "What is My IP", description: "Find out your public IP address." },
             { name: "CDN Finder", description: "Identify which CDN a website is using." },
@@ -96,17 +114,14 @@
             return highlightedResults;
         }
 
-        // Event listener for the search form submission
-        document.getElementById('searchForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form from submitting/reloading
+        // Function to get URL query parameter value
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
-            // Get the value of the search input
-            const searchQuery = document.getElementById('searchInput').value;
-
-            // Perform search
-            const results = performSearch(searchQuery);
-
-            // Display results
+        // Function to display search results
+        function displayResults(results) {
             const searchResultDiv = document.getElementById('searchResult');
             searchResultDiv.innerHTML = ''; // Clear previous results
             if (results.length > 0) {
@@ -118,9 +133,36 @@
             } else {
                 searchResultDiv.innerHTML = 'No results found.';
             }
+        }
+
+        // Perform search automatically if query is present in URL
+        window.onload = function() {
+            const searchQuery = getQueryParameter('q');
+            if (searchQuery) {
+                document.getElementById('searchInput').value = searchQuery; // Set the input field
+                const results = performSearch(searchQuery); // Perform the search
+                displayResults(results); // Display the results
+            }
+        };
+
+        // Event listener for the search form submission
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from submitting/reloading
+
+            // Get the value of the search input
+            const searchQuery = document.getElementById('searchInput').value;
+
+            // Perform search
+            const results = performSearch(searchQuery);
+
+            // Display results
+            displayResults(results);
+
+            // Update the URL query string without reloading the page
+            const newUrl = `${window.location.pathname}?q=${encodeURIComponent(searchQuery)}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
         });
     </script>
-<!-- Footer -->
 <div class="footer">
     © 2024 WizBox Tool Checks, Inc. | <a href="https://wizbox.tools/what-is-my-ip" style="text-decoration: none; color: inherit;">What is My IP</a> | <a href="https://wizbox.tools/faq" style="text-decoration: none; color: inherit;">FAQ</a> | <span id="userIp">Your IP is: Fetching...</span>
 </div>
