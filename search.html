@@ -18,11 +18,10 @@
     <meta name="twitter:description" content="Check your domain security with DNS lookup, SSL check, and more.">
     <meta name="twitter:image" content="https://wizbox.tools/apple-touch-icon.png">
     <!-- Link the external JS file -->
-    <script src="js/main.js" defer></script>
-    <script src="js/api-handlers.js" defer></script>
-    <script src="js/map.js" defer></script>
-    <script src="js/language.js" defer></script>
     <script src="js/ui-helpers.js" defer></script>
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,20 +78,30 @@
 
     <script>
         // Mock data for your tools
-        const toolsData = [
-            { name: "What is My IP", description: "Find out your public IP address." },
-            { name: "CDN Finder", description: "Identify which CDN a website is using." },
-            { name: "SSL Checker", description: "Check the validity of SSL certificates." },
-            { name: "DNS Lookup", description: "Use this tool to check DNS records." },
-            { name: "Blacklist Lookup", description: "Check if an IP or domain is blacklisted." },
-            { name: "DMARC Lookup", description: "Check a domain's DMARC policy." },
-            { name: "WHOIS Lookup", description: "Get information about domain registration details." },
-            { name: "Ping", description: "Test the reachability of a host on the network." },
-            { name: "Traceroute", description: "Track the path packets take to a destination." },
-            { name: "MX Lookup", description: "Check mail server records for a domain." },
-            { name: "Security Headers", description: "Check the security headers of a website." },
-            { name: "Git To LLM", description: "Convert GitHub repo to LLM format." }
-        ];
+    const toolsData = [
+        { name: "FAQ", description: "Frequently Asked Questions about our tools.", url: "/faq" },
+        { name: "What is My IP", description: "Find out your public IP address.", url: "/what-is-my-ip" },
+        { name: "CDN Finder", description: "Identify which CDN a website is using.", url: "/cdn-finder.html" },
+        { name: "SSL Checker", description: "Check the validity of SSL certificates.", url: "/ssl-checker.html" },
+        { name: "DNS Lookup", description: "Use this tool to check DNS records.", url: "/dns-lookup.html" },
+        { name: "Blacklist Lookup", description: "Check if an IP or domain is blacklisted.", url: "/blacklist-lookup.html" },
+        { name: "DMARC Lookup", description: "Check a domain's DMARC policy.", url: "/dmarc-lookup.html" },
+        { name: "WHOIS Lookup", description: "Get information about domain registration details.", url: "/whois-lookup.html" },
+        { name: "Ping", description: "Test the reachability of a host on the network.", url: "/ping.html" },
+        { name: "Traceroute", description: "Track the path packets take to a destination.", url: "/traceroute.html" },
+        { name: "MX Lookup", description: "Check mail server records for a domain.", url: "/mx-lookup.html" },
+        { name: "Security Headers", description: "Check the security headers of a website.", url: "/security-headers.html" },
+        { name: "Git To LLM", description: "Convert GitHub repo to LLM format.", url: "/git-to-llm.html" }
+    ];
+
+
+        // Function to get URL query parameter value
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramValue = urlParams.get(name);
+            console.log(`Query Parameter "${name}":`, paramValue); // Added logging for debugging
+            return paramValue;
+        }
 
         // Function to perform search
         function performSearch(query) {
@@ -101,6 +110,8 @@
                 tool.name.toLowerCase().includes(lowerCaseQuery) ||
                 tool.description.toLowerCase().includes(lowerCaseQuery)
             );
+
+            console.log(`Search results for "${query}":`, results); // Added logging to check results
 
             // Highlight the search term in the results
             const highlightedResults = results.map(result => {
@@ -114,28 +125,7 @@
             return highlightedResults;
         }
 
-        // Function to get URL query parameter value
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        // Function to display search results
-        function displayResults(results) {
-            const searchResultDiv = document.getElementById('searchResult');
-            searchResultDiv.innerHTML = ''; // Clear previous results
-            if (results.length > 0) {
-                results.forEach(result => {
-                    const resultItem = document.createElement('div');
-                    resultItem.innerHTML = `<strong>${result.name}</strong>: ${result.description}`;
-                    searchResultDiv.appendChild(resultItem);
-                });
-            } else {
-                searchResultDiv.innerHTML = 'No results found.';
-            }
-        }
-
-        // Perform search automatically if query is present in URL
+        // Event listener for page load to handle query in URL
         window.onload = function() {
             const searchQuery = getQueryParameter('q');
             if (searchQuery) {
@@ -144,6 +134,23 @@
                 displayResults(results); // Display the results
             }
         };
+
+        // Function to display search results
+        function displayResults(results) {
+            const searchResultDiv = document.getElementById('searchResult');
+            searchResultDiv.innerHTML = ''; // Clear previous results
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.innerHTML = `<a href="${result.url}" style="text-decoration: none; color: inherit;">
+                        <strong>${result.name}</strong>
+                    </a>: ${result.description} - ${result.url}`
+                    searchResultDiv.appendChild(resultItem);
+                });
+            } else {
+                searchResultDiv.innerHTML = 'No results found.';
+            }
+        }
 
         // Event listener for the search form submission
         document.getElementById('searchForm').addEventListener('submit', function (event) {
