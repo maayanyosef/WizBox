@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WizBox - Easily ask your LLM code questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/gittollm.js" defer></script>
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes fadeGtoU {
+
+            0%,
+            45% {
+                content: 'W';
+                opacity: 1;
+            }
+
+            50% {
+                content: 'W';
+                opacity: 0;
+            }
+
+            55%,
+            100% {
+                content: 'W';
+                opacity: 1;
+                color: purple;
+            }
+        }
+
+        .fade-w-to-w::before {
+            content: 'W';
+            animation: fadeWtoW 2s linear forwards;
+        }
+
+        @keyframes fadeWtoW {
+
+            0%,
+            45% {
+                content: 'W';
+                opacity: 1;
+            }
+
+            50% {
+                content: 'W';
+                opacity: 0;
+            }
+
+            55%,
+            100% {
+                content: 'W';
+                opacity: 1;
+                color: purple;
+            }
+        }
+        @keyframes fadeBtoB {
+
+            0%,
+            45% {
+                content: 'B';
+                opacity: 1;
+            }
+
+            50% {
+                content: 'B';
+                opacity: 0;
+            }
+
+            55%,
+            100% {
+                content: 'B';
+                opacity: 1;
+                color: purple;
+            }
+        }
+        .fade-b-to-b::before {
+            content: 'B';
+            animation: fadeBtoB 2s linear forwards;
+        }
+        .fade-w-to-w::before {
+            content: 'W';
+            animation: fadeWtoW 2s linear forwards;
+        }
+        .fade-b-to-b::before {
+            content: 'B';
+            animation: fadeBtoB 2s linear forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-black min-h-screen flex flex-col items-center justify-center">
+    <div id="content"
+        class="opacity-0 transform translate-y-20 transition-all duration-1000 ease-out mt-20 min-h-[100vh]">
+        <h1
+            class="text-8xl md:text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8 text-center float-animation">
+            <span><span class="fade-w-to-w"></span>iz</span><span class="fade-b-to-b"></span>ox</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 text-center max-w-2xl">
+            Easily Ask Your LLM Coding Questions
+        </p>
+        <form id="username-form" class="text-center">
+            <input autofocus id="ghuser" type="text" spellcheck="false" placeholder="GitHub owner/repo or URL"
+                class="bg-gray-800 text-white rounded-full py-3 px-6 mb-4 w-64 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <button type="submit"
+                class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-full text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 animate-pulse">
+                Get Context
+            </button>
+        </form>
+    </div>
+
+    <section class="tweet-section bg-gray-100 w-full py-12 px-4">
+        <div class="container mx-auto">
+            <!-- <h2 class="text-3xl font-bold text-center mb-8">What People Are Saying</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="tweet-embed">
+                    <blockquote class="twitter-tweet" data-dnt="true">
+                        <p lang="en" dir="ltr"></p>&mdash; Nick Dobos (@nickadobos) <a
+                            href="https://twitter.com/NickADobos/status/1842054113124876473?ref_src=twsrc%5Etfw">October
+                            4th, 2024
+                        </a>
+                    </blockquote>
+                </div>
+                <div class="tweet-embed">
+                    <blockquote class="twitter-tweet" data-dnt="true">
+                        <p lang="en" dir="ltr"></p>&mdash; Ian Nuttall (@iannuttall) <a
+                            href="https://twitter.com/iannuttall/status/1841487260237058118?ref_src=twsrc%5Etfw">October
+                            2nd, 2024</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-embed">
+                    <blockquote class="twitter-tweet" data-dnt="true">
+                        <p lang="en" dir="ltr"></p>&mdash; Yohei Nakajima (@yoheinakajima) <a
+                            href="https://twitter.com/yoheinakajima/status/1841586300501262430?ref_src=twsrc%5Etfw">October
+                            2nd, 2024</a>
+                    </blockquote>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="example-section" class="w-full py-12 px-4 bg-gray-900">
+
+        <div class="mt-12 text-center flex flex-col items-center">
+            <h2 class="text-2xl text-white font-semibold mb-4">Unlock the Power of AI-Driven Development</h2>
+            <p class="text-lg mb-6 text-white max-w-2xl self-center text-center">With WizBox API, you can easily get LLM
+                context in your daily
+                work,
+                perform AI
+                repo analysis at scale, and power the next generation of development tools and applications.</p>
+        </div>
+
+        <div class="container mx-auto flex flex-col items-center">
+            <h2 class="text-3xl font-bold text-center mb-8 text-white">Example Queries</h2>
+            <div id="example-list" class="space-y-8">
+                <!-- Examples will be dynamically inserted here -->
+            </div>
+
+
+            <p class="text-2xl md:text-2xl text-gray-300 my-20 text-center max-w-2xl">
+                For more advanced features, see <a href="openapi.html" class="underline">the docs</a>
+            </p>
+        </div>
+    </section>
+
+
+    <section class="bg-gray-100 w-full">
+
+        <div class="container mx-auto px-4 py-8 flex flex-col items-center">
+            <h1 class="text-4xl font-bold text-center">Innovative Ideas with WizBox's API</h1>
+
+            <p class="max-w-3xl text-center py-10">With WizBox, we want to foster innovation in AI coding by allowing
+                individuals to create systems that
+                analyse and manipulate code at scale. Here are some ideas to get the gears turning..</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-code-branch text-3xl text-purple-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">Intelligent Code Review Assistant</h2>
+                    <p>Automated code reviews and suggestions powered by AI analysis of repository contents.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-graduation-cap text-3xl text-green-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">Language-Specific Learning Tool</h2>
+                    <p>Study real-world code examples from popular repositories to master programming languages.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-project-diagram text-3xl text-blue-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">Project Complexity Analyzer</h2>
+                    <p>Gain insights into project structure and identify areas for optimization.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-book text-3xl text-red-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">AI-Powered Documentation Generator</h2>
+                    <p>Automatically generate and improve project documentation using AI analysis.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-search text-3xl text-yellow-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">Cross-Repository Code Search Engine</h2>
+                    <p>Find specific code patterns across multiple repositories with AI-powered semantic search.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <i class="fas fa-sync text-3xl text-indigo-600 mb-4"></i>
+                    <h2 class="text-xl font-semibold mb-2">Automated Dependency Updater</h2>
+                    <p>Keep projects up-to-date by automatically suggesting and creating dependency update PRs.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+
+                <p class="text-xl md:text-2xl my-20 text-center">
+                    Explore <a href="openapi.html" class="underline">the docs here</a>. For specific needs, <a
+                        href="https://cal.com/karsens" class="underline" target="_blank">get in touch</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div id="github-attribution"
+        class="mt-8 opacity-0 transform translate-y-20 transition-all duration-1000 ease-out delay-500">
+        <div class="flex items-center justify-center text-gray-400 hover:text-gray-200 transition-colors duration-300">
+            <span>WizBox.com</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(() => {
+                document.getElementById('content').classList.remove('opacity-0', 'translate-y-20');
+                document.getElementById('github-attribution').classList.remove('opacity-0', 'translate-y-20');
+            }, 100);
+
+            const form = document.getElementById('username-form');
+            const input = document.getElementById('ghuser');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputValue = input.value.trim();
+                if (inputValue) {
+                    if (isValidGitHubUrl(inputValue)) {
+                        const redirectUrl = inputValue.replace('github.com', 'wizbox.tools');
+                        window.location.href = redirectUrl;
+                    } else if (isValidOwnerRepo(inputValue)) {
+                        window.location.href = '/' + inputValue;
+                    } else {
+                        alert('Please enter a valid GitHub URL or owner/repo format');
+                    }
+                }
+            });
+
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    form.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            function isValidGitHubUrl(url) {
+                return /^https?:\/\/(www\.)?github\.com\/[\w-]+\/[\w.-]+\/?.*$/.test(url);
+            }
+
+            function isValidOwnerRepo(input) {
+                return /^[\w-]+\/[\w.-]+$/.test(input);
+            }
+        });
+    </script>
+</body>
+</html>
