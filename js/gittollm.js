@@ -83,24 +83,33 @@ function saveGithubCredentials() {
 // Function to fetch repo contents with authentication using Bearer token (if available)
 async function fetchRepoContents(owner, repo, path = '') {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    // Check if we have GitHub credentials (username and token)
     const headers = githubCredentials.token ? {
         'Authorization': `token ${githubCredentials.token}`
     } : {};
 
-    const response = await fetch(url, { headers });
-    if (response.ok) {
-        return await response.json();
-    } else if (response.status === 403) {
-        // Check if the error is due to rate limiting
-        const errorData = await response.json();
-        if (errorData.message.includes('API rate limit exceeded')) {
-            openCredentialModal(); // Open the modal to ask for GitHub credentials
+    try {
+        const response = await fetch(url, { headers });
+
+        if (response.ok) {
+            return await response.json();
+        } else if (response.status === 403) {
+            // Check if the error is due to rate limiting
+            const errorData = await response.json();
+            if (errorData.message.includes('API rate limit exceeded')) {
+                openCredentialModal(); // Open the modal to ask for GitHub credentials
+            }
+            throw new Error(`Error fetching data: ${response.status} ${response.statusText}`);
+        } else {
+            throw new Error(`Error fetching data: ${response.status} ${response.statusText}`);
         }
-        throw new Error(`Error fetching data: ${response.status} ${response.statusText}`);
-    } else {
-        throw new Error(`Error fetching data: ${response.status} ${response.statusText}`);
+    } catch (error) {
+        console.error('Error fetching repository contents: ', error);
+        throw error;
     }
 }
+
 // Function to fetch file content with authentication using Bearer token (if available)
 async function fetchFileContent(owner, repo, filePath) {
     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
@@ -271,23 +280,19 @@ function initializeJsTree(owner, repo) {
                             return null; // Exclude image files
                         }
 
-                        if (item.type === 'dir') {
-                            return {
-                                "text": item.name,
-                                "children": true, // Indicates that the node has children
-                                "data": { "path": item.path, "type": "dir" }
-                            };
-                        } else if (item.type === 'file') {
+                        // Add checkbox for each file
+                        if (item.type === 'file') {
                             return {
                                 "text": item.name,
                                 "icon": "jstree-file",
-                                "data": { "path": item.path, "type": "file" }
+                                "data": { "path": item.path, "type": "file" },
+                                "state": { "selected": false } // Checkbox default state
                             };
                         } else {
                             return {
                                 "text": item.name,
-                                "icon": "jstree-file",
-                                "data": { "path": item.path, "type": item.type }
+                                "children": true, // Indicates that the node has children
+                                "data": { "path": item.path, "type": "dir" }
                             };
                         }
                     }).filter(item => item !== null); // Remove null entries
@@ -302,8 +307,13 @@ function initializeJsTree(owner, repo) {
                 'icons': true
             }
         },
-        "plugins" : [ "wholerow", "search" ]
+        "checkbox": {
+            "keep_selected_style": false, // Prevent checkbox from changing row style
+            "three_state": false // Enable independent selection of child items
+        },
+        "plugins": ["checkbox", "search", "wholerow"]
     });
+
     // Initialize jsTree search plugin
     let searchTimeout = null;
     $('#searchBar').keyup(function () {
@@ -313,13 +323,8 @@ function initializeJsTree(owner, repo) {
             $('#file-tree').jstree(true).search(v);
         }, 300);
     });
-
-    // Event listener for when a node is selected (optional, since all contents are already displayed)
-    $('#file-tree').on("select_node.jstree", function (e, data) {
-        // Optional: Highlight the selected file in the content area
-        // Not necessary for LLM copying, but can enhance user experience
-    });
 }
+
 // Function to display all file contents with syntax highlighting
 function displayAllFileContents(fileContents) {
     const contentContainer = document.getElementById('file-content');
@@ -434,3 +439,55 @@ function showError(message) {
 
 // Add event listener to the Load Repository button
 document.getElementById('loadRepoButton').addEventListener('click', loadRepo);
+
+async function copyAllContent() {
+    const selectedFiles = $('#file-tree').jstree("get_selected", true); // Get selected files with their data
+    const repoInput = document.getElementById('repoInput').value;
+    const { owner, repo } = parseRepoInput(repoInput);
+
+    let fileContentText = '';
+
+    for (const fileNode of selectedFiles) {
+        if (fileNode.data.type === 'file') {
+            try {
+                const content = await fetchFileContent(owner, repo, fileNode.data.path);
+                fileContentText += `### File: ${fileNode.data.path}\n${content}\n\n`;
+            } catch (err) {
+                console.error(`Error fetching file content for ${fileNode.data.path}: ${err.message}`);
+                fileContentText += `Error fetching file content for ${fileNode.data.path}\n\n`;
+            }
+        }
+    }
+
+    if (fileContentText) {
+        navigator.clipboard.writeText(fileContentText).then(() => {
+            alert('Selected file contents have been copied to the clipboard.');
+        }).catch(err => {
+            console.error('Failed to copy content: ', err);
+            alert('Failed to copy content. Please try again.');
+        });
+    } else {
+        alert('No files selected.');
+    }
+}
+function toggleSelectAllFiles() {
+    const isChecked = document.getElementById('selectAllCheckbox').checked;
+    if (isChecked) {
+        // Select all files
+        $('#file-tree').jstree('check_all');
+    } else {
+        // Deselect all files
+        $('#file-tree').jstree('uncheck_all');
+    }
+}
+$('#file-tree').on("changed.jstree", function (e, data) {
+    const selectedFiles = $('#file-tree').jstree("get_checked", true);
+    const totalFiles = $('#file-tree').jstree().get_json().length;
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+    if (selectedFiles.length === totalFiles) {
+        selectAllCheckbox.checked = true; // All files are selected
+    } else {
+        selectAllCheckbox.checked = false; // Not all files are selected
+    }
+});
