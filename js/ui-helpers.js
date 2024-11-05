@@ -35,3 +35,15 @@ async function fetchIP() {
 
 // Call the function when the page loads
 fetchIP();
+
+// Function to load the footer content
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footerContainer').innerHTML = footerHTML;
+    } catch (error) {
+        console.error("Footer failed to load", error);
+    }
+}
+document.addEventListener("DOMContentLoaded", loadFooter);
