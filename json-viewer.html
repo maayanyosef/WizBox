@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WizBox Tool Checks: JSON Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link the external JS file -->
+    <script src="js/ui-helpers.js" defer></script>
+    <!-- Include JSONEditor CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/jsoneditor@latest/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H95KXSEZ00');
+    </script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "oef9uwdrnz");
+    </script>
+    <!-- Styles -->
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --button-background: #e0e0e0;
+            --button-text: #000000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .controls {
+            margin-bottom: 10px;
+        }
+
+        .controls button, .controls input[type="file"], .controls select {
+            margin-right: 5px;
+            background-color: var(--button-background);
+            color: var(--button-text);
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #d5d5d5;
+        }
+
+        .sections {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .input-section, .output-section, .schema-section, .diff-section {
+            flex: 1 1 45%;
+            margin: 10px;
+        }
+
+        .editor {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+        }
+
+        .error {
+            display: none;
+            color: red;
+            margin-top: 5px;
+            white-space: pre-wrap;
+        }
+
+        .counts {
+            margin-top: 5px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            --background-color: #1e1e1e;
+            --text-color: #c5c6c7;
+            --button-background: #333333;
+            --button-text: #c5c6c7;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: var(--background-color);
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            color: var(--text-color);
+        }
+
+        .close {
+            color: var(--text-color);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* JSON Diff styles */
+        .diff-section {
+            margin-top: 20px;
+        }
+
+        #diffOutput {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow: auto;
+            max-height: 600px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 800px) {
+            .input-section, .output-section, .schema-section, .diff-section {
+                flex: 1 1 100%;
+            }
+        }
+        .footer {
+          position: relative;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding: 5px;
+          background-color: #2a2d34;
+          color: white;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="controls">
+    <input type="file" id="fileInput" aria-label="Select JSON file to import" title="Select JSON file to import">
+    <button onclick="importJson()" aria-label="Import JSON" title="Import JSON from a file">Import JSON</button>
+    <button onclick="exportJson()" aria-label="Export JSON" title="Export JSON to a file">Export JSON</button>
+    <button onclick="copyToClipboard()" aria-label="Copy JSON to clipboard" title="Copy output JSON to clipboard">Copy Output JSON</button>
+    <button onclick="beautifyJson()" aria-label="Beautify JSON" title="Beautify JSON">Beautify JSON</button>
+    <button onclick="minifyJson()" aria-label="Minify JSON" title="Minify JSON">Minify JSON</button>
+    <button onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle between light and dark themes">Toggle Theme</button>
+    <select onchange="changeLanguage(this.value)" title="Select Language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <!-- Add more languages here -->
+    </select>
+    <button onclick="showHelp()" aria-label="Help" title="Show help">Help</button>
+</div>
+
+<div class="sections">
+    <!-- Input JSON Section -->
+    <div class="input-section">
+        <h3 data-i18n="Input JSON">Input JSON</h3>
+        <div id="jsonInputEditor" class="editor"></div>
+        <div id="inputError" class="error"></div>
+        <!-- Line and Character Counts -->
+        <div id="counts" class="counts">Lines: 0, Characters: 0</div>
+    </div>
+
+    <!-- Output JSON Section -->
+    <div class="output-section">
+        <h3 data-i18n="Output JSON">Output JSON</h3>
+        <div id="jsonOutput"></div>
+        <div id="outputError" class="error"></div>
+    </div>
+
+    <!-- JSON Schema Section -->
+    <div class="schema-section">
+        <h3 data-i18n="JSON Schema">JSON Schema</h3>
+        <div id="jsonSchemaEditor" class="editor"></div>
+        <div id="schemaError" class="error"></div>
+        <button onclick="validateJson()" aria-label="Validate JSON" title="Validate JSON against the schema">Validate JSON</button>
+    </div>
+
+    <!-- Fetch JSON from URL Section -->
+    <div class="fetch-section">
+        <h3 data-i18n="Fetch JSON from URL">Fetch JSON from URL</h3>
+        <input type="text" id="urlInput" placeholder="Enter JSON URL" aria-label="JSON URL">
+        <button onclick="fetchJson()" aria-label="Fetch JSON" title="Fetch JSON from URL">Fetch JSON</button>
+        <div id="fetchError" class="error"></div>
+    </div>
+
+    <!-- JSON Diff Section -->
+    <div class="diff-section">
+        <h3 data-i18n="JSON Diff Tool">JSON Diff Tool</h3>
+        <div id="jsonDiffEditor" class="editor"></div>
+        <button onclick="diffJson()" aria-label="Diff JSON" title="Compare JSON">Compare JSON</button>
+        <div id="diffOutput"></div>
+        <div id="diffError" class="error"></div>
+    </div>
+
+    <!-- JSONPath Query Section -->
+    <div class="jsonpath-section">
+        <h3 data-i18n="JSONPath Query">JSONPath Query</h3>
+        <input type="text" id="jsonPathInput" placeholder="Enter JSONPath query" aria-label="JSONPath Query">
+        <button onclick="executeJsonPath()" aria-label="Execute JSONPath" title="Execute JSONPath Query">Execute Query</button>
+        <div id="jsonPathResult" class="counts"></div>
+        <div id="jsonPathError" class="error"></div>
+    </div>
+</div>
+
+<!-- Help Modal -->
+<div id="helpModal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+        <span class="close" onclick="closeHelp()" aria-label="Close help">&times;</span>
+        <h2 data-i18n="JSON Viewer Help">JSON Viewer Help</h2>
+        <p data-i18n="helpContent">
+            Welcome to the Enhanced JSON Viewer. Here's how you can use this tool:
+        </p>
+        <ul>
+            <li><strong data-i18n="Input JSON">Input JSON</strong>: Paste or type your JSON data directly into the input editor.</li>
+            <li><strong data-i18n="Output JSON">Output JSON</strong>: View the parsed and formatted JSON in the output section.</li>
+            <li><strong data-i18n="Import JSON">Import JSON</strong>: Select and load a JSON file from your computer into the input editor.</li>
+            <li><strong data-i18n="Export JSON">Export JSON</strong>: Download the JSON data from the output section to a file.</li>
+            <li><strong data-i18n="Copy Output JSON">Copy Output JSON</strong>: Copy the JSON data from the output section to your clipboard.</li>
+            <li><strong data-i18n="Minify and Beautify">Minify and Beautify</strong>: Use these options to format your JSON data.</li>
+            <li><strong data-i18n="JSON Schema Validation">JSON Schema Validation</strong>: Validate your JSON against a schema.</li>
+            <li><strong data-i18n="Fetch JSON from URL">Fetch JSON from URL</strong>: Load JSON data from a remote URL.</li>
+            <li><strong data-i18n="JSON Diff Tool">JSON Diff Tool</strong>: Compare two JSON objects and see the differences.</li>
+            <li><strong data-i18n="JSONPath Query">JSONPath Query</strong>: Extract data using JSONPath expressions.</li>
+            <li><strong data-i18n="Keyboard Shortcuts">Keyboard Shortcuts</strong>: Use keyboard shortcuts for common actions.</li>
+            <li><strong data-i18n="Localization">Localization</strong>: Change the interface language.</li>
+            <!-- Add more help content as needed -->
+        </ul>
+        <p data-i18n="helpFooter">For any issues or feedback, please contact the developer.</p>
+    </div>
+</div>
+
+<!-- Include JSONEditor JS -->
+<script src="https://cdn.jsdelivr.net/npm/jsoneditor@latest/dist/jsoneditor.min.js"></script>
+<!-- Include Ace Editor JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js"></script>
+<!-- Include Ajv JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv.min.js"></script>
+<!-- Include JSONPath JS -->
+<script src="https://cdn.jsdelivr.net/npm/jsonpath-plus@5.0.1/dist/index-umd.min.js"></script>
+<!-- Include i18next JS -->
+<script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+<!-- Include jsondiffpatch JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.3.11/jsondiffpatch.umd.js"></script>
+<!-- Include any other required libraries -->
+
+<script>
+    // Initialize i18next for localization
+    i18next.init({
+        lng: 'en', // default language
+        resources: {
+            en: {
+                translation: {
+                    "Input JSON": "Input JSON",
+                    "Output JSON": "Output JSON",
+                    "JSON Schema": "JSON Schema",
+                    "JSON Diff Tool": "JSON Diff Tool",
+                    "Fetch JSON from URL": "Fetch JSON from URL",
+                    "JSONPath Query": "JSONPath Query",
+                    "JSON Viewer Help": "JSON Viewer Help",
+                    "helpContent": "Welcome to the Enhanced JSON Viewer. Here's how you can use this tool:",
+                    "helpFooter": "For any issues or feedback, please contact the developer.",
+                    "Minify and Beautify": "Minify and Beautify",
+                    "JSON Schema Validation": "JSON Schema Validation",
+                    "Keyboard Shortcuts": "Keyboard Shortcuts",
+                    "Localization": "Localization",
+                    "Copy Output JSON": "Copy Output JSON",
+                    "Import JSON": "Import JSON",
+                    "Export JSON": "Export JSON",
+                    "Fetch JSON": "Fetch JSON",
+                    "Validate JSON": "Validate JSON",
+                    "Compare JSON": "Compare JSON",
+                    "Execute Query": "Execute Query",
+                    // ... other translations
+                }
+            },
+            es: {
+                translation: {
+                    "Input JSON": "JSON de Entrada",
+                    "Output JSON": "JSON de Salida",
+                    "JSON Schema": "Esquema JSON",
+                    "JSON Diff Tool": "Herramienta de Diferencias JSON",
+                    "Fetch JSON from URL": "Obtener JSON desde URL",
+                    "JSONPath Query": "Consulta JSONPath",
+                    "JSON Viewer Help": "Ayuda del Visor JSON",
+                    "helpContent": "Bienvenido al Visor JSON Mejorado. Así es como puedes usar esta herramienta:",
+                    "helpFooter": "Para cualquier problema o comentario, por favor contacta al desarrollador.",
+                    "Minify and Beautify": "Minificar y Embellecer",
+                    "JSON Schema Validation": "Validación de Esquema JSON",
+                    "Keyboard Shortcuts": "Atajos de Teclado",
+                    "Localization": "Localización",
+                    "Copy Output JSON": "Copiar JSON de Salida",
+                    "Import JSON": "Importar JSON",
+                    "Export JSON": "Exportar JSON",
+                    "Fetch JSON": "Obtener JSON",
+                    "Validate JSON": "Validar JSON",
+                    "Compare JSON": "Comparar JSON",
+                    "Execute Query": "Ejecutar Consulta",
+                    // ... other translations
+                }
+            }
+            // Add more languages here
+        }
+    }, function(err, t) {
+        updateContent();
+    });
+
+    function changeLanguage(lng) {
+        i18next.changeLanguage(lng, () => {
+            updateContent();
+        });
+    }
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            element.textContent = i18next.t(key);
+        });
+    }
+
+    // Initialize Ace Editors
+    const jsonInputEditor = ace.edit("jsonInputEditor");
+    jsonInputEditor.setTheme("ace/theme/textmate");
+    jsonInputEditor.session.setMode("ace/mode/json");
+    jsonInputEditor.session.setUseWrapMode(true);
+
+    const jsonSchemaEditor = ace.edit("jsonSchemaEditor");
+    jsonSchemaEditor.setTheme("ace/theme/textmate");
+    jsonSchemaEditor.session.setMode("ace/mode/json");
+    jsonSchemaEditor.session.setUseWrapMode(true);
+
+    const jsonDiffEditor = ace.edit("jsonDiffEditor");
+    jsonDiffEditor.setTheme("ace/theme/textmate");
+    jsonDiffEditor.session.setMode("ace/mode/json");
+    jsonDiffEditor.session.setUseWrapMode(true);
+
+    // Initialize the output JSON editor
+    const outputContainer = document.getElementById('jsonOutput');
+    const outputOptions = {
+        mode: 'view',
+        onError: function (err) {
+            showError('outputError', err.toString());
+        },
+        onModeChange: function (newMode, oldMode) {
+            console.log(`Switched from ${oldMode} to ${newMode}`);
+        }
+    };
+    const outputEditor = new JSONEditor(outputContainer, outputOptions);
+
+    // Performance Metrics
+    let parseStartTime = 0;
+    let parseEndTime = 0;
+
+    // Input JSON handling
+    jsonInputEditor.session.on('change', function() {
+        const text = jsonInputEditor.getValue();
+        updateCounts(text);
+        localStorage.setItem('jsonInput', text);
+        clearError('inputError');
+        clearError('outputError');
+
+        if (text.trim() === '') {
+            outputEditor.clear();
+            return;
+        }
+        parseStartTime = performance.now();
+        try {
+            const json = JSON.parse(text);
+            outputEditor.set(json);
+            parseEndTime = performance.now();
+            console.log(`JSON parsed in ${(parseEndTime - parseStartTime).toFixed(2)} ms`);
+        } catch (e) {
+            showError('inputError', 'Invalid JSON input.\n' + e.message);
+            highlightErrorPosition(e);
+            outputEditor.clear();
+        }
+    });
+
+    // Function to update line and character counts
+    function updateCounts(text) {
+        const lines = text === '' ? 0 : text.split(/\r\n|\r|\n/).length;
+        const characters = text.length;
+        const countsDiv = document.getElementById('counts');
+        countsDiv.textContent = `Lines: ${lines}, Characters: ${characters}`;
+    }
+
+    // Initialize counts
+    updateCounts('');
+
+    // Error display functions
+    function showError(elementId, message) {
+        const errorDiv = document.getElementById(elementId);
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    function clearError(elementId) {
+        const errorDiv = document.getElementById(elementId);
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+    }
+
+    // Import JSON function
+    function importJson() {
+        clearError('inputError');
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length === 0) {
+            showError('inputError', 'Please select a file.');
+            return;
+        }
+        const file = fileInput.files[0];
+
+        // Check file size (limit to 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            showError('inputError', 'File is too large. Please select a file smaller than 5MB.');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const text = e.target.result;
+                jsonInputEditor.setValue(text, -1);
+                updateCounts(text);
+                const json = JSON.parse(text);
+                outputEditor.set(json);
+                clearError('inputError');
+            } catch (e) {
+                showError('inputError', 'Invalid JSON file.');
+                outputEditor.clear();
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    // Export JSON function
+    function exportJson() {
+        clearError('outputError');
+        try {
+            const json = outputEditor.getText();
+            const blob = new Blob([json], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            clearError('outputError');
+        } catch (e) {
+            showError('outputError', 'No valid JSON to export.');
+        }
+    }
+
+    // Copy to Clipboard function
+    function copyToClipboard() {
+        clearError('outputError');
+        try {
+            const json = outputEditor.getText();
+            navigator.clipboard.writeText(json).then(() => {
+                alert('Output JSON copied to clipboard');
+                clearError('outputError');
+            }, () => {
+                showError('outputError', 'Failed to copy JSON');
+            });
+        } catch (e) {
+            showError('outputError', 'No valid JSON to copy.');
+        }
+    }
+
+    // Minify and Beautify functions
+    function minifyJson() {
+        clearError('inputError');
+        try {
+            const data = JSON.parse(jsonInputEditor.getValue());
+            const minified = JSON.stringify(data);
+            jsonInputEditor.setValue(minified, -1);
+            updateCounts(minified);
+            outputEditor.set(data);
+        } catch (e) {
+            showError('inputError', 'Invalid JSON input.');
+        }
+    }
+
+    function beautifyJson() {
+        clearError('inputError');
+        try {
+            const data = JSON.parse(jsonInputEditor.getValue());
+            const beautified = JSON.stringify(data, null, 4);
+            jsonInputEditor.setValue(beautified, -1);
+            updateCounts(beautified);
+            outputEditor.set(data);
+        } catch (e) {
+            showError('inputError', 'Invalid JSON input.');
+        }
+    }
+
+    // Toggle Theme function
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Help Modal functions
+    function showHelp() {
+        const modal = document.getElementById('helpModal');
+        modal.style.display = 'block';
+        modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeHelp() {
+        const modal = document.getElementById('helpModal');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById('helpModal');
+        if (event.target == modal) {
+            closeHelp();
+        }
+    }
+
+    // JSON Schema Validation function
+    function validateJson() {
+        clearError('schemaError');
+        const schemaText = jsonSchemaEditor.getValue();
+        const jsonText = jsonInputEditor.getValue();
+
+        try {
+            const schema = JSON.parse(schemaText);
+            const data = JSON.parse(jsonText);
+            const ajv = new Ajv();
+            const validate = ajv.compile(schema);
+            const valid = validate(data);
+
+            if (valid) {
+                alert('JSON is valid according to the schema.');
+            } else {
+                showError('schemaError', 'Validation errors:\n' + ajv.errorsText(validate.errors, {separator: '\n'}));
+            }
+        } catch (e) {
+            showError('schemaError', 'Invalid JSON Schema or Data.');
+        }
+    }
+
+    // Fetch JSON from URL function
+    function fetchJson() {
+        clearError('fetchError');
+        const url = document.getElementById('urlInput').value.trim();
+        if (!url) {
+            showError('fetchError', 'Please enter a valid URL.');
+            return;
+        }
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const jsonString = JSON.stringify(data, null, 2);
+                jsonInputEditor.setValue(jsonString, -1);
+                updateCounts(jsonString);
+                outputEditor.set(data);
+                clearError('inputError');
+            })
+            .catch(error => {
+                showError('fetchError', 'Failed to fetch JSON from the URL.');
+                console.error(error);
+            });
+    }
+
+    // JSON Diff function
+    function diffJson() {
+        clearError('diffError');
+        try {
+            const text1 = jsonInputEditor.getValue();
+            const text2 = jsonDiffEditor.getValue();
+            const json1 = JSON.parse(text1);
+            const json2 = JSON.parse(text2);
+            const delta = jsondiffpatch.diff(json1, json2);
+            const html = jsondiffpatch.formatters.html.format(delta, json1);
+            document.getElementById('diffOutput').innerHTML = html;
+        } catch (e) {
+            showError('diffError', 'Invalid JSON input.');
+            console.error(e);
+        }
+    }
+
+    // JSONPath Query function
+    function executeJsonPath() {
+        clearError('jsonPathError');
+        const query = document.getElementById('jsonPathInput').value;
+        const data = outputEditor.get();
+        try {
+            const result = JSONPath.JSONPath({path: query, json: data});
+            document.getElementById('jsonPathResult').textContent = JSON.stringify(result, null, 2);
+        } catch (e) {
+            showError('jsonPathError', 'Invalid JSONPath query.');
+        }
+    }
+
+    // Highlight error position in input
+    function highlightErrorPosition(error) {
+        const errorMessage = error.message;
+        const positionMatch = errorMessage.match(/at position (\d+)/);
+        if (positionMatch) {
+            const position = parseInt(positionMatch[1], 10);
+            const editorSession = jsonInputEditor.getSession();
+            const doc = editorSession.getDocument();
+            const {row, column} = doc.indexToPosition(position, 0);
+            jsonInputEditor.selection.moveTo(row, column);
+            jsonInputEditor.focus();
+        }
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+            switch (event.key.toLowerCase()) {
+                case 'i':
+                    event.preventDefault();
+                    importJson();
+                    break;
+                case 'e':
+                    event.preventDefault();
+                    exportJson();
+                    break;
+                case 'b':
+                    event.preventDefault();
+                    beautifyJson();
+                    break;
+                case 'm':
+                    event.preventDefault();
+                    minifyJson();
+                    break;
+                case 'v':
+                    if (event.shiftKey) {
+                        event.preventDefault();
+                        validateJson();
+                    }
+                    break;
+                case 'l':
+                    event.preventDefault();
+                    toggleTheme();
+                    break;
+            }
+        }
+    });
+
+    // Load JSON from localStorage
+    window.onload = function() {
+        const savedJson = localStorage.getItem('jsonInput');
+        if (savedJson) {
+            jsonInputEditor.setValue(savedJson, -1);
+            updateCounts(savedJson);
+            try {
+                const json = JSON.parse(savedJson);
+                outputEditor.set(json);
+            } catch (e) {
+                // Handle parsing error if needed
+            }
+        }
+        // Set theme based on system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+        }
+    };
+
+    // Dark Mode Scheduling
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if(event.matches){
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+
+    // Placeholder functions for features requiring backend or complex implementation
+    function collaborationFeature() {
+        alert('Collaboration features are under development.');
+    }
+
+    function pluginArchitecture() {
+        alert('Plugin architecture is under development.');
+    }
+
+    function dataVisualization() {
+        alert('Data visualization features are under development.');
+    }
+</script>
+<!-- Footer -->
+<div class="footer">
+        <ul>
+          <a href="https://www.wizbox.tools" style="text-decoration: none; color: inherit;">Home </a><td>|</td>
+          <a href="https://www.wizbox.tools/what-is-my-ip" style="text-decoration: none; color: inherit;">What is My IP </a><td>|</td>
+          <a href="https://www.wizbox.tools/cdn-finder" style="text-decoration: none; color: inherit;">CDN Finder </a><td>|</td>
+          <a href="https://www.wizbox.tools/ssl-checker" style="text-decoration: none; color: inherit;">SSL Checker </a><td>|</td>
+          <a href="https://www.wizbox.tools/dns-lookup" style="text-decoration: none; color: inherit;">DNS Lookup </a><td>|</td>
+          <a href="https://www.wizbox.tools/blacklist-lookup" style="text-decoration: none; color: inherit;">Blacklist Lookup </a><td>|</td>
+          <a href="https://www.wizbox.tools/dmarc-lookup" style="text-decoration: none; color: inherit;">DMARC Record Check </a><td>|</td>
+          <br>
+          <a href="https://www.wizbox.tools/whois-lookup" style="text-decoration: none; color: inherit;">WHOIS Lookup </a><td>|</td>
+          <a href="https://www.wizbox.tools/ping" style="text-decoration: none; color: inherit;">Ping Tool </a><td>|</td>
+          <a href="https://www.wizbox.tools/traceroute" style="text-decoration: none; color: inherit;">Traceroute </a><td>|</td>
+          <a href="https://www.wizbox.tools/mx-lookup" style="text-decoration: none; color: inherit;">MX Lookup </a><td>|</td>
+          <a href="https://www.wizbox.tools/security-headers-check" style="text-decoration: none; color: inherit;">Security Headers Check </a><td>|</td>
+          <a href="https://www.wizbox.tools/git-to-llm" style="text-decoration: none; color: inherit;">Git to LLM </a>|</td>
+          <a href="https://www.wizbox.tools/json-viewer" style="text-decoration: none; color: inherit;">JSON Viewer</a>
+        </ul>
+    <br>
+    © 2024 WizBox Tool, Inc. | <a href="https://www.wizbox.tools/terms" style="text-decoration: none; color: inherit;">Terms</a> | <a href="https://www.wizbox.tools/privacy" style="text-decoration: none; color: inherit;">Privacy</a> | <a href="https://www.wizbox.tools/faq" style="text-decoration: none; color: inherit;">FAQ</a> | <span id="userIp">Your IP is: Fetching...</span>
+</div>
+</body>
+</html>
