@@ -1,0 +1,80 @@
+# WizBox SEO fixes - Redirect rules
+Options +FollowSymLinks
+RewriteEngine On
+
+# Force HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force www. prefix
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Add .html extension to URLs without extensions (if file exists)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}$)
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.*)$ $1.html [L,R=301]
+
+# Redirect old URL patterns to new ones (examples)
+RewriteRule ^what-is-my-ip$ /what-is-my-ip.html [L,R=301]
+RewriteRule ^cdn-finder$ /cdn-finder.html [L,R=301]
+RewriteRule ^ssl-checker$ /ssl-checker.html [L,R=301]
+RewriteRule ^dns-lookup$ /dns-lookup.html [L,R=301]
+RewriteRule ^blacklist-lookup$ /blacklist-lookup.html [L,R=301]
+RewriteRule ^dmarc-lookup$ /dmarc-lookup.html [L,R=301]
+RewriteRule ^whois-lookup$ /whois-lookup.html [L,R=301]
+RewriteRule ^ping$ /ping.html [L,R=301]
+RewriteRule ^traceroute$ /traceroute.html [L,R=301]
+RewriteRule ^mx-lookup$ /mx-lookup.html [L,R=301]
+RewriteRule ^security-headers$ /security-headers-check.html [L,R=301]
+RewriteRule ^git-to-llm$ /git-to-llm.html [L,R=301]
+RewriteRule ^json-viewer$ /json-viewer.html [L,R=301]
+RewriteRule ^faq$ /faq.html [L,R=301]
+RewriteRule ^privacy$ /privacy.html [L,R=301]
+RewriteRule ^terms$ /terms.html [L,R=301]
+RewriteRule ^search$ /search.html [L,R=301]
+
+# Custom error pages
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# Enable GZIP compression for better performance
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
+</IfModule>
+
+# Set browser caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access 1 year"
+  ExpiresByType image/jpeg "access 1 year"
+  ExpiresByType image/gif "access 1 year"
+  ExpiresByType image/png "access 1 year"
+  ExpiresByType image/svg+xml "access 1 year"
+  ExpiresByType text/css "access 1 month"
+  ExpiresByType text/html "access 1 month"
+  ExpiresByType application/javascript "access 1 month"
+  ExpiresByType text/javascript "access 1 month"
+  ExpiresByType application/pdf "access 1 month"
+  ExpiresByType application/x-shockwave-flash "access 1 month"
+  ExpiresDefault "access 1 month"
+</IfModule>
+
+# Set security headers to improve security posture
+<IfModule mod_headers.c>
+  # Strict Transport Security
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  # XSS Protection
+  Header always set X-XSS-Protection "1; mode=block"
+  # Content Type Options
+  Header always set X-Content-Type-Options "nosniff"
+  # Frame Options
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Referrer Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Content Security Policy (adjust as needed)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://api.ipify.org https://www.google-analytics.com;"
+</IfModule>
