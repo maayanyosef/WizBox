@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found - WizBox Tools offers free network diagnostics and security tools. Find useful utilities including DNS Lookup, SSL Checker, CDN Finder, and more.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/x-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
+    <link rel="canonical" href="https://www.wizbox.tools/404.html">
+    <title>Page Not Found - WizBox Tools</title>
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Page Not Found - WizBox Tools">
+    <meta property="og:description" content="Page not found - WizBox Tools offers free network diagnostics and security tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.wizbox.tools/404.html">
+    <meta property="og:image" content="https://www.wizbox.tools/images/apple-touch-icon.png">
+    <!-- Link the external CSS file -->
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link the external JS file -->
+    <script src="https://www.wizbox.tools/js/ui-helpers.js" defer></script>
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 50px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .suggestions {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .suggestions h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tool-item {
+            background-color: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 5px;
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tool-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tool-item i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .search-box {
+            margin: 30px 0;
+        }
+        
+        .search-box input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        .home-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WizBox Tool Checks</h1>
+        <div class="language-selector">
+            <label for="languageSelect">Select Language: </label>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+            </select>
+            <button onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Page Not Found</div>
+        <p>Sorry, the page you are looking for doesn't exist or has been moved.</p>
+        
+        <div class="search-box">
+            <form action="https://www.wizbox.tools/search.html" method="get">
+                <input type="text" name="q" placeholder="Search for tools...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        
+        <a href="https://www.wizbox.tools/" class="home-button">
+            <i class="fas fa-home"></i> Go to Homepage
+        </a>
+        
+        <div class="suggestions">
+            <h3>Popular Tools</h3>
+            <p>Here are some of our most popular tools you might find useful:</p>
+            
+            <div class="tool-grid">
+                <a href="https://www.wizbox.tools/what-is-my-ip.html" class="tool-item">
+                    <i class="fas fa-network-wired"></i>
+                    <span>What Is My IP</span>
+                </a>
+                <a href="https://www.wizbox.tools/ssl-checker.html" class="tool-item">
+                    <i class="fas fa-lock"></i>
+                    <span>SSL Checker</span>
+                </a>
+                <a href="https://www.wizbox.tools/dns-lookup.html" class="tool-item">
+                    <i class="fas fa-search"></i>
+                    <span>DNS Lookup</span>
+                </a>
+                <a href="https://www.wizbox.tools/cdn-finder.html" class="tool-item">
+                    <i class="fas fa-server"></i>
+                    <span>CDN Finder</span>
+                </a>
+                <a href="https://www.wizbox.tools/whois-lookup.html" class="tool-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span>WHOIS Lookup</span>
+                </a>
+                <a href="https://www.wizbox.tools/ping.html" class="tool-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>Ping Tool</span>
+                </a>
+                <a href="https://www.wizbox.tools/json-viewer.html" class="tool-item">
+                    <i class="fas fa-code"></i>
+                    <span>JSON Viewer</span>
+                </a>
+                <a href="https://www.wizbox.tools/faq.html" class="tool-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>FAQ</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footerContainer"></div>
+    <script>
+        // Load the footer
+        fetch('https://www.wizbox.tools/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footerContainer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
