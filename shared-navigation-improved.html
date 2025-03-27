@@ -1,0 +1,166 @@
+<!-- Improved navigation with better internal linking -->
+<div class="tabs-container">
+    <div class="tabs">
+        <div class="tab" role="button" data-page="home" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/'">
+            <i class="fas fa-home"></i> Home
+        </div>
+        <div class="tab" role="button" data-page="what-is-my-ip" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/what-is-my-ip.html'">
+            <i class="fas fa-network-wired"></i> What Is My IP
+        </div>
+        <div class="tab" role="button" data-page="cdn-finder" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/cdn-finder.html'">
+            <i class="fas fa-server"></i> CDN Finder
+        </div>
+        <div class="tab" role="button" data-page="ssl-checker" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/ssl-checker.html'">
+            <i class="fas fa-lock"></i> SSL Checker
+        </div>
+        <div class="tab" role="button" data-page="dns-lookup" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/dns-lookup.html'">
+            <i class="fas fa-search"></i> DNS Lookup
+        </div>
+        <div class="tab" role="button" data-page="blacklist-lookup" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/blacklist-lookup.html'">
+            <i class="fas fa-ban"></i> Blacklist Check
+        </div>
+        <div class="tab" role="button" data-page="dmarc-lookup" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/dmarc-lookup.html'">
+            <i class="fas fa-envelope"></i> DMARC Lookup
+        </div>
+        <div class="tab" role="button" data-page="whois-lookup" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/whois-lookup.html'">
+            <i class="fas fa-info-circle"></i> WHOIS Lookup
+        </div>
+        <div class="tab" role="button" data-page="ping" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/ping.html'">
+            <i class="fas fa-heartbeat"></i> Ping
+        </div>
+        <div class="tab" role="button" data-page="traceroute" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/traceroute.html'">
+            <i class="fas fa-route"></i> Traceroute
+        </div>
+        <div class="tab" role="button" data-page="mx-lookup" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/mx-lookup.html'">
+            <i class="fas fa-mail-bulk"></i> MX Lookup
+        </div>
+        <div class="tab" role="button" data-page="security-headers-check" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/security-headers-check.html'">
+            <i class="fas fa-shield-alt"></i> Security Headers
+        </div>
+        <div class="tab" role="button" data-page="git-to-llm" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/git-to-llm.html'">
+            <i class="fas fa-code-branch"></i> Git to LLM
+        </div>
+        <div class="tab" role="button" data-page="json-viewer" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/json-viewer.html'">
+            <i class="fas fa-code"></i> JSON Viewer
+        </div>
+    </div>
+    
+    <!-- Mobile menu for responsive design -->
+    <div class="mobile-menu">
+        <button id="menuToggle" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-dropdown-content" id="mobileMenu">
+            <a href="https://www.wizbox.tools/">Home</a>
+            <a href="https://www.wizbox.tools/what-is-my-ip.html">What Is My IP</a>
+            <a href="https://www.wizbox.tools/cdn-finder.html">CDN Finder</a>
+            <a href="https://www.wizbox.tools/ssl-checker.html">SSL Checker</a>
+            <a href="https://www.wizbox.tools/dns-lookup.html">DNS Lookup</a>
+            <a href="https://www.wizbox.tools/blacklist-lookup.html">Blacklist Check</a>
+            <a href="https://www.wizbox.tools/dmarc-lookup.html">DMARC Lookup</a>
+            <a href="https://www.wizbox.tools/whois-lookup.html">WHOIS Lookup</a>
+            <a href="https://www.wizbox.tools/ping.html">Ping</a>
+            <a href="https://www.wizbox.tools/traceroute.html">Traceroute</a>
+            <a href="https://www.wizbox.tools/mx-lookup.html">MX Lookup</a>
+            <a href="https://www.wizbox.tools/security-headers-check.html">Security Headers</a>
+            <a href="https://www.wizbox.tools/git-to-llm.html">Git to LLM</a>
+            <a href="https://www.wizbox.tools/json-viewer.html">JSON Viewer</a>
+            <a href="https://www.wizbox.tools/faq.html">FAQ</a>
+            <a href="https://www.wizbox.tools/search.html">Search Tools</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.tabs-container {
+    position: relative;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+        background-color: #f8f9fa;
+        padding: 10px;
+    }
+    
+    #menuToggle {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+    
+    .mobile-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        width: 100%;
+    }
+    
+    .mobile-dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .mobile-dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    
+    .show {
+        display: block;
+    }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set active tab based on current page
+    const currentPath = window.location.pathname;
+    const pageIdentifier = currentPath.split('/').pop().replace('.html', '');
+    
+    document.querySelectorAll('.tab').forEach(tab => {
+        if (tab.getAttribute('data-page') === pageIdentifier) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+    
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('show');
+        });
+    }
+    
+    // Close the menu when clicking outside
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('#menuToggle') && !event.target.matches('.fa-bars')) {
+            if (mobileMenu.classList.contains('show')) {
+                mobileMenu.classList.remove('show');
+            }
+        }
+    });
+});
+</script>
