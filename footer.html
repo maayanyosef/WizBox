@@ -1,25 +1,122 @@
-<!-- footer.html -->
+<!-- Improved footer with better internal linking -->
 <div class="footer">
-    <ul>
-        <a href="https://www.wizbox.tools" style="text-decoration: none; color: inherit;">Home</a> |
-        <a href="https://www.wizbox.tools/what-is-my-ip" style="text-decoration: none; color: inherit;">What is My IP</a> |
-        <a href="https://www.wizbox.tools/cdn-finder" style="text-decoration: none; color: inherit;">CDN Finder</a> |
-        <a href="https://www.wizbox.tools/ssl-checker" style="text-decoration: none; color: inherit;">SSL Checker</a> |
-        <a href="https://www.wizbox.tools/dns-lookup" style="text-decoration: none; color: inherit;">DNS Lookup</a> |
-        <a href="https://www.wizbox.tools/blacklist-lookup" style="text-decoration: none; color: inherit;">Blacklist Lookup</a> |
-        <a href="https://www.wizbox.tools/dmarc-lookup" style="text-decoration: none; color: inherit;">DMARC Record Check</a> |
-        <br>
-        <a href="https://www.wizbox.tools/whois-lookup" style="text-decoration: none; color: inherit;">WHOIS Lookup</a> |
-        <a href="https://www.wizbox.tools/ping" style="text-decoration: none; color: inherit;">Ping Tool</a> |
-        <a href="https://www.wizbox.tools/traceroute" style="text-decoration: none; color: inherit;">Traceroute</a> |
-        <a href="https://www.wizbox.tools/mx-lookup" style="text-decoration: none; color: inherit;">MX Lookup</a> |
-        <a href="https://www.wizbox.tools/security-headers-check" style="text-decoration: none; color: inherit;">Security Headers Check</a> |
-        <a href="https://www.wizbox.tools/git-to-llm" style="text-decoration: none; color: inherit;">Git to LLM</a> |
-        <a href="https://www.wizbox.tools/json-viewer" style="text-decoration: none; color: inherit;">JSON Viewer</a>
-    </ul>
-    <br>
-    © 2024 WizBox Tool, Inc. | <a href="https://www.wizbox.tools/terms" style="text-decoration: none; color: inherit;">Terms</a> |
-    <a href="https://www.wizbox.tools/privacy" style="text-decoration: none; color: inherit;">Privacy</a> |
-    <a href="https://www.wizbox.tools/faq" style="text-decoration: none; color: inherit;">FAQ</a> |
-    <span id="userIp">Your IP is: Fetching...</span>
+    <!-- Main navigation links -->
+    <div class="footer-section">
+        <h3>Tools</h3>
+        <ul class="footer-links">
+            <li><a href="https://www.wizbox.tools/" title="WizBox Home">Home</a></li>
+            <li><a href="https://www.wizbox.tools/what-is-my-ip.html" title="Find your public IP address">What is My IP</a></li>
+            <li><a href="https://www.wizbox.tools/cdn-finder.html" title="Identify CDN providers">CDN Finder</a></li>
+            <li><a href="https://www.wizbox.tools/ssl-checker.html" title="Verify SSL certificates">SSL Checker</a></li>
+            <li><a href="https://www.wizbox.tools/dns-lookup.html" title="DNS record lookup">DNS Lookup</a></li>
+            <li><a href="https://www.wizbox.tools/blacklist-lookup.html" title="Check if domain is blacklisted">Blacklist Lookup</a></li>
+            <li><a href="https://www.wizbox.tools/dmarc-lookup.html" title="Check DMARC records">DMARC Lookup</a></li>
+        </ul>
+    </div>
+    
+    <div class="footer-section">
+        <h3>More Tools</h3>
+        <ul class="footer-links">
+            <li><a href="https://www.wizbox.tools/whois-lookup.html" title="Domain ownership information">WHOIS Lookup</a></li>
+            <li><a href="https://www.wizbox.tools/ping.html" title="Check server response time">Ping Tool</a></li>
+            <li><a href="https://www.wizbox.tools/traceroute.html" title="Trace network route">Traceroute</a></li>
+            <li><a href="https://www.wizbox.tools/mx-lookup.html" title="Check mail server records">MX Lookup</a></li>
+            <li><a href="https://www.wizbox.tools/security-headers-check.html" title="Analyze security headers">Security Headers</a></li>
+            <li><a href="https://www.wizbox.tools/git-to-llm.html" title="Convert Git repos to LLM format">Git to LLM</a></li>
+            <li><a href="https://www.wizbox.tools/json-viewer.html" title="View and format JSON">JSON Viewer</a></li>
+        </ul>
+    </div>
+    
+    <div class="footer-section">
+        <h3>Information</h3>
+        <ul class="footer-links">
+            <li><a href="https://www.wizbox.tools/faq.html" title="Frequently Asked Questions">FAQ</a></li>
+            <li><a href="https://www.wizbox.tools/privacy.html" title="Privacy Policy">Privacy Policy</a></li>
+            <li><a href="https://www.wizbox.tools/terms.html" title="Terms of Service">Terms of Service</a></li>
+            <li><a href="https://www.wizbox.tools/search.html" title="Search WizBox Tools">Search</a></li>
+        </ul>
+    </div>
+    
+    <!-- Copyright and IP information -->
+    <div class="footer-bottom">
+        <p>© 2025 WizBox Tools. All rights reserved.</p>
+        <p><span id="userIp">Your IP: Fetching...</span></p>
+        <p>
+            <a href="https://www.wizbox.tools/sitemap.xml">Sitemap</a> | 
+            <a href="https://www.wizbox.tools/">WizBox Home</a>
+        </p>
+    </div>
 </div>
+
+<style>
+.footer {
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.footer-section {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        display: block;
+        margin-right: 0;
+    }
+}
+</style>
+
+<script>
+// Get user IP for display
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('userIp').textContent = 'Your IP: ' + data.ip;
+    })
+    .catch(error => {
+        console.error('Error fetching IP:', error);
+    });
+});
+</script>
