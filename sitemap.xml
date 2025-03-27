@@ -1,105 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <!-- Home page -->
    <url>
       <loc>https://www.wizbox.tools/</loc>
-      <lastmod>2024-11-06</lastmod>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
+   </url>
+   
+   <!-- Main tool pages - ensuring canonical URLs -->
+   <url>
+      <loc>https://www.wizbox.tools/what-is-my-ip.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://www.wizbox.tools/what-is-my-ip</loc>
-      <lastmod>2024-11-06</lastmod>
+      <loc>https://www.wizbox.tools/cdn-finder.html</loc>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+      <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://www.wizbox.tools/git-to-llm</loc>
-      <lastmod>2024-11-06</lastmod>
+      <loc>https://www.wizbox.tools/ssl-checker.html</loc>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+      <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://www.wizbox.tools/faq</loc>
-      <lastmod>2024-11-06</lastmod>
+      <loc>https://www.wizbox.tools/dns-lookup.html</loc>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+      <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://www.wizbox.tools/terms</loc>
-      <lastmod>2024-11-06</lastmod>
+      <loc>https://www.wizbox.tools/blacklist-lookup.html</loc>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+      <priority>0.9</priority>
    </url>
    <url>
-      <loc>https://www.wizbox.tools/privacy</loc>
-      <lastmod>2024-11-06</lastmod>
+      <loc>https://www.wizbox.tools/dmarc-lookup.html</loc>
+      <lastmod>2025-03-27</lastmod>
       <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+      <priority>0.9</priority>
    </url>
-    <url>
-        <loc>https://www.wizbox.tools/cdn-finder</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/ssl-checker</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/dns-lookup</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/blacklist-lookup</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/dmarc-lookup</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/whois-lookup</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/ping</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/traceroute</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/mx-lookup</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/security-headers-check</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.wizbox.tools/json-viewer</loc>
-        <lastmod>2024-11-06</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
+   <url>
+      <loc>https://www.wizbox.tools/whois-lookup.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/ping.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/traceroute.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/mx-lookup.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/security-headers-check.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/git-to-llm.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/json-viewer.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+   </url>
+   
+   <!-- Supporting pages -->
+   <url>
+      <loc>https://www.wizbox.tools/faq.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/privacy.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/terms.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/search.html</loc>
+      <lastmod>2025-03-27</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
 </urlset>
