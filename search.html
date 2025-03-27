@@ -3,100 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A powerful tool for DNS Lookup, SSL Certificate Check, CDN Finder, and more. Use our free web tool to check the security and performance of your domain.">
-    <meta name="keywords" content="DNS Lookup, SSL Checker, CDN Finder, Security Headers, WHOIS Lookup, FastAPI">
+    <meta name="description" content="Search through WizBox's comprehensive collection of web tools and utilities. Find the perfect tool for your network diagnostics, security analysis, or domain information needs with our convenient search feature.">
+    <meta name="keywords" content="DNS Lookup, SSL Checker, CDN Finder, Security Headers, WHOIS Lookup, website tools search">
     <meta name="author" content="WizBox Tool Checks">
     <link rel="icon" type="image/x-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
-    <link rel="canonical" href="https://www.wizbox.tools/search">
-    <title>WizBox Tools Check - Search</title>
+    <link rel="canonical" href="https://www.wizbox.tools/search.html">
+    <title>WizBox Tools - Search All Network and Security Tools</title>
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="WizBox Tool Checks - Domain Lookup and Security Tools">
-    <meta property="og:description" content="Check your domain security with DNS lookup, SSL check, and more.">
+    <meta property="og:title" content="WizBox Tool Checks - Search All Tools">
+    <meta property="og:description" content="Search through our comprehensive collection of web tools including DNS lookup, SSL checkers, and security utilities.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.wizbox.tools">
-    <meta property="og:image" content="https://www.wizbox.tools/apple-touch-icon.png">
+    <meta property="og:url" content="https://www.wizbox.tools/search.html">
+    <meta property="og:image" content="https://www.wizbox.tools/images/apple-touch-icon.png">
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WizBox Tool Checks">
-    <meta name="twitter:description" content="Check your domain security with DNS lookup, SSL check, and more.">
-    <meta name="twitter:image" content="https://www.wizbox.tools/apple-touch-icon.png">
+    <meta name="twitter:title" content="WizBox Tool Search">
+    <meta name="twitter:description" content="Search through our comprehensive collection of web tools for network and security analysis.">
+    <meta name="twitter:image" content="https://www.wizbox.tools/images/apple-touch-icon.png">
     <!-- Link the external JS file -->
-    <script src="js/ui-helpers.js" defer></script>
+    <script src="https://www.wizbox.tools/js/ui-helpers.js" defer></script>
     <!-- Link the external CSS file -->
     <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         h1 {
             color: #333;
+            margin-bottom: 1.5rem;
         }
 
         form {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
         }
 
         #searchInput {
-            width: 300px;
-            padding: 10px;
+            width: 100%;
+            max-width: 600px;
+            padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
         #searchResult {
-            margin-top: 20px;
+            margin-top: 2rem;
         }
 
         .search-result div {
-            padding: 10px;
+            padding: 15px;
             border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        .search-result div:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-result a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .search-result div strong {
             color: #007BFF;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .search-result div a:hover strong {
+            text-decoration: underline;
+        }
+
+        .search-result div .result-url {
+            color: #28a745;
+            font-size: 0.9rem;
+            margin-top: 5px;
         }
 
         /* Highlighting matched terms */
         mark {
             background-color: #ffff00;
             font-weight: bold;
+            padding: 0 2px;
+        }
+
+        .no-results {
+            padding: 20px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                padding: 1rem;
+            }
+            
+            #searchInput {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            button[type="submit"] {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Search Tools</h1>
+    <header>
+        <h1 id="pageTitle">Search WizBox Tools</h1>
+        <div class="language-selector">
+            <label for="languageSelect">Select Language: </label>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+            </select>
+            <button onclick="toggleDarkMode()">🌙</button>
+        </div>
+    </header>
 
-    <!-- Search Form -->
-    <form id="searchForm">
-        <input type="text" id="searchInput" placeholder="Search for tools..." required>
-        <button type="submit">Search</button>
-    </form>
+    <div class="search-container">
+        <!-- Search Form -->
+        <form id="searchForm">
+            <div style="display: flex; flex-wrap: wrap;">
+                <input type="text" id="searchInput" placeholder="Search for tools..." required>
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </form>
 
-    <!-- Search Results Area -->
-    <div class="search-result" id="searchResult"></div>
+        <!-- Search Results Area -->
+        <div class="search-result" id="searchResult"></div>
+    </div>
 
     <script>
-        // Mock data for your tools
-    const toolsData = [
-        { name: "FAQ", description: "Frequently Asked Questions about our tools.", url: "/faq" },
-        { name: "What is My IP", description: "Find out your public IP address.", url: "/what-is-my-ip" },
-        { name: "CDN Finder", description: "Identify which CDN a website is using.", url: "/cdn-finder.html" },
-        { name: "SSL Checker", description: "Check the validity of SSL certificates.", url: "/ssl-checker.html" },
-        { name: "DNS Lookup", description: "Use this tool to check DNS records.", url: "/dns-lookup.html" },
-        { name: "Blacklist Lookup", description: "Check if an IP or domain is blacklisted.", url: "/blacklist-lookup.html" },
-        { name: "DMARC Lookup", description: "Check a domain's DMARC policy.", url: "/dmarc-lookup.html" },
-        { name: "WHOIS Lookup", description: "Get information about domain registration details.", url: "/whois-lookup.html" },
-        { name: "Ping", description: "Test the reachability of a host on the network.", url: "/ping.html" },
-        { name: "Traceroute", description: "Track the path packets take to a destination.", url: "/traceroute.html" },
-        { name: "MX Lookup", description: "Check mail server records for a domain.", url: "/mx-lookup.html" },
-        { name: "Security Headers", description: "Check the security headers of a website.", url: "/security-headers.html" },
-        { name: "Git To LLM", description: "Convert GitHub repo to LLM format.", url: "/git-to-llm.html" }
-    ];
+        // Mock data for your tools with updated URL patterns
+        const toolsData = [
+            { name: "Home", description: "WizBox Tools homepage with all web utilities and tools.", url: "https://www.wizbox.tools/" },
+            { name: "What is My IP", description: "Find out your public IP address and detailed connection information.", url: "https://www.wizbox.tools/what-is-my-ip.html" },
+            { name: "CDN Finder", description: "Identify which Content Delivery Network (CDN) a website is using.", url: "https://www.wizbox.tools/cdn-finder.html" },
+            { name: "SSL Checker", description: "Check the validity and details of SSL certificates for any domain.", url: "https://www.wizbox.tools/ssl-checker.html" },
+            { name: "DNS Lookup", description: "Look up various DNS records like A, CNAME, MX, and TXT for any domain.", url: "https://www.wizbox.tools/dns-lookup.html" },
+            { name: "Blacklist Lookup", description: "Check if a domain or IP address is listed on email blacklists.", url: "https://www.wizbox.tools/blacklist-lookup.html" },
+            { name: "DMARC Lookup", description: "Check a domain's DMARC policy for email authentication.", url: "https://www.wizbox.tools/dmarc-lookup.html" },
+            { name: "WHOIS Lookup", description: "Get detailed domain registration information and ownership details.", url: "https://www.wizbox.tools/whois-lookup.html" },
+            { name: "Ping", description: "Test the reachability and response time of a server or host.", url: "https://www.wizbox.tools/ping.html" },
+            { name: "Traceroute", description: "Track the network path and latency to a destination server.", url: "https://www.wizbox.tools/traceroute.html" },
+            { name: "MX Lookup", description: "Check mail server records for a domain's email configuration.", url: "https://www.wizbox.tools/mx-lookup.html" },
+            { name: "Security Headers", description: "Analyze a website's security headers for better protection.", url: "https://www.wizbox.tools/security-headers-check.html" },
+            { name: "Git To LLM", description: "Convert GitHub repositories to LLM-compatible format.", url: "https://www.wizbox.tools/git-to-llm.html" },
+            { name: "JSON Viewer", description: "Format, analyze, and validate JSON data easily.", url: "https://www.wizbox.tools/json-viewer.html" },
+            { name: "FAQ", description: "Frequently asked questions about our tools and services.", url: "https://www.wizbox.tools/faq.html" },
+            { name: "Privacy Policy", description: "Information about how we handle your data and privacy.", url: "https://www.wizbox.tools/privacy.html" },
+            { name: "Terms of Service", description: "Terms and conditions for using WizBox Tools.", url: "https://www.wizbox.tools/terms.html" }
+        ];
 
 
         // Function to get URL query parameter value
@@ -122,7 +215,8 @@
                 const regex = new RegExp(`(${query})`, 'gi');
                 return {
                     name: result.name.replace(regex, "<mark>$1</mark>"),
-                    description: result.description.replace(regex, "<mark>$1</mark>")
+                    description: result.description.replace(regex, "<mark>$1</mark>"),
+                    url: result.url
                 };
             });
 
@@ -136,6 +230,14 @@
                 document.getElementById('searchInput').value = searchQuery; // Set the input field
                 const results = performSearch(searchQuery); // Perform the search
                 displayResults(results); // Display the results
+            } else {
+                // If no search query, show all tools as a directory
+                displayResults(toolsData.map(tool => ({
+                    name: tool.name,
+                    description: tool.description,
+                    url: tool.url
+                })));
+                document.getElementById('searchResult').insertAdjacentHTML('beforebegin', '<h2>All Available Tools</h2>');
             }
         };
 
@@ -143,16 +245,20 @@
         function displayResults(results) {
             const searchResultDiv = document.getElementById('searchResult');
             searchResultDiv.innerHTML = ''; // Clear previous results
+            
             if (results.length > 0) {
                 results.forEach(result => {
                     const resultItem = document.createElement('div');
-                    resultItem.innerHTML = `<a href="${result.url}" style="text-decoration: none; color: inherit;">
-                        <strong>${result.name}</strong>
-                    </a>: ${result.description} - ${result.url}`
+                    resultItem.innerHTML = `
+                        <a href="${result.url}">
+                            <strong>${result.name}</strong>
+                            <p>${result.description}</p>
+                            <div class="result-url">${result.url}</div>
+                        </a>`;
                     searchResultDiv.appendChild(resultItem);
                 });
             } else {
-                searchResultDiv.innerHTML = 'No results found.';
+                searchResultDiv.innerHTML = '<div class="no-results">No results found. Try different keywords or browse our <a href="https://www.wizbox.tools/">homepage</a> for all tools.</div>';
             }
         }
 
@@ -174,7 +280,29 @@
             window.history.pushState({ path: newUrl }, '', newUrl);
         });
     </script>
-<!-- Footer -->
-<div id="footerContainer"></div>
+
+    <!-- Include the improved navigation -->
+    <div id="navContainer"></div>
+    <script>
+        // Load the shared navigation
+        fetch('https://www.wizbox.tools/shared-navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navContainer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+    <!-- Footer -->
+    <div id="footerContainer"></div>
+    <script>
+        // Load the footer
+        fetch('https://www.wizbox.tools/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footerContainer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
 </body>
 </html>
