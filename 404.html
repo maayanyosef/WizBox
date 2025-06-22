@@ -23,81 +23,94 @@
     <!-- Link the external JS file -->
     <script src="https://www.wizbox.tools/js/ui-helpers.js" defer></script>
     <style>
+        :root {
+            --error-bg: #f8f9fa;
+            --error-text: #24292e;
+            --error-card: #fff;
+            --error-border: #e1e4e8;
+            --error-link: #3498db;
+            --error-link-hover: #2ecc71;
+        }
+        [data-theme="dark"], .dark-mode, body.dark-mode {
+            --error-bg: #181a1b;
+            --error-text: #f6f8fa;
+            --error-card: #23272b;
+            --error-border: #333;
+            --error-link: #6ec6ff;
+            --error-link-hover: #27ae60;
+        }
+        body {
+            background: var(--error-bg);
+            color: var(--error-text);
+        }
         .error-container {
             text-align: center;
             padding: 50px 20px;
             max-width: 800px;
             margin: 0 auto;
         }
-        
         .error-code {
             font-size: 120px;
             font-weight: bold;
             color: #e74c3c;
             margin-bottom: 20px;
         }
-        
         .error-message {
             font-size: 24px;
             margin-bottom: 30px;
         }
-        
         .suggestions {
-            background-color: #f8f9fa;
+            background-color: var(--error-card);
             border-radius: 8px;
             padding: 20px;
             margin-top: 30px;
             text-align: left;
+            border: 1px solid var(--error-border);
         }
-        
         .suggestions h3 {
             margin-top: 0;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--error-border);
             padding-bottom: 10px;
         }
-        
         .tool-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
-        
         .tool-item {
-            background-color: #fff;
-            border: 1px solid #e1e4e8;
+            background-color: var(--error-card);
+            border: 1px solid var(--error-border);
             border-radius: 5px;
             padding: 15px;
             transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--error-text);
         }
-        
         .tool-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        
         .tool-item i {
             display: block;
             font-size: 24px;
             margin-bottom: 10px;
-            color: #3498db;
+            color: var(--error-link);
         }
-        
         .search-box {
             margin: 30px 0;
         }
-        
         .search-box input {
             width: 70%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--error-border);
             border-radius: 4px;
             font-size: 16px;
+            background: var(--error-card);
+            color: var(--error-text);
         }
-        
         .search-box button {
             padding: 10px 20px;
-            background-color: #3498db;
+            background-color: var(--error-link);
             color: white;
             border: none;
             border-radius: 4px;
@@ -105,7 +118,6 @@
             font-size: 16px;
             margin-left: 10px;
         }
-        
         .home-button {
             display: inline-block;
             margin-top: 20px;
@@ -117,11 +129,33 @@
             font-weight: bold;
             transition: background-color 0.2s;
         }
-        
         .home-button:hover {
-            background-color: #27ae60;
+            background-color: var(--error-link-hover);
         }
     </style>
+    <script>
+    // Dark mode toggle support
+    function setDarkMode(enabled) {
+        if (enabled) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('wizbox-dark-mode', '1');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('wizbox-dark-mode', '0');
+        }
+    }
+    function toggleDarkMode() {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('wizbox-dark-mode', isDark ? '1' : '0');
+    }
+    // On load, set dark mode if user prefers
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkPref = localStorage.getItem('wizbox-dark-mode');
+        if (darkPref === '1' || (darkPref === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+        }
+    });
+    </script>
 </head>
 <body>
     <header>
