@@ -7,7 +7,7 @@
     <meta name="keywords" content="DNS tutorial, SSL guide, CDN explained, network security, web development">
     <title>WizBox Blog - Network Tools & Security Guides</title>
     <link rel="canonical" href="https://www.wizbox.tools/blog">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
@@ -29,62 +29,80 @@
 </head>
 <body>
     <header>
-        <h1>WizBox Blog - Network & Security Insights</h1>
+        <h1>WizBox Blog</h1>
+        <p class="subtitle">Network & Security Insights</p>
         <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="/faq">FAQ</a>
+            <a href="/">🏠 Home</a>
+            <a href="/blog">📝 Blog</a>
+            <a href="/faq">❓ FAQ</a>
+            <a href="/search">🔍 Search</a>
         </nav>
     </header>
 
-    <main class="container">
-        <section class="blog-intro">
-            <h2>Latest Articles & Guides</h2>
-            <p>Stay updated with the latest in network diagnostics, security, and web development tools.</p>
-        </section>
+    <div class="container">
+        <main class="main-content">
+            <section class="blog-intro">
+                <h2>Latest Articles & Guides</h2>
+                <p>Stay updated with the latest in network diagnostics, security, and web development tools.</p>
+            </section>
 
-        <section class="blog-posts">
-            <article class="blog-post">
-                <h3><a href="/blog/complete-guide-dns-lookup">Complete Guide to DNS Lookup: Understanding How Domain Names Work</a></h3>
-                <p class="meta">Published: August 6, 2025 | 8 min read</p>
-                <p>Learn everything about DNS lookup, from basic concepts to advanced troubleshooting techniques. Discover how DNS resolution works and why it's crucial for website performance.</p>
-                <a href="/blog/complete-guide-dns-lookup" class="read-more">Read More →</a>
-            </article>
+            <section class="blog-posts">
+                <article class="blog-post">
+                    <h3><a href="/blog/complete-guide-dns-lookup">Complete Guide to DNS Lookup: Understanding How Domain Names Work</a></h3>
+                    <p class="meta">📅 Published: August 6, 2025 | ⏱️ 8 min read | 🏷️ DNS, Networking</p>
+                    <p>Learn everything about DNS lookup, from basic concepts to advanced troubleshooting techniques. Discover how DNS resolution works and why it's crucial for website performance.</p>
+                    <a href="/blog/complete-guide-dns-lookup" class="read-more">Read More →</a>
+                </article>
 
-            <article class="blog-post">
-                <h3><a href="/blog/ssl-certificate-best-practices">SSL Certificate Best Practices for 2025</a></h3>
-                <p class="meta">Published: August 5, 2025 | 6 min read</p>
-                <p>Discover the latest SSL certificate best practices, including choosing the right certificate type, implementation tips, and security considerations for modern websites.</p>
-                <a href="/blog/ssl-certificate-best-practices" class="read-more">Read More →</a>
-            </article>
+                <article class="blog-post">
+                    <h3><a href="/blog/ssl-certificate-best-practices">SSL Certificate Best Practices for 2025</a></h3>
+                    <p class="meta">📅 Published: August 5, 2025 | ⏱️ 6 min read | 🏷️ SSL, Security</p>
+                    <p>Discover the latest SSL certificate best practices, including choosing the right certificate type, implementation tips, and security considerations for modern websites.</p>
+                    <a href="/blog/ssl-certificate-best-practices" class="read-more">Read More →</a>
+                </article>
 
-            <article class="blog-post">
-                <h3><a href="/blog/cdn-performance-optimization">How CDNs Boost Website Performance: A Technical Deep Dive</a></h3>
-                <p class="meta">Published: August 4, 2025 | 10 min read</p>
-                <p>Explore how Content Delivery Networks work under the hood and learn practical strategies to optimize your website's global performance using CDN technology.</p>
-                <a href="/blog/cdn-performance-optimization" class="read-more">Read More →</a>
-            </article>
+                <article class="blog-post">
+                    <h3><a href="/blog/cdn-performance-optimization">How CDNs Boost Website Performance: A Technical Deep Dive</a></h3>
+                    <p class="meta">📅 Published: August 4, 2025 | ⏱️ 10 min read | 🏷️ CDN, Performance</p>
+                    <p>Explore how Content Delivery Networks work under the hood and learn practical strategies to optimize your website's global performance using CDN technology.</p>
+                    <a href="/blog/cdn-performance-optimization" class="read-more">Read More →</a>
+                </article>
 
-            <article class="blog-post">
-                <h3><a href="/blog/security-headers-implementation">Implementing Security Headers: A Developer's Checklist</a></h3>
-                <p class="meta">Published: August 3, 2025 | 7 min read</p>
-                <p>A comprehensive guide to implementing essential security headers like CSP, HSTS, and X-Frame-Options to protect your website from common vulnerabilities.</p>
-                <a href="/blog/security-headers-implementation" class="read-more">Read More →</a>
-            </article>
-        </section>
+                <article class="blog-post">
+                    <h3><a href="/blog/security-headers-implementation">Implementing Security Headers: A Developer's Checklist</a></h3>
+                    <p class="meta">📅 Published: August 3, 2025 | ⏱️ 7 min read | 🏷️ Security, Headers</p>
+                    <p>A comprehensive guide to implementing essential security headers like CSP, HSTS, and X-Frame-Options to protect your website from common vulnerabilities.</p>
+                    <a href="/blog/security-headers-implementation" class="read-more">Read More →</a>
+                </article>
 
-        <section class="newsletter-signup">
-            <h3>Stay Updated</h3>
-            <p>Get the latest network security tips and tool updates delivered to your inbox.</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </section>
-    </main>
+                <article class="blog-post">
+                    <h3><a href="/blog/network-troubleshooting-guide">Network Troubleshooting: Ping, Traceroute, and Beyond</a></h3>
+                    <p class="meta">📅 Published: August 2, 2025 | ⏱️ 12 min read | 🏷️ Networking, Troubleshooting</p>
+                    <p>Master the art of network troubleshooting with comprehensive guides on using ping, traceroute, and other diagnostic tools to solve connectivity issues.</p>
+                    <a href="/blog/network-troubleshooting-guide" class="read-more">Read More →</a>
+                </article>
+
+                <article class="blog-post">
+                    <h3><a href="/blog/whois-privacy-protection">WHOIS Privacy: Protecting Your Domain Information</a></h3>
+                    <p class="meta">📅 Published: August 1, 2025 | ⏱️ 5 min read | 🏷️ WHOIS, Privacy</p>
+                    <p>Learn how to protect your personal information in WHOIS databases and understand the importance of domain privacy protection for website owners.</p>
+                    <a href="/blog/whois-privacy-protection" class="read-more">Read More →</a>
+                </article>
+            </section>
+
+            <section class="newsletter-signup">
+                <h3>📧 Stay Updated</h3>
+                <p>Get the latest network security tips and tool updates delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </section>
+        </main>
+    </div>
 
     <footer>
-        <p>&copy; 2025 WizBox Tools. All rights reserved.</p>
+        <p>&copy; 2025 WizBox Tools. All rights reserved. | <a href="/privacy" style="color: #94a3b8;">Privacy Policy</a> | <a href="/terms" style="color: #94a3b8;">Terms of Service</a></p>
     </footer>
 </body>
 </html>

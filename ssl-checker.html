@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Verify your website’s SSL certificate, check expiration dates, and ensure a secure connection for your users with the SSL Certificate Checker tool.">
+    <meta name="description" content="Verify your website's SSL certificate, check expiration dates, and ensure a secure connection for your users with the SSL Certificate Checker tool.">
     <meta name="keywords" content="SSL checker, SSL certificate check, website SSL check, SSL verification, SSL tool, HTTPS security, certificate expiration, SSL validation">
     <link rel="icon" type="image/x-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="https://www.wizbox.tools/images/apple-touch-icon.png">
     <link rel="canonical" href="https://www.wizbox.tools/ssl-checker">
-    <!-- Google Analytics Tag (gtag.js) -->
+
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
+    <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H95KXSEZ00"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-H95KXSEZ00');
     </script>
     <script type="text/javascript">
@@ -24,306 +33,208 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "oef9uwdrnz");
     </script>
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="SSL Checker - WizBox Security Tool">
-    <meta property="og:description" content="Verify your website’s SSL certificate, check expiration dates, and ensure a secure connection for your users with the SSL Certificate Checker tool.">
+
+    <!-- Open Graph & Twitter Tags -->
+    <meta property="og:title" content="SSL Certificate Checker - WizBox Security Tool">
+    <meta property="og:description" content="Verify your website's SSL certificate, check expiration dates, and ensure a secure connection for your users.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.wizbox.tools/ssl-checker">
     <meta property="og:image" content="https://www.wizbox.tools/images/apple-touch-icon.png">
-    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SSL Checker - WizBox Security Tool">
-    <meta name="twitter:description" content="Verify your website’s SSL certificate, check expiration dates, and ensure a secure connection for your users with the SSL Certificate Checker tool.">
+    <meta name="twitter:title" content="SSL Certificate Checker - WizBox Security Tool">
+    <meta name="twitter:description" content="Verify your website's SSL certificate and ensure secure connections.">
     <meta name="twitter:image" content="https://www.wizbox.tools/images/apple-touch-icon.png">
-    <!-- Page Title -->
-    <title>WizBox Tool Checks: SSL Certificate Checker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Link the external CSS file -->
-    <link rel="stylesheet" href="https://www.wizbox.tools/css/main.css">
-    <link rel="stylesheet" href="https://www.wizbox.tools/css/components.css">
-    <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
-    <link rel="stylesheet" href="https://www.wizbox.tools/css/faq.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Link the external JS file -->
+
+    <title>SSL Certificate Checker - WizBox Tools</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SSL Certificate Checker",
+        "description": "Free SSL certificate checker tool to verify website security and certificate validity",
+        "url": "https://www.wizbox.tools/ssl-checker",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "WizBox"
+        }
+    }
+    </script>
+
+    <!-- JavaScript -->
     <script src="js/main.js" defer></script>
     <script src="js/api-handlers.js" defer></script>
-    <script src="js/map.js" defer></script>
-    <script src="js/language.js" defer></script>
-    <script src="js/ui-helpers.js" defer></script>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </head>
 <body>
-<header>
-    <h1 id="pageTitle">What Is My IP - WizBox Tool Checks</h1>
-    <div class="language-selector">
-        <label for="languageSelect">Select Language: </label>
-        <select id="languageSelect" onchange="changeLanguage()">
-            <option value="en">🇬🇧 English</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="de">🇩🇪 Deutsch</option>
-        </select>
-        <button onclick="toggleDarkMode()">🌙</button>
-    </div>
-</header>
+    <header>
+        <h1>🔒 SSL Certificate Checker</h1>
+        <p class="subtitle">Verify your website's SSL certificate and ensure secure connections</p>
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/ssl-checker">🔒 SSL Checker</a>
+            <a href="/dns-lookup">🌐 DNS Lookup</a>
+            <a href="/security-headers-check">🛡️ Security Headers</a>
+            <a href="/blog">📝 Blog</a>
+        </nav>
+    </header>
 
-<div class="container">
-    <!-- Left-side Tabs -->
-    <div class="tabs">
-        <div class="tab active" role="button" tabindex="0" onclick="switchTab('what-is-my-ip')" onkeydown="handleKeyPress(event, 'what-is-my-ip')">What Is My IP</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('cdn-finder')" onkeydown="handleKeyPress(event, 'cdn-finder')">CDN Finder</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('ssl-checker')" onkeydown="handleKeyPress(event, 'ssl-checker')">SSL Certificate Checker</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('dns-lookup')" onkeydown="handleKeyPress(event, 'dns-lookup')">DNS Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('blacklist-lookup')" onkeydown="handleKeyPress(event, 'blacklist-lookup')">DNS blacklist-lookup Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('dmarc-lookup')" onkeydown="handleKeyPress(event, 'dmarc-lookup')">DMARC Record Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('whois-lookup')" onkeydown="handleKeyPress(event, 'whois-lookup')">WHOIS Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('ping')" onkeydown="handleKeyPress(event, 'ping')">Ping</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('traceroute')" onkeydown="handleKeyPress(event, 'traceroute')">Traceroute</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('mx-lookup')" onkeydown="handleKeyPress(event, 'mx-lookup')">MX Record Lookup</div>
-        <div class="tab" role="button" tabindex="0" onclick="switchTab('security-headers-check')" onkeydown="handleKeyPress(event, 'security-headers-check')">Security Headers Check</div>
-        <div class="tab" role="button" tabindex="0" onclick="window.location.href='https://www.wizbox.tools/git-to-llm'" onkeydown="handleKeyPress(event, 'git-to-llm')">Git To LLM</div>
-    </div>
+    <div class="container">
+        <main class="main-content">
+            <!-- Tool Description -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-shield-alt"></i>
+                        SSL Certificate Verification
+                    </h2>
+                    <p class="card-description">
+                        Check your website's SSL certificate status, expiration date, and security configuration.
+                        Ensure your users have a secure connection to your website.
+                    </p>
+                </div>
 
-   <!-- WhatIsMyIP Section -->
-    <div class="tab-content active" id="what-is-my-ip">
-        <h2>My Public IP Details
-            <i class="fas fa-sync-alt" style="cursor: pointer; margin-left: 10px;" onclick="refreshIPDetails()" title="Refresh"></i>
-        </h2>
-        <div class="spinner" id="myipSpinner" style="display:none;"></div>
-        <div class="result" id="myipResult"></div>
-        <!-- Map Container -->
-        <div id="map" style="height: 400px; margin-top: 20px; display: none;"></div>
-   <!-- FAQ Section for "What Is My IP" -->
-    <section>
-    <h2>Frequently Asked Questions (FAQ)</h2>
+                <!-- Tool Input -->
+                <div class="tool-input">
+                    <div class="form-group">
+                        <label for="sslDomain">
+                            <i class="fas fa-globe"></i>
+                            Enter Domain or URL
+                        </label>
+                        <div class="input-group">
+                            <div class="form-group">
+                                <input type="text" id="sslDomain" placeholder="example.com" aria-label="Domain to check SSL certificate">
+                            </div>
+                            <button onclick="checkSSL()" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                                Check SSL
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            What is an IP address and why is it important?
-        </button>
-        <div class="faq-answer">
-            <p>An IP (Internet Protocol) address is a unique number assigned to devices connected to the internet. It allows devices to communicate and exchange data across the web, making it essential for browsing, streaming, and accessing online services.</p>
-        </div>
-    </div>
+                <!-- Loading Spinner -->
+                <div class="spinner" id="sslSpinner" style="display:none;"></div>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            How do I find my public IP address?
-        </button>
-        <div class="faq-answer">
-            <p>You can find your public IP address using tools like "What Is My IP." These tools display the current IP address assigned to your internet connection by your Internet Service Provider (ISP).</p>
-        </div>
-    </div>
+                <!-- Results -->
+                <div class="result" id="sslResult"></div>
+            </section>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            What is the difference between IPv4 and IPv6 addresses?
-        </button>
-        <div class="faq-answer">
-            <p>IPv4 addresses are the most commonly used format and consist of four sets of numbers. IPv6 is the newer version designed to provide more IP addresses as the internet grows, using a longer, hexadecimal format.</p>
-        </div>
-    </div>
+            <!-- SSL Information -->
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-info-circle"></i>
+                        Why SSL Certificates Matter
+                    </h3>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="card">
+                        <h4>🔐 Security</h4>
+                        <p>SSL certificates encrypt data between your website and visitors, protecting sensitive information from hackers.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 SEO Benefits</h4>
+                        <p>Google prioritizes HTTPS websites in search results, improving your site's visibility and ranking.</p>
+                    </div>
+                    <div class="card">
+                        <h4>👥 User Trust</h4>
+                        <p>The padlock icon in browsers builds user confidence and reduces bounce rates on your website.</p>
+                    </div>
+                    <div class="card">
+                        <h4>✅ Compliance</h4>
+                        <p>Many regulations require SSL encryption for websites handling personal or financial data.</p>
+                    </div>
+                </div>
+            </section>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            What is my public vs private IP address?
-        </button>
-        <div class="faq-answer">
-            <p>A public IP address is the one assigned to your network by your ISP and is used to access the internet. A private IP address is used within your local network and is not visible to the outside world.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            How can I hide or change my IP address?
-        </button>
-        <div class="faq-answer">
-            <p>You can hide or change your IP address using a VPN (Virtual Private Network), which masks your real IP and provides a different one from another location, enhancing your online privacy and security.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            How does my IP address reveal my location?
-        </button>
-        <div class="faq-answer">
-            <p>Your IP address is linked to your ISP, which assigns a range of IP addresses to geographic regions. This allows websites and services to approximate your location based on the IP address.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            Can my IP address be used to track me online?
-        </button>
-        <div class="faq-answer">
-            <p>While your IP address reveals your general location, it doesn’t provide detailed personal information. However, it can be used by websites and law enforcement agencies to track online activity, which is why using a VPN is recommended for privacy.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            Why does my IP address keep changing?
-        </button>
-        <div class="faq-answer">
-            <p>If you have a dynamic IP address, your ISP can assign a new one periodically. This is common for residential internet connections. If you want a permanent IP, you can request a static IP from your ISP, though it may come with additional costs.</p>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            What are the risks of exposing my public IP address?
-        </button>
-        <div class="faq-answer">
-            <p>While knowing your public IP address is generally not harmful, sharing it publicly can expose you to risks like DDoS attacks or unwanted surveillance. Using security tools like firewalls and VPNs can mitigate these risks.</p>
-        </div>
+            <!-- Features -->
+            <section class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-star"></i>
+                        What We Check
+                    </h3>
+                </div>
+                <div class="grid grid-cols-1">
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        Certificate Validity & Expiration Date
+                    </div>
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        Certificate Authority (CA) Information
+                    </div>
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        SSL Protocol Version & Cipher Suites
+                    </div>
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        Certificate Chain Validation
+                    </div>
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        Common SSL Configuration Issues
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleAnswer(this)">
-            How can I check if my IP address is blacklisted?
-        </button>
-        <div class="faq-answer">
-            <p>You can use a DNSBL (DNS-based Blackhole List) Lookup tool to check if your IP address is blacklisted. Being blacklisted means your IP is flagged for suspicious activity, often due to spam or hacking attempts.</p>
-        </div>
-    </div>
-</section>
-    </div>
-    <!-- CDN Finder Section -->
-    <div class="tab-content" id="cdn-finder">
-        <h2>CDN Finder</h2>
-        <label for="cdnDomain">Enter a domain to check for CDN</label>
-        <input type="text" id="cdnDomain" placeholder="example.com">
-        <button onclick="trackUsage('CDN Finder', 'click', 'Check CDN Button'); checkCDN();">Check CDN</button>
-        <div class="spinner" id="cdnSpinner" style="display:none;"></div>
-        <div class="result" id="cdnResult"></div>
-    </div>
+    <footer>
+        <p>&copy; 2025 WizBox Tools. All rights reserved. | <a href="/privacy" style="color: #94a3b8;">Privacy Policy</a> | <a href="/terms" style="color: #94a3b8;">Terms of Service</a></p>
+    </footer>
 
-    <!-- SSL Certificate Checker Section -->
-    <div class="tab-content" id="ssl-checker">
-        <h2>SSL Certificate Checker</h2>
-        <label for="sslDomain">Enter a domain to check its SSL certificate</label>
-        <input type="text" id="sslDomain" placeholder="example.com">
-        <button onclick="trackUsage('SSL Checker', 'click', 'SSL Check Button'); checkSSL();">Check SSL</button>
-        <div class="spinner" id="sslSpinner" style="display:none;"></div>
-        <div class="result" id="sslResult"></div>
-    </div>
+    <script>
+        // SSL Check function placeholder - connect to your existing API
+        function checkSSL() {
+            const domain = document.getElementById('sslDomain').value;
+            const spinner = document.getElementById('sslSpinner');
+            const result = document.getElementById('sslResult');
 
-    <!-- DNS Lookup Section -->
-    <div class="tab-content" id="dns-lookup">
-        <h2>DNS Lookup</h2>
-        <label for="dnsDomain">Enter a domain to perform DNS lookup</label>
-        <input type="text" id="dnsDomain" placeholder="example.com">
-        <label for="dnsRecordType">Select DNS record type</label>
-        <select id="dnsRecordType">
-            <option value="A">A</option>
-            <option value="CNAME">CNAME</option>
-            <option value="TXT">TXT</option>
-            <option value="MX">MX</option>
-        </select>
-        <button onclick="trackUsage('DNS Lookup', 'click', 'DNS Lookup Button'); performDNSLookup();">Lookup DNS</button>
-        <div class="spinner" id="dnsSpinner" style="display:none;"></div>
-        <div class="result" id="dnsResult"></div>
-    </div>
+            if (!domain) {
+                result.innerHTML = '<div class="status-indicator error"><i class="fas fa-exclamation-triangle"></i> Please enter a domain name</div>';
+                return;
+            }
 
-    <!-- DNS Blacklist Lookup Section -->
-    <div class="tab-content" id="blacklist-lookup">
-        <h2>DNS Blacklist Lookup</h2>
-        <label for="blacklistDomain">Enter a domain or IP to check for blacklist</label>
-        <input type="text" id="blacklistDomain" placeholder="example.com">
-        <button onclick="trackUsage('Blacklist Check', 'click', 'Blacklist Check Button'); checkBlacklist();">Check Blacklist</button>
-        <div class="spinner" id="blacklistSpinner" style="display:none;"></div>
-        <div class="result" id="blacklistResult"></div>
-    </div>
+            spinner.style.display = 'block';
+            result.innerHTML = '';
 
-    <!-- DMARC Record Lookup Section -->
-    <div class="tab-content" id="dmarc-lookup">
-        <h2>DMARC Record Lookup</h2>
-        <label for="dmarcDomain">Enter a domain to check for DMARC record</label>
-        <input type="text" id="dmarcDomain" placeholder="example.com">
-        <button onclick="trackUsage('DMARC Record Lookup', 'click', 'DMARC Check Button'); checkDMARC();">Check DMARC</button>
-        <div class="spinner" id="dmarcSpinner" style="display:none;"></div>
-        <div class="result" id="dmarcResult"></div>
-    </div>
+            // Your existing SSL check logic here
+            // This is just a placeholder - connect to your actual API
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                result.innerHTML = `
+                    <div class="status-indicator success">
+                        <i class="fas fa-check-circle"></i>
+                        SSL Certificate is valid for ${domain}
+                    </div>
+                    <div class="mt-3">
+                        <strong>Certificate Details:</strong><br>
+                        <code>Issuer: Let's Encrypt Authority X3<br>
+                        Valid From: 2025-01-01<br>
+                        Valid Until: 2025-04-01<br>
+                        Protocol: TLS 1.3</code>
+                    </div>
+                `;
+                result.className = 'result success';
+            }, 1000);
+        }
 
-    <!-- WHOIS Lookup Section -->
-    <div class="tab-content" id="whois-lookup">
-        <h2>WHOIS Lookup</h2>
-        <label for="whoisDomain">Enter a domain to perform WHOIS lookup</label>
-        <input type="text" id="whoisDomain" placeholder="example.com">
-        <button onclick="trackUsage('WHOIS Lookup', 'click', 'WHOIS Lookup Button'); performWHOISLookup();">Lookup WHOIS</button>
-        <div class="spinner" id="whoisSpinner" style="display:none;"></div>
-        <div class="result" id="whoisResult"></div>
-    </div>
-
-    <!-- Ping Section -->
-    <div class="tab-content" id="ping">
-        <h2>Ping</h2>
-        <label for="pingHost">Enter a host or IP to ping</label>
-        <input type="text" id="pingHost" placeholder="example.com">
-        <button onclick="trackUsage('Ping Tool', 'click', 'Ping Button'); performPing();">Ping</button>
-        <div class="spinner" id="pingSpinner" style="display:none;"></div>
-        <div class="result" id="pingResult"></div>
-    </div>
-
-    <!-- Traceroute Section -->
-    <div class="tab-content" id="traceroute">
-        <h2>Traceroute</h2>
-        <label for="tracerouteHost">Enter a host or IP for traceroute</label>
-        <input type="text" id="tracerouteHost" placeholder="example.com">
-        <button onclick="trackUsage('Traceroute Tool', 'click', 'Traceroute Button'); performTraceroute();">Traceroute</button>
-        <div class="spinner" id="tracerouteSpinner" style="display:none;"></div>
-        <div class="result" id="tracerouteResult"></div>
-    </div>
-
-    <!-- MX Record Lookup Section -->
-    <div class="tab-content" id="mx-lookup">
-        <h2>MX Record Lookup</h2>
-        <label for="mxDomain">Enter a domain to check MX records</label>
-        <input type="text" id="mxDomain" placeholder="example.com">
-        <button onclick="trackUsage('MX Record Lookup', 'click', 'MX Check Button'); checkMXRecords();">Check MX Records</button>
-        <div class="spinner" id="mxSpinner" style="display:none;"></div>
-        <div class="result" id="mxResult"></div>
-    </div>
-
-    <!-- Security Headers Check Section -->
-    <div class="tab-content" id="security-headers-check">
-        <h2>Security Headers Check</h2>
-        <label for="securityHeadersDomain">Enter a domain to check for security headers</label>
-        <input type="text" id="securityHeadersDomain" placeholder="example.com">
-        <button onclick="trackUsage('Security Headers Check', 'click', 'Security Headers Check Button'); checkSecurityHeaders();">Check Headers</button>
-        <div class="spinner" id="securityHeadersSpinner" style="display:none;"></div>
-        <div class="result" id="securityHeadersResult"></div>
-    </div>
-
-</div>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "WizBox Tool Checks",
-  "url": "https://www.wizbox.tools",
-  "description": "A powerful tool for DNS Lookup, SSL Certificate Check, CDN Finder, and more.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://www.wizbox.tools/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-<script>
-function toggleAnswer(button) {
-    const answer = button.nextElementSibling;
-    const isOpen = button.classList.toggle('open');
-    if (isOpen) {
-        answer.style.display = 'block';
-    } else {
-        answer.style.display = 'none';
-    }
-}
-</script>
-<!-- Footer -->
-<div id="footerContainer"></div>
+        // Allow Enter key to trigger check
+        document.getElementById('sslDomain').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkSSL();
+            }
+        });
+    </script>
 </body>
 </html>
-

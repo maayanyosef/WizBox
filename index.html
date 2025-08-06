@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="https://www.wizbox.tools/css/dark-mode.css">
     <link rel="stylesheet" href="https://www.wizbox.tools/css/faq.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Link the external JS file -->
     <script src="js/main.js" defer></script>
     <script src="js/api-handlers.js" defer></script>
@@ -106,6 +106,18 @@
             <option value="de">🇩🇪 Deutsch</option>
         </select>
         <button onclick="toggleDarkMode()">🌙</button>
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="toolSearch" placeholder="Search tools (e.g., SSL, DNS, ping)..." onkeyup="searchTools()" />
+            <button class="clear-search" onclick="clearSearch()" title="Clear search">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="searchSuggestions" class="search-suggestions"></div>
     </div>
 </header>
 

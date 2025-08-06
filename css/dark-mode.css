@@ -1,37 +1,223 @@
-/* Dark Mode Styling */
+/* Dark Mode Theme - Modern & Comprehensive */
+:root {
+    --dark-bg-primary: #0f1419;
+    --dark-bg-secondary: #1a1f2e;
+    --dark-bg-tertiary: #252a3a;
+    --dark-surface: #1e2328;
+    --dark-border: #2a2f3a;
+    --dark-text-primary: #ffffff;
+    --dark-text-secondary: #b4b6c7;
+    --dark-text-muted: #8b8fa3;
+    --dark-accent: #4f46e5;
+    --dark-success: #10b981;
+    --dark-warning: #f59e0b;
+    --dark-danger: #ef4444;
+}
+
+/* Base Dark Mode Styling */
 .dark-mode {
-    background-color: #1a2a2a;
-    // text color
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--dark-bg-primary) 0%, var(--dark-bg-secondary) 100%);
+    color: var(--dark-text-primary);
+    transition: all 0.3s ease;
 }
 
-/* Dark Mode for Container */
+/* Header */
+.dark-mode header {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-bottom: 1px solid var(--dark-border);
+}
+
+/* Container & Cards */
 .dark-mode .container {
-    background-color: #2a2a2a;
-    box-shadow: none;
+    background: transparent;
 }
 
-/* Dark Mode for Tables */
+.dark-mode .main-content,
+.dark-mode .card {
+    background: var(--dark-surface);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .tabs {
+    background: var(--dark-surface);
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .tab {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text-secondary);
+}
+
+.dark-mode .tab:hover {
+    background: var(--dark-border);
+    color: var(--dark-text-primary);
+    border-color: var(--dark-accent);
+}
+
+.dark-mode .tab.active {
+    background: linear-gradient(135deg, var(--dark-accent) 0%, #6366f1 100%);
+    color: white;
+    border-color: var(--dark-accent);
+}
+
+/* Form Elements */
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="url"],
+.dark-mode select,
+.dark-mode textarea {
+    background: var(--dark-bg-tertiary);
+    border: 2px solid var(--dark-border);
+    color: var(--dark-text-primary);
+}
+
+.dark-mode input::placeholder {
+    color: var(--dark-text-muted);
+}
+
+.dark-mode input:focus,
+.dark-mode select:focus,
+.dark-mode textarea:focus {
+    border-color: var(--dark-accent);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Results Display */
+.dark-mode .result {
+    background: var(--dark-bg-tertiary);
+    border-left: 4px solid var(--dark-accent);
+    color: var(--dark-text-primary);
+}
+
+.dark-mode .result.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: var(--dark-success);
+}
+
+.dark-mode .result.warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-left-color: var(--dark-warning);
+}
+
+.dark-mode .result.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left-color: var(--dark-danger);
+}
+
+/* Tables */
 .dark-mode table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #2a2a2a;
-    text-color: #ffffff;
-    color: #ffffff;
+    background: var(--dark-surface);
+    border: 1px solid var(--dark-border);
 }
 
 .dark-mode table th,
 .dark-mode table td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: left;
+    border-bottom: 1px solid var(--dark-border);
+    color: var(--dark-text-primary);
 }
 
 .dark-mode table th {
-    background-color: #a2a2a;
-    color: #ffffff;
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
 }
 
-.dark-mode table tr:nth-child(even) {
-    background-color: #3a2a2a;
+.dark-mode table tr:hover {
+    background: var(--dark-bg-tertiary);
+}
+
+/* Status Indicators */
+.dark-mode .status-indicator.success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+.dark-mode .status-indicator.warning {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+.dark-mode .status-indicator.error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+/* Blog Styles */
+.dark-mode .blog-intro {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+.dark-mode .blog-post {
+    background: var(--dark-surface);
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .blog-post h3 a {
+    color: var(--dark-text-primary);
+}
+
+.dark-mode .blog-post h3 a:hover {
+    color: var(--dark-accent);
+}
+
+.dark-mode .blog-post .meta {
+    color: var(--dark-text-muted);
+}
+
+/* Newsletter */
+.dark-mode .newsletter-signup {
+    background: var(--dark-bg-tertiary);
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .newsletter-signup h3 {
+    color: var(--dark-text-primary);
+}
+
+/* Language Selector */
+.dark-mode .language-selector {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .language-selector select {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border);
+}
+
+/* Footer */
+.dark-mode footer {
+    background: var(--dark-bg-primary);
+    color: var(--dark-text-secondary);
+}
+
+/* FAQ Styles */
+.dark-mode .faq-item {
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .faq-question {
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-primary);
+    border: none;
+}
+
+.dark-mode .faq-question:hover {
+    background: var(--dark-border);
+}
+
+.dark-mode .faq-answer {
+    background: var(--dark-surface);
+    color: var(--dark-text-secondary);
+    border-top: 1px solid var(--dark-border);
+}
+
+/* Smooth transitions for all elements */
+.dark-mode * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
