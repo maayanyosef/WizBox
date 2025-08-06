@@ -58,6 +58,41 @@
     <script src="js/language.js" defer></script>
     <script src="js/ui-helpers.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WizBox Tools",
+        "description": "Free online tools for DNS lookup, SSL certificate checking, CDN detection, and network diagnostics",
+        "url": "https://www.wizbox.tools",
+        "applicationCategory": "NetworkingApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "DNS Lookup",
+            "SSL Certificate Checker",
+            "CDN Finder",
+            "IP Address Detection",
+            "WHOIS Lookup",
+            "Security Headers Check",
+            "Ping Tool",
+            "Traceroute",
+            "MX Record Lookup",
+            "DMARC Record Lookup",
+            "Blacklist Lookup"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "WizBox"
+        }
+    }
+    </script>
 </head>
 <body>
 <header>
