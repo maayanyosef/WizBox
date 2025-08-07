@@ -1,0 +1,103 @@
+{
+  "name": "WizBox Network Tools",
+  "short_name": "WizBox",
+  "description": "Professional network diagnostic and security tools including DNS lookup, SSL checker, CDN finder, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities", "developer"],
+  "icons": [
+    {
+      "src": "/images/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "DNS Lookup",
+      "short_name": "DNS",
+      "description": "Check DNS records for any domain",
+      "url": "/dns-lookup",
+      "icons": [
+        {
+          "src": "/images/apple-touch-icon.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "SSL Checker",
+      "short_name": "SSL",
+      "description": "Verify SSL certificate status",
+      "url": "/ssl-checker",
+      "icons": [
+        {
+          "src": "/images/apple-touch-icon.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Security Headers",
+      "short_name": "Security",
+      "description": "Check website security headers",
+      "url": "/security-headers-check",
+      "icons": [
+        {
+          "src": "/images/apple-touch-icon.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "WHOIS Lookup",
+      "short_name": "WHOIS",
+      "description": "Get domain registration information",
+      "url": "/whois-lookup",
+      "icons": [
+        {
+          "src": "/images/apple-touch-icon.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
