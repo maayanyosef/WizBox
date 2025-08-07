@@ -74,5 +74,19 @@ const translations = {
         tracerouteTool: "Traceroute-Tool",
         mxLookup: "MX-Suche",
         securityHeaders: "Sicherheitsheader-Check",
+    },
+    zh: {
+        pageTitle: "WizBox工具检查 - 域名查找和安全工具",
+        cdnFinder: "CDN查找器",
+        sslChecker: "SSL证书检查器",
+        dnsLookup: "DNS查找",
+        myIPDetails: "我的IP详情",
+        blacklistLookup: "黑名单查找",
+        dmarcLookup: "DMARC记录查找",
+        whoisLookup: "WHOIS查找",
+        pingTool: "Ping工具",
+        tracerouteTool: "路由跟踪工具",
+        mxLookup: "MX查找",
+        securityHeaders: "安全标头检查",
     }
 };

@@ -703,76 +703,6 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-// Tool Comparison Matrix Functions
-function initToolComparison() {
-    const comparisonData = {
-        'Basic Plan': {
-            icon: 'fas fa-rocket',
-            features: [
-                'All basic network tools',
-                'Up to 100 requests/day',
-                'Standard support',
-                'Basic reporting'
-            ],
-            price: 'Free',
-            button: 'Get Started',
-            link: '#'
-        },
-        'Pro Plan': {
-            icon: 'fas fa-star',
-            features: [
-                'All advanced tools',
-                'Unlimited requests',
-                'Priority support',
-                'Advanced analytics',
-                'API access',
-                'Custom reports'
-            ],
-            price: '$9.99/month',
-            button: 'Upgrade Now',
-            link: '#upgrade'
-        },
-        'Enterprise': {
-            icon: 'fas fa-building',
-            features: [
-                'All Pro features',
-                'Custom integrations',
-                'Dedicated support',
-                'SLA guarantees',
-                'On-premise deployment',
-                'Team management'
-            ],
-            price: 'Contact Sales',
-            button: 'Contact Us',
-            link: '#contact'
-        }
-    };
-    
-    const comparisonHTML = `
-        <div class="tool-comparison">
-            <h3><i class="fas fa-compare"></i> Choose Your Plan</h3>
-            <div class="comparison-grid">
-                ${Object.entries(comparisonData).map(([planName, plan]) => `
-                    <div class="comparison-card">
-                        <div class="comparison-header">
-                            <div class="comparison-icon">
-                                <i class="${plan.icon}"></i>
-                            </div>
-                            <div class="comparison-title">${planName}</div>
-                        </div>
-                        <div class="comparison-price">${plan.price}</div>
-                        <ul class="comparison-features">
-                            ${plan.features.map(feature => `<li>${feature}</li>`).join('')}
-                        </ul>
-                        <a href="${plan.link}" class="btn btn-primary">${plan.button}</a>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-    
-    return comparisonHTML;
-}
 
 // Initialize all enhanced features
 document.addEventListener('DOMContentLoaded', function() {
@@ -782,11 +712,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initSocialSharing();
         initNewsletterIntegration();
         
-        // Add comparison section to home page if it doesn't exist
-        const mainContent = document.querySelector('.main-content');
-        if (mainContent && !document.querySelector('.tool-comparison')) {
-            mainContent.insertAdjacentHTML('beforeend', initToolComparison());
-        }
         
         // Add enhanced functionality to existing elements
         document.querySelectorAll('.tab').forEach(tab => {
