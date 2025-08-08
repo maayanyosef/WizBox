@@ -5,6 +5,12 @@ async function checkCDN() {
     resultDiv.innerHTML = "";  // Clear previous results
     showSpinner('cdnSpinner');  // Show spinner while request is made
 
+    // Track tool start
+    if (window.clarityEvents) {
+        window.clarityEvents.trackToolStart('cdn_finder');
+        window.clarityEvents.trackToolInput('cdn_finder', 'domain', domain);
+    }
+
     try {
         const response = await fetch(`${BASE_URL}/cdn/${domain}`);
         const result = await response.json();
@@ -48,10 +54,31 @@ async function checkCDN() {
             } else {
                 resultDiv.innerHTML = `No CDN detected for this domain.`;
             }
+            
+            // Track successful completion
+            if (window.clarityEvents) {
+                window.clarityEvents.trackToolComplete('cdn_finder', true, {
+                    domain: domain,
+                    cdnsDetected: cdnDetected.length,
+                    cdnProviders: cdnDetected
+                });
+            }
         }
     } catch (error) {
         hideSpinner('cdnSpinner');
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+        
+        // Track error
+        if (window.clarityEvents) {
+            window.clarityEvents.trackToolComplete('cdn_finder', false, {
+                error: error.message,
+                domain: domain
+            });
+            window.clarityEvents.trackError('api_error', error.message, {
+                tool: 'cdn_finder',
+                domain: domain
+            });
+        }
     }
 }
 // SSL Checker Function
@@ -60,6 +87,12 @@ async function checkSSL() {
     const resultDiv = document.getElementById("sslResult");
     resultDiv.innerHTML = "";  // Clear previous results
     showSpinner('sslSpinner');
+
+    // Track tool start
+    if (window.clarityEvents) {
+        window.clarityEvents.trackToolStart('ssl_checker');
+        window.clarityEvents.trackToolInput('ssl_checker', 'domain', domain);
+    }
 
     try {
         const response = await fetch(`${BASE_URL}/ssl/${domain}`);
@@ -89,10 +122,32 @@ async function checkSSL() {
                 <p><strong>Certificate:</strong> ${result.ssl_info.serialNumber}</p>
                 <p><strong>Public Key:</strong> ${result.ssl_info.publicKey || "N/A"}</p>
             `;
+            
+            // Track successful completion
+            if (window.clarityEvents) {
+                window.clarityEvents.trackToolComplete('ssl_checker', true, {
+                    domain: domain,
+                    issuer: result.ssl_info.issuer?.commonName,
+                    validFrom: result.ssl_info.valid_from,
+                    validTo: result.ssl_info.valid_to
+                });
+            }
         }
     } catch (error) {
         hideSpinner('sslSpinner');
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+        
+        // Track error
+        if (window.clarityEvents) {
+            window.clarityEvents.trackToolComplete('ssl_checker', false, {
+                error: error.message,
+                domain: domain
+            });
+            window.clarityEvents.trackError('api_error', error.message, {
+                tool: 'ssl_checker',
+                domain: domain
+            });
+        }
     }
 }
 // DNS Lookup Function
@@ -102,6 +157,13 @@ async function performDNSLookup() {
     const resultDiv = document.getElementById("dnsResult");
     resultDiv.innerHTML = "";  // Clear previous results
     showSpinner('dnsSpinner');
+
+    // Track tool start
+    if (window.clarityEvents) {
+        window.clarityEvents.trackToolStart('dns_lookup');
+        window.clarityEvents.trackToolInput('dns_lookup', 'domain', domain);
+        window.clarityEvents.trackToolInput('dns_lookup', 'record_type', recordType);
+    }
 
     try {
         const response = await fetch(`${BASE_URL}/dns/${domain}?record_type=${recordType}`);
@@ -113,6 +175,15 @@ async function performDNSLookup() {
         } else {
             const tableHTML = formatDNSResultTable(result, recordType);
             resultDiv.innerHTML = tableHTML;
+            
+            // Track successful completion
+            if (window.clarityEvents) {
+                window.clarityEvents.trackToolComplete('dns_lookup', true, {
+                    domain: domain,
+                    recordType: recordType,
+                    recordCount: result[`${recordType}_record`]?.length || 0
+                });
+            }
         }
     } catch (error) {
         hideSpinner('dnsSpinner');
@@ -270,6 +341,12 @@ async function performPing() {
     resultDiv.innerHTML = "";
     showSpinner('pingSpinner');
 
+    // Track tool start
+    if (window.clarityEvents) {
+        window.clarityEvents.trackToolStart('ping_tool');
+        window.clarityEvents.trackToolInput('ping_tool', 'host', host);
+    }
+
     try {
         const response = await fetch(`${BASE_URL}/ping/${host}`);
         if (!response.ok) {
@@ -279,6 +356,14 @@ async function performPing() {
         const result = await response.json();
         hideSpinner('pingSpinner');
         resultDiv.innerHTML = `<pre>${result.result}</pre>`;
+        
+        // Track successful completion
+        if (window.clarityEvents) {
+            window.clarityEvents.trackToolComplete('ping_tool', true, {
+                host: host,
+                responseLength: result.result?.length || 0
+            });
+        }
     } catch (error) {
         hideSpinner('pingSpinner');
         resultDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;

@@ -15,6 +15,11 @@ function trackUsage(eventCategory, eventAction, eventLabel = '') {
 }
 // Function to switch tabs and update the URL hash
 function switchTab(tabId) {
+    // Get current tab for Clarity tracking
+    const currentActiveTab = document.querySelector('.tab.active');
+    const currentTabId = currentActiveTab ? 
+        currentActiveTab.getAttribute('onclick')?.match(/switchTab\('([^']+)'\)/)?.[1] : null;
+    
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -34,6 +39,11 @@ function switchTab(tabId) {
     // Update the URL hash without causing a page reload or scroll
     if (window.location.hash !== `#${tabId}`) {
         window.location.hash = `#${tabId}`;
+    }
+    
+    // Track tab switch with Clarity
+    if (window.clarityEvents && currentTabId !== tabId) {
+        window.clarityEvents.trackTabSwitch(currentTabId || 'unknown', tabId);
     }
 }
 
@@ -68,6 +78,11 @@ function toggleDarkMode() {
     
     // Track usage
     trackUsage('UI', 'dark_mode_toggle', isDarkMode ? 'enabled' : 'disabled');
+    
+    // Track with Clarity
+    if (window.clarityEvents) {
+        window.clarityEvents.trackFeatureUsage('dark_mode', isDarkMode ? 'enabled' : 'disabled');
+    }
 }
 
 // Initialize dark mode on page load
@@ -362,6 +377,11 @@ function searchTools() {
         return;
     }
     
+    // Track search with Clarity
+    if (window.clarityEvents && query.length >= 2) {
+        window.clarityEvents.trackSearch(query);
+    }
+    
     // Filter tools based on search query
     const matches = toolsData.filter(tool => {
         return tool.name.toLowerCase().includes(query) ||
@@ -569,18 +589,27 @@ function shareOnTwitter(title, url) {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(twitterUrl, '_blank', 'width=600,height=400');
     trackUsage('Social', 'share_twitter', title);
+    if (window.clarityEvents) {
+        window.clarityEvents.trackSocialShare('twitter', 'tool_result');
+    }
 }
 
 function shareOnLinkedIn(title, url) {
     const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
     window.open(linkedInUrl, '_blank', 'width=600,height=400');
     trackUsage('Social', 'share_linkedin', title);
+    if (window.clarityEvents) {
+        window.clarityEvents.trackSocialShare('linkedin', 'tool_result');
+    }
 }
 
 function shareOnFacebook(url) {
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
     window.open(facebookUrl, '_blank', 'width=600,height=400');
     trackUsage('Social', 'share_facebook');
+    if (window.clarityEvents) {
+        window.clarityEvents.trackSocialShare('facebook', 'tool_result');
+    }
 }
 
 function copyResultUrl() {
@@ -627,6 +656,9 @@ function handleNewsletterSignup(e) {
         showNotification('Successfully subscribed to updates!', 'success');
         form.reset();
         trackUsage('Newsletter', 'subscribe', email);
+        if (window.clarityEvents) {
+            window.clarityEvents.trackNewsletterSignup(email, 'website_form');
+        }
     }, 2000);
 }
 
