@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <!-- Blog main page -->
+   <url>
+      <loc>https://www.wizbox.tools/blog</loc>
+      <lastmod>2025-08-08</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <!-- Blog posts -->
+   <url>
+      <loc>https://www.wizbox.tools/blog/complete-guide-dns-lookup</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/blog/ssl-certificate-best-practices</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/blog/cdn-performance-optimization</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/blog/security-headers-implementation</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/blog/network-troubleshooting-guide</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
+      <loc>https://www.wizbox.tools/blog/whois-privacy-protection</loc>
+      <lastmod>2025-08-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+</urlset>
