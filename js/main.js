@@ -241,11 +241,14 @@ document.addEventListener('DOMContentLoaded', function() {
         initScrollReveal();
     }
     
-    // Add scroll reveal class to cards and blog posts
-    document.querySelectorAll('.card, .blog-post').forEach((el, index) => {
-        el.classList.add('scroll-reveal');
-        el.style.animationDelay = `${index * 0.1}s`;
-    });
+    // Add scroll reveal class to cards and blog posts (only on homepage with tools)
+    const tabs = document.querySelectorAll('.tab');
+    if (tabs.length > 0) {
+        document.querySelectorAll('.card, .blog-post').forEach((el, index) => {
+            el.classList.add('scroll-reveal');
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+    }
     
     // Enhanced form interactions
     document.querySelectorAll('input, select, textarea').forEach(input => {
