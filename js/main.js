@@ -50,6 +50,12 @@ function switchTab(tabId) {
 
 // Function to load the appropriate tab based on the URL hash when the page loads
 function loadTabFromHash() {
+    // Only run tab logic if we're on a page with tabs
+    const tabs = document.querySelectorAll('.tab');
+    if (tabs.length === 0) {
+        return; // No tabs on this page, skip tab logic
+    }
+    
     const hash = window.location.hash.substring(1); // Get the hash value without the '#'
     if (hash) {
         switchTab(hash);
@@ -100,8 +106,17 @@ function initializeDarkMode() {
 // Initialize page functionality
 window.onload = function() {
     initializeDarkMode(); // Initialize dark mode from localStorage
-    changeLanguage(); // This ensures the correct language is set on page load
-    getMyIPDetails(); // Automatically fetch IP details when the page loads
+    
+    // Only run homepage-specific functions if we're on a page with tools
+    const tabs = document.querySelectorAll('.tab');
+    if (tabs.length > 0) {
+        if (typeof changeLanguage === 'function') {
+            changeLanguage(); // This ensures the correct language is set on page load
+        }
+        if (typeof getMyIPDetails === 'function') {
+            getMyIPDetails(); // Automatically fetch IP details when the page loads
+        }
+    }
 };
 // Open the side panel
 function openSidePanel() {
