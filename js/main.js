@@ -507,74 +507,6 @@ searchHighlightStyle.textContent = `
 `;
 document.head.appendChild(searchHighlightStyle);
 
-// Enhanced Quick Access Toolbar
-let toolbarExpanded = true;
-
-function initQuickAccessToolbar() {
-    const toolbarHTML = `
-        <div class="quick-access-toolbar" id="quickAccessToolbar">
-            <button class="quick-access-btn toolbar-toggle" onclick="toggleToolbar()" data-tooltip="Toggle Toolbar">
-                <i class="fas fa-plus"></i>
-            </button>
-            <button class="quick-access-btn" onclick="quickAccessTool('ping')" data-tooltip="Ping Tool">
-                <i class="fas fa-satellite-dish"></i>
-            </button>
-            <button class="quick-access-btn secondary" onclick="quickAccessTool('dns-lookup')" data-tooltip="DNS Lookup">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="quick-access-btn warning" onclick="quickAccessTool('ssl-checker')" data-tooltip="SSL Checker">
-                <i class="fas fa-shield-alt"></i>
-            </button>
-            <button class="quick-access-btn danger" onclick="quickAccessTool('security-headers-check')" data-tooltip="Security Headers">
-                <i class="fas fa-lock"></i>
-            </button>
-            <button class="quick-access-btn" onclick="scrollToTop()" data-tooltip="Back to Top">
-                <i class="fas fa-arrow-up"></i>
-            </button>
-        </div>
-    `;
-    
-    document.body.insertAdjacentHTML('beforeend', toolbarHTML);
-}
-
-function toggleToolbar() {
-    const toolbar = document.getElementById('quickAccessToolbar');
-    const toggleBtn = toolbar.querySelector('.toolbar-toggle i');
-    
-    toolbarExpanded = !toolbarExpanded;
-    
-    if (toolbarExpanded) {
-        toolbar.classList.remove('collapsed');
-        toggleBtn.className = 'fas fa-plus';
-    } else {
-        toolbar.classList.add('collapsed');
-        toggleBtn.className = 'fas fa-times';
-    }
-    
-    trackUsage('UI', 'toolbar_toggle', toolbarExpanded ? 'expanded' : 'collapsed');
-}
-
-function quickAccessTool(toolId) {
-    // Navigate to tool page
-    const toolUrls = {
-        'ping': '/ping.html',
-        'dns-lookup': '/dns-lookup.html',
-        'ssl-checker': '/ssl-checker.html',
-        'security-headers-check': '/security-headers-check.html',
-        'whois-lookup': '/whois-lookup.html',
-        'traceroute': '/traceroute.html'
-    };
-    
-    if (toolUrls[toolId]) {
-        window.location.href = toolUrls[toolId];
-    } else if (typeof switchTab === 'function') {
-        // If we're on the main page with tabs
-        switchTab(toolId);
-    }
-    
-    trackUsage('QuickAccess', 'tool_accessed', toolId);
-    showNotification(`Opening ${toolId.replace('-', ' ').toUpperCase()}`, 'info', 1500);
-}
 
 function scrollToTop() {
     window.scrollTo({
@@ -708,7 +640,6 @@ function isValidEmail(email) {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize enhanced features after a short delay to ensure DOM is fully loaded
     setTimeout(() => {
-        initQuickAccessToolbar();
         initSocialSharing();
         initNewsletterIntegration();
         
